@@ -1,18 +1,41 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <!--  <nav>
+      <router-link to="/">Home</router-link>
+      |
+      <router-link to="/about">About</router-link>
+    </nav>-->
   <router-view/>
 </template>
 
 <style>
+
+:root {
+  --bg: #1A1126;
+  --bg2: #332B3E;
+  --bg3: #4C405B;
+  --bg4: #857E90;
+  --bg5: #fff;
+
+  --text: #FFFFFF;
+
+  --gray1: #F0F0F0;
+  --gray2: #F3F3F3;
+  --gray3: #F5F5F5;
+  --gray4: #D9D9D9;
+
+  --main: #5C04BB;
+  --main2: #C6009A;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 nav {
