@@ -8,6 +8,7 @@
     <app-sidebar></app-sidebar>
 </template>
 <style>
+/* CSS Переменные необходимо продублировать в store (appColors) - нужно для работы подсказок ide */
 :root {
     --bg: #1A1126;
     --bg2: #332B3E;
@@ -27,11 +28,13 @@
     --main: #5C04BB;
     --main2: #C6009A;
 }
+
 @font-face {
-    font-family:'Roboto';
+    font-family: 'Roboto';
     src: url('~@/assets/fonts/Roboto.ttf');
     font-weight: 360;
 }
+
 #app {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -59,7 +62,21 @@ nav a.router-link-exact-active {
 </style>
 <script>
 import AppSidebar from "@/components/app-sidebar";
+import store from "@/store";
+
 export default {
-	components: {AppSidebar}
+    components: {AppSidebar},
+    methods: {
+        updateColors() {
+            let colors = store.getters.colors;
+            let keys = Object.keys(colors);
+            for (let cssVar of keys) {
+                document.documentElement.style.setProperty(cssVar, colors[cssVar]);
+            }
+        }
+    },
+    created() {
+        this.updateColors();
+    }
 }
 </script>
