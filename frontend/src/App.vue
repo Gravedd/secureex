@@ -1,53 +1,52 @@
 <template>
-  <!--  <nav>
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </nav>-->
-  <router-view/>
+    <!--  <nav>
+        <router-link to="/">Home</router-link>
+        |
+        <router-link to="/about">About</router-link>
+      </nav>-->
+    <router-view/>
 </template>
-
 <style>
-
 :root {
-  --bg: #1A1126;
-  --bg2: #332B3E;
-  --bg3: #4C405B;
-  --bg4: #857E90;
-  --bg5: #fff;
+    --bg: #1A1126;
+    --bg2: #332B3E;
+    --bg3: #4C405B;
+    --bg4: #857E90;
+    --bg5: #fff;
 
-  --text: #FFFFFF;
+    --text: #FFFFFF;
 
-  --gray1: #F0F0F0;
-  --gray2: #F3F3F3;
-  --gray3: #F5F5F5;
-  --gray4: #D9D9D9;
+    --gray1: #F0F0F0;
+    --gray2: #F3F3F3;
+    --gray3: #F5F5F5;
+    --gray4: #D9D9D9;
 
-  --main: #5C04BB;
-  --main2: #C6009A;
+    --main: #5C04BB;
+    --main2: #C6009A;
 }
 
 #app {
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  color: var(--text);
-  background-color: var(--bg);
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    color: var(--text);
+    background-color: var(--bg);
+    font-size: 14px;
 }
 
 nav {
-  padding: 30px;
+    padding: 30px;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+    color: #42b983;
 }
 </style>

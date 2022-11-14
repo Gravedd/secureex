@@ -1,23 +1,27 @@
 <template>
-    <app-header>Название страницы</app-header>
-
-
+    <header>
+        <icon class="menuIcon">
+            <menu-icon/>
+        </icon>
+        <div id="headerTitle">
+            <slot></slot>
+        </div>
+        <icon class="pointsIcon">
+            <points-icon/>
+        </icon>
+    </header>
 </template>
 <script>
 
+import Icon from "@/components/icons/icon";
 import MenuIcon from "@/components/icons/menuIcon";
-import icon from "@/components/icons/icon";
 import PointsIcon from "@/components/icons/pointsIcon";
-import AppHeader from "@/components/app-header";
-
 export default {
-	name: 'HomeView',
-	components: {AppHeader, PointsIcon, icon, MenuIcon}
+	name: "app-header",
+	components: {PointsIcon, MenuIcon, Icon}
 }
-
 </script>
-
-<style>
+<style scoped>
     header {
         height: 40px;
         display: flex;
