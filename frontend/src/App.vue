@@ -5,6 +5,7 @@
         <router-link to="/about">About</router-link>
       </nav>-->
     <router-view/>
+    <app-sidebar></app-sidebar>
 </template>
 <style>
 :root {
@@ -20,13 +21,19 @@
     --gray2: #F3F3F3;
     --gray3: #F5F5F5;
     --gray4: #D9D9D9;
+    --gray5: #5E5369;
+
 
     --main: #5C04BB;
     --main2: #C6009A;
 }
-
+@font-face {
+    font-family:'Roboto';
+    src: url('~@/assets/fonts/Roboto.ttf');
+    font-weight: 360;
+}
 #app {
-    font-family: sans-serif;
+    font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     width: 100%;
@@ -50,3 +57,9 @@ nav a.router-link-exact-active {
     color: #42b983;
 }
 </style>
+<script>
+import AppSidebar from "@/components/app-sidebar";
+export default {
+	components: {AppSidebar}
+}
+</script>

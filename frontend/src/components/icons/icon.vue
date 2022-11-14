@@ -21,4 +21,7 @@ export default {
 }
 </script>
 <style scoped>
+    svg {
+        display: inline-block;
+    }
 </style>
