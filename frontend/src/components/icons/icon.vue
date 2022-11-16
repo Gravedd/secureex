@@ -23,5 +23,6 @@ export default {
 <style scoped>
     svg {
         display: inline-block;
+        cursor: pointer;
     }
 </style>
