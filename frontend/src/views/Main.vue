@@ -1,7 +1,5 @@
 <template>
-    <app-header>Название страницы</app-header>
-
-
+dsasadsa
 </template>
 <script>
 

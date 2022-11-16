@@ -1,31 +1,36 @@
 <template>
-    <div class="sidebarContainer">
-        <div class="sidebarWrapper">
-            <div class="sidebarHeader">
-                <div class="avatar-wrapper">
-                    <div class="avatar"></div>
+    <div class="background" v-if="opened"></div>
+
+    <transition name="slide">
+        <div class="sidebarContainer" v-if="opened" @click="$emit('closeSidebar')">
+            <div class="sidebarWrapper" @click="clickOnSidebar">
+                <div class="sidebarHeader">
+                    <div class="avatar-wrapper">
+                        <div class="avatar"></div>
+                    </div>
+                    <div class="userdata">
+                        <div class="userdata-name">Username</div>
+                        <div class="userdata-nickname">@username</div>
+                    </div>
                 </div>
-                <div class="userdata">
-                    <div class="userdata-name">Username</div>
-                    <div class="userdata-nickname">@username</div>
-                </div>
-            </div>
-            <div class="sidebarMenu">
-                <div class="item">
-                    <icon color="#5C04BB"><settings-icon/></icon>
-                    <span class="item-text">Настройки</span>
-                </div>
-                <div class="item">
-                    <icon color="#5C04BB"><key-icon/></icon>
-                    <span class="item-text">Ключи</span>
-                </div>
-                <div class="item">
-                    <icon color="#5C04BB"><people-icon/></icon>
-                    <span class="item-text">Пригласить друзей</span>
+                <div class="sidebarMenu">
+                    <div class="item">
+                        <icon color="#5C04BB"><settings-icon/></icon>
+                        <span class="item-text">Настройки</span>
+                    </div>
+                    <div class="item">
+                        <icon color="#5C04BB"><key-icon/></icon>
+                        <span class="item-text">Ключи</span>
+                    </div>
+                    <div class="item">
+                        <icon color="#5C04BB"><people-icon/></icon>
+                        <span class="item-text">Пригласить друзей</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </transition>
+
 </template>
 <script>
 import SettingsIcon from "@/components/icons/settingsIcon";
@@ -34,13 +39,26 @@ import KeyIcon from "@/components/icons/keyIcon";
 import PeopleIcon from "@/components/icons/peopleIcon";
 export default {
 	name: "app-sidebar",
+    props: {
+	    "opened" : false,
+    },
+    methods: {
+        clickOnSidebar(event) { event.stopPropagation(); }//Клик на сайдбар
+    },
 	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon}
+
 }
 </script>
 <style scoped>
-    .sidebarContainer {
+    .background {
         position: fixed;
         backdrop-filter: brightness(0.7);
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .sidebarContainer {
+        position: fixed;
         top: 0;
         width: 100%;
         height: 100%;
@@ -85,6 +103,14 @@ export default {
     }
     .item-text {
         margin-left: 15px;
+    }
+
+    .slide-leave-active, .slide-enter-active  {
+        transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+    .slide-enter-from, .slide-leave-to {
+        transform: translateX(-400px);
+        opacity: 0;
     }
 
 </style>

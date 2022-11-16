@@ -1,6 +1,6 @@
 <template>
     <header>
-        <icon class="menuIcon">
+        <icon class="menuIcon" @click="$emit('openSidebar')">
             <menu-icon/>
         </icon>
         <div id="headerTitle">
@@ -18,7 +18,11 @@ import MenuIcon from "@/components/icons/menuIcon";
 import PointsIcon from "@/components/icons/pointsIcon";
 export default {
 	name: "app-header",
-	components: {PointsIcon, MenuIcon, Icon}
+	components: {PointsIcon, MenuIcon, Icon},
+    emits: {
+        openSidebar: null,
+    }
+
 }
 </script>
 <style scoped>
