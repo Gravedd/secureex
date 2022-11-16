@@ -62,7 +62,6 @@ export default {
         top: 0;
         width: 100%;
         height: 100%;
-
     }
     .sidebarWrapper {
         background-color: var(--bg2);
@@ -111,6 +110,13 @@ export default {
     .slide-enter-from, .slide-leave-to {
         transform: translateX(-400px);
         opacity: 0;
+    }
+
+    @media (min-width: 400px) {
+        .sidebarWrapper {
+            max-width: 236px;
+        }
+
     }
 
 </style>
