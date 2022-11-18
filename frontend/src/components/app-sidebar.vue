@@ -45,7 +45,10 @@ export default {
     methods: {
         clickOnSidebar(event) { event.stopPropagation(); }//Клик на сайдбар
     },
-	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon}
+	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon},
+    emits: {
+        closeSidebar: null,
+    }
 
 }
 </script>

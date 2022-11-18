@@ -4,9 +4,10 @@
         |
         <router-link to="/about">About</router-link>
       </nav>-->
-    <app-header @openSidebar="openSidebar">Название страницы</app-header>
+    <app-header @openSidebar="openSidebar" @openMenu="openMenu">Название страницы</app-header>
     <router-view/>
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
+    <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu"></action-menu>
 </template>
 <style>
 /* CSS Переменные необходимо продублировать в store (appColors) - нужно для работы подсказок ide */
@@ -65,12 +66,14 @@ nav a.router-link-exact-active {
 import AppSidebar from "@/components/app-sidebar";
 import store from "@/store";
 import AppHeader from "@/components/app-header";
+import ActionMenu from "@/components/action-menu";
 
 export default {
-    components: {AppHeader, AppSidebar},
+    components: {ActionMenu, AppHeader, AppSidebar},
     data() {
         return {
-            isSidebarOpened: false
+            isSidebarOpened: false,
+            isActionMenuOpened: false,
         }
     },
     methods: {
@@ -86,6 +89,12 @@ export default {
         },
         closeSidebar() {
             this.isSidebarOpened = false;
+        },
+        openMenu() {
+            this.isActionMenuOpened = true;
+        },
+        closeMenu() {
+            this.isActionMenuOpened = false;
         }
     },
     created() {

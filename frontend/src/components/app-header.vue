@@ -6,9 +6,10 @@
         <div id="headerTitle">
             <slot></slot>
         </div>
-        <icon class="pointsIcon">
+        <icon class="pointsIcon" @click="$emit('openMenu')">
             <points-icon/>
         </icon>
+        <action-menu v-if="showMenu" @closeMenu="openmenu"></action-menu>
     </header>
 </template>
 <script>
@@ -16,11 +17,23 @@
 import Icon from "@/components/icons/icon";
 import MenuIcon from "@/components/icons/menuIcon";
 import PointsIcon from "@/components/icons/pointsIcon";
+import ActionMenu from "@/components/action-menu";
 export default {
 	name: "app-header",
-	components: {PointsIcon, MenuIcon, Icon},
+	components: {ActionMenu, PointsIcon, MenuIcon, Icon},
+    data() {
+	    return {
+	        showMenu: false,
+        }
+    },
+    methods: {
+        openmenu () {
+            this.showMenu = !this.showMenu;
+        }
+    },
     emits: {
         openSidebar: null,
+        openMenu: null,
     }
 
 }
