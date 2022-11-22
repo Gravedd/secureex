@@ -61,6 +61,14 @@ nav a {
 nav a.router-link-exact-active {
     color: #42b983;
 }
+/* Стили попапов sweetAlert */
+.swal2-popup {
+    color: var(--text) !important;
+    background-color: var(--bg2) !important;
+}
+.swal2-styled.swal2-confirm {
+    background-color: var(--main2) !important;
+}
 </style>
 <script>
 import AppSidebar from "@/components/app-sidebar";
