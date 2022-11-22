@@ -5,13 +5,60 @@
         <router-link to="/about">About</router-link>
       </nav>-->
     <app-header @openSidebar="openSidebar" @openMenu="openMenu">Название страницы</app-header>
+
     <router-view/>
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
+
     <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu">
         <div>Действие 1</div>
         <div>Закрыть</div>
     </action-menu>
+
 </template>
+<script>
+import AppSidebar from "@/components/app-sidebar";
+import store from "@/store";
+import AppHeader from "@/components/app-header";
+import ActionMenu from "@/components/action-menu";
+
+export default {
+    components: {ActionMenu, AppHeader, AppSidebar},
+    data() {
+        return {
+            isSidebarOpened: false,
+            isActionMenuOpened: false,
+        }
+    },
+    methods: {
+        //Обновить цвета в css
+        updateColors() {
+            let colors = store.getters.colors;
+            let keys = Object.keys(colors);
+            for (let cssVar of keys) {
+                document.documentElement.style.setProperty(cssVar, colors[cssVar]);
+            }
+        },
+        //Сайдбар
+        openSidebar() {
+            this.isSidebarOpened = true;
+        },
+        closeSidebar() {
+            this.isSidebarOpened = false;
+        },
+        //Экшн меню
+        openMenu() {
+            this.$store.commit("actionMenuStatus", true);
+        },
+        closeMenu() {
+            this.$store.commit("actionMenuStatus", false);
+        }
+    },
+    created() {
+        this.updateColors();
+    }
+}
+</script>
+
 <style>
 /* CSS Переменные необходимо продублировать в store (appColors) - нужно для работы подсказок ide */
 :root {
@@ -73,43 +120,3 @@ nav a.router-link-exact-active {
     background-color: var(--main2) !important;
 }
 </style>
-<script>
-import AppSidebar from "@/components/app-sidebar";
-import store from "@/store";
-import AppHeader from "@/components/app-header";
-import ActionMenu from "@/components/action-menu";
-
-export default {
-    components: {ActionMenu, AppHeader, AppSidebar},
-    data() {
-        return {
-            isSidebarOpened: false,
-            isActionMenuOpened: false,
-        }
-    },
-    methods: {
-        updateColors() {
-            let colors = store.getters.colors;
-            let keys = Object.keys(colors);
-            for (let cssVar of keys) {
-                document.documentElement.style.setProperty(cssVar, colors[cssVar]);
-            }
-        },
-        openSidebar() {
-            this.isSidebarOpened = true;
-        },
-        closeSidebar() {
-            this.isSidebarOpened = false;
-        },
-        openMenu() {
-            this.$store.commit("actionMenuStatus", true);
-        },
-        closeMenu() {
-            this.$store.commit("actionMenuStatus", false);
-        }
-    },
-    created() {
-        this.updateColors();
-    }
-}
-</script>
