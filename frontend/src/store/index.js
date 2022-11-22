@@ -23,6 +23,8 @@ export default createStore({
 		},
 		//Action menu
 		isActionMenuOpened: false,
+		//Load indicator
+		showLoader: false,
 	},
     getters: {
 		colors: (state) => {
@@ -30,12 +32,21 @@ export default createStore({
 		},
 		actionMenuOpened: (state) => {
 			return state.isActionMenuOpened
+		},
+		showLoader: (state) => {
+			return state.showLoader
 		}
 	},
     mutations: {
 		actionMenuStatus (state, status) {
 			state.isActionMenuOpened = status
-		}
+		},
+		showLoader (state) {
+			state.showLoader = true;
+		},
+		hideLoader (state) {
+			state.showLoader = false;
+		},
 	},
     actions: {
 

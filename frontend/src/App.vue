@@ -9,16 +9,17 @@
     <router-view/>
 
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"/>
-
+    <loader></loader>
 </template>
 <script>
 import AppSidebar from "@/components/app-sidebar";
 import store from "@/store";
 import AppHeader from "@/components/app-header";
 import ActionMenu from "@/components/action-menu";
+import Loader from "@/components/loader";
 
 export default {
-    components: {ActionMenu, AppHeader, AppSidebar},
+    components: {Loader, ActionMenu, AppHeader, AppSidebar},
     data() {
         return {
             isSidebarOpened: false,
@@ -28,8 +29,14 @@ export default {
         openSidebar() { this.isSidebarOpened = true },
         closeSidebar() { this.isSidebarOpened = false },
     },
+    beforeCreate() {
+        this.$showLoader();
+    },
     created() {
-        this.$store.dispatch("updateColors");
+        store.dispatch("updateColors");
+    },
+    mounted() {
+        this.$hideLoader();
     }
 }
 </script>
@@ -93,5 +100,14 @@ nav a.router-link-exact-active {
 }
 .swal2-styled.swal2-confirm {
     background-color: var(--main2) !important;
+}
+
+    /* Анимации */
+/* fade */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
 }
 </style>

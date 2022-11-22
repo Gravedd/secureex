@@ -1,11 +1,13 @@
-/*export default {
+import store from "@/store";
+export default {
     install(Vue, args) {
-        Vue.config.globalProperties.$test = new vAlert;
-
-        /!*
-        Vue.component('my-alert', Alert);
-        Vue.config.globalProperties.$vAlert = function () {
-            /!*this.$emit("showAlert");*!/
-        }*!/
+        //Включить анимацию загрузки
+        Vue.config.globalProperties.$showLoader = function () {
+            store.commit("showLoader");
+        };
+        //Выключить анимацию загрузки
+        Vue.config.globalProperties.$hideLoader = function () {
+            store.commit("hideLoader");
+        };
     }
-}*/
+}
