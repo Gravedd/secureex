@@ -2,13 +2,14 @@
     <transition name="slide">
         <div class="menuwrapper-flex" @click="$emit('closeMenu')" v-if="opened">
             <div class="menuwrapper" @click="clickOnMenu">
-                <div>Действие 1</div>
-                <div>Закрыть</div>
+                <slot/>
             </div>
         </div>
     </transition>
 </template>
 <script>
+import store from "@/store";
+
 export default {
     name: "action-menu",
     data() {
@@ -16,18 +17,20 @@ export default {
 
         }
     },
-    props: {
-        opened : false,
-    },
     methods: {
         clickOnMenu(event) { event.stopPropagation(); }//Клик на сайдбар
     },
     emits: {
         closeMenu: null,
+    },
+    computed: {
+        opened() {
+            return this.$store.getters.actionMenuOpened
+        }
     }
 }
 </script>
-<style scoped>
+<style>
     .menu-background {
         position: fixed;
         backdrop-filter: brightness(0.9);

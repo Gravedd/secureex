@@ -20,14 +20,23 @@ export default createStore({
 
 			"--main": "#5C04BB",
 			"--main2": "#C6009A",
-		}
+		},
+		//Action menu
+		isActionMenuOpened: false,
 	},
     getters: {
 		colors: (state) => {
 			return state.appColors
+		},
+		actionMenuOpened: (state) => {
+			return state.isActionMenuOpened
 		}
 	},
-    mutations: {},
+    mutations: {
+		actionMenuStatus (state, status) {
+			state.isActionMenuOpened = status
+		}
+	},
     actions: {},
     modules: {}
 })

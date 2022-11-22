@@ -9,7 +9,6 @@
         <icon class="pointsIcon" @click="$emit('openMenu')">
             <points-icon/>
         </icon>
-        <action-menu v-if="showMenu" @closeMenu="openmenu"></action-menu>
     </header>
 </template>
 <script>

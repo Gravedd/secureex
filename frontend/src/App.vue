@@ -7,7 +7,10 @@
     <app-header @openSidebar="openSidebar" @openMenu="openMenu">Название страницы</app-header>
     <router-view/>
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
-    <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu"></action-menu>
+    <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu">
+        <div>Действие 1</div>
+        <div>Закрыть</div>
+    </action-menu>
 </template>
 <style>
 /* CSS Переменные необходимо продублировать в store (appColors) - нужно для работы подсказок ide */
@@ -99,10 +102,10 @@ export default {
             this.isSidebarOpened = false;
         },
         openMenu() {
-            this.isActionMenuOpened = true;
+            this.$store.commit("actionMenuStatus", true);
         },
         closeMenu() {
-            this.isActionMenuOpened = false;
+            this.$store.commit("actionMenuStatus", false);
         }
     },
     created() {
