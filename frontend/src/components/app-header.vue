@@ -4,7 +4,7 @@
             <menu-icon/>
         </icon>
         <div id="headerTitle">
-            <slot></slot>
+            <slot/>
         </div>
         <icon class="pointsIcon" @click="openMenu">
             <points-icon/>
@@ -33,9 +33,9 @@ export default {
     emits: {
         openSidebar: null,
     }
-
 }
 </script>
+
 <style scoped>
     header {
         height: 40px;

@@ -37,6 +37,16 @@ export default createStore({
 			state.isActionMenuOpened = status
 		}
 	},
-    actions: {},
+    actions: {
+
+		updateColors(context) {//Обновить цвета в css
+			let colors = context.getters.colors;
+			let keys = Object.keys(colors);
+			for (let cssVar of keys) {
+				document.documentElement.style.setProperty(cssVar, colors[cssVar]);
+			}
+		},
+
+	},
     modules: {}
 })

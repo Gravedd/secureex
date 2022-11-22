@@ -3,23 +3,25 @@
         <slot color="{{color}}"/>
     </svg>
 </template>
+
 <script>
 export default {
-	name: "icon",
+    name: "icon",
     props: {
-		width: {
-			default: 19,
+        width: {
+            default: 19,
         },
-		height: {
-			default: 19,
-		},
-		color: {
-			default: "#ffffff",
-		},
+        height: {
+            default: 19,
+        },
+        color: {
+            default: "#ffffff",
+        },
 
     }
 }
 </script>
+
 <style scoped>
     svg {
         display: inline-block;

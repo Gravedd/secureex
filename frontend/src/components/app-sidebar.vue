@@ -1,6 +1,5 @@
 <template>
     <div class="background" v-if="opened"></div>
-
     <transition name="slide">
         <div class="sidebarContainer" v-if="opened" @click="$emit('closeSidebar')">
             <div class="sidebarWrapper" @click="clickOnSidebar">
@@ -15,15 +14,21 @@
                 </div>
                 <div class="sidebarMenu">
                     <div class="item">
-                        <icon color="#5C04BB"><settings-icon/></icon>
+                        <icon color="#5C04BB">
+                            <settings-icon/>
+                        </icon>
                         <span class="item-text">Настройки</span>
                     </div>
                     <div class="item">
-                        <icon color="#5C04BB"><key-icon/></icon>
+                        <icon color="#5C04BB">
+                            <key-icon/>
+                        </icon>
                         <span class="item-text">Ключи</span>
                     </div>
                     <div class="item">
-                        <icon color="#5C04BB"><people-icon/></icon>
+                        <icon color="#5C04BB">
+                            <people-icon/>
+                        </icon>
                         <span class="item-text">Пригласить друзей</span>
                     </div>
                 </div>
@@ -32,11 +37,13 @@
     </transition>
 
 </template>
+
 <script>
 import SettingsIcon from "@/components/icons/settingsIcon";
 import Icon from "@/components/icons/icon";
 import KeyIcon from "@/components/icons/keyIcon";
 import PeopleIcon from "@/components/icons/peopleIcon";
+
 export default {
 	name: "app-sidebar",
     props: {
@@ -52,6 +59,7 @@ export default {
 
 }
 </script>
+
 <style scoped>
     .background {
         position: fixed;

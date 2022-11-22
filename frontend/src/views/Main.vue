@@ -1,5 +1,4 @@
 <template>
-dsasadsa
     <action-menu>
         <div>Действие 2</div>
         <div>Закрыть</div>

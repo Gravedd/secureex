@@ -1,35 +1,30 @@
 <template>
     <transition name="slide">
-        <div class="menuwrapper-flex" @click="closeMenu" v-if="opened">
+        <div class="menuwrapper-flex" v-if="opened" @click="closeMenu">
             <div class="menuwrapper" @click="clickOnMenu">
                 <slot/>
             </div>
         </div>
     </transition>
 </template>
-<script>
-import store from "@/store";
 
+<script>
 export default {
     name: "action-menu",
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-        clickOnMenu(event) { event.stopPropagation(); },//Клик на сайдбар
-        closeMenu() {
-            this.$store.commit("actionMenuStatus", false);
-        }
-    },
     computed: {
         opened() {
             return this.$store.getters.actionMenuOpened
         }
-    }
+    },
+    methods: {
+        closeMenu() {
+            this.$store.commit("actionMenuStatus", false);
+        },
+        clickOnMenu(event) { event.stopPropagation(); },//Клик на сайдбар
+    },
 }
 </script>
+
 <style>
     .menu-background {
         position: fixed;

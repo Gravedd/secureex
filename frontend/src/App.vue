@@ -4,11 +4,11 @@
         |
         <router-link to="/about">About</router-link>
       </nav>-->
-    <app-header @openSidebar="openSidebar" @openMenu="openMenu">{{ this.$route.name }}</app-header>
+    <app-header @openSidebar="openSidebar">{{ this.$route.name }}</app-header>
 
     <router-view/>
 
-    <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
+    <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"/>
 
 </template>
 <script>
@@ -22,32 +22,14 @@ export default {
     data() {
         return {
             isSidebarOpened: false,
-            isActionMenuOpened: false,
         }
     },
     methods: {
-        //Обновить цвета в css
-        updateColors() {
-            let colors = store.getters.colors;
-            let keys = Object.keys(colors);
-            for (let cssVar of keys) {
-                document.documentElement.style.setProperty(cssVar, colors[cssVar]);
-            }
-        },
-        //Сайдбар
-        openSidebar() {
-            this.isSidebarOpened = true;
-        },
-        closeSidebar() {
-            this.isSidebarOpened = false;
-        },
-        //Экшн меню
-        openMenu() {
-            this.$store.commit("actionMenuStatus", true);
-        },
+        openSidebar() { this.isSidebarOpened = true },
+        closeSidebar() { this.isSidebarOpened = false },
     },
     created() {
-        this.updateColors();
+        this.$store.dispatch("updateColors");
     }
 }
 </script>
