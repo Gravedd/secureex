@@ -4,9 +4,10 @@
         |
         <router-link to="/about">About</router-link>
       </nav>-->
-    <app-header @openSidebar="openSidebar" @openMenu="openMenu">Название страницы</app-header>
+    <app-header @openSidebar="openSidebar" @openMenu="openMenu">{{ this.$route.name }}</app-header>
 
     <router-view/>
+    
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
 
     <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu">
