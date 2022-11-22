@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="menuwrapper-flex" @click="$emit('closeMenu')" v-if="opened">
+        <div class="menuwrapper-flex" @click="closeMenu" v-if="opened">
             <div class="menuwrapper" @click="clickOnMenu">
                 <slot/>
             </div>
@@ -18,10 +18,10 @@ export default {
         }
     },
     methods: {
-        clickOnMenu(event) { event.stopPropagation(); }//Клик на сайдбар
-    },
-    emits: {
-        closeMenu: null,
+        clickOnMenu(event) { event.stopPropagation(); },//Клик на сайдбар
+        closeMenu() {
+            this.$store.commit("actionMenuStatus", false);
+        }
     },
     computed: {
         opened() {

@@ -6,7 +6,7 @@
         <div id="headerTitle">
             <slot></slot>
         </div>
-        <icon class="pointsIcon" @click="$emit('openMenu')">
+        <icon class="pointsIcon" @click="openMenu">
             <points-icon/>
         </icon>
     </header>
@@ -22,17 +22,16 @@ export default {
 	components: {ActionMenu, PointsIcon, MenuIcon, Icon},
     data() {
 	    return {
-	        showMenu: false,
+
         }
     },
     methods: {
-        openmenu () {
-            this.showMenu = !this.showMenu;
+        openMenu () {
+            this.$store.commit("actionMenuStatus", true);
         }
     },
     emits: {
         openSidebar: null,
-        openMenu: null,
     }
 
 }

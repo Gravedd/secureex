@@ -1,5 +1,9 @@
 <template>
 dsasadsa
+    <action-menu>
+        <div>Действие 2</div>
+        <div>Закрыть</div>
+    </action-menu>
 </template>
 <script>
 
@@ -7,10 +11,11 @@ import MenuIcon from "@/components/icons/menuIcon";
 import icon from "@/components/icons/icon";
 import PointsIcon from "@/components/icons/pointsIcon";
 import AppHeader from "@/components/app-header";
+import ActionMenu from "@/components/action-menu";
 
 export default {
 	name: 'HomeView',
-	components: {AppHeader, PointsIcon, icon, MenuIcon}
+	components: {ActionMenu, AppHeader, PointsIcon, icon, MenuIcon}
 }
 
 </script>

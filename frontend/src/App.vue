@@ -7,13 +7,8 @@
     <app-header @openSidebar="openSidebar" @openMenu="openMenu">{{ this.$route.name }}</app-header>
 
     <router-view/>
-    
-    <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
 
-    <action-menu :opened="isActionMenuOpened" @closeMenu="closeMenu">
-        <div>Действие 1</div>
-        <div>Закрыть</div>
-    </action-menu>
+    <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"></app-sidebar>
 
 </template>
 <script>
@@ -50,9 +45,6 @@ export default {
         openMenu() {
             this.$store.commit("actionMenuStatus", true);
         },
-        closeMenu() {
-            this.$store.commit("actionMenuStatus", false);
-        }
     },
     created() {
         this.updateColors();
