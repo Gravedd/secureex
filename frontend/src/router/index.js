@@ -1,17 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Main from '../views/Main.vue'
+import _Clean from '../views/_Clean.vue'
 
 const routes = [
     {
         path: '/',
         name: 'Главная',
-        component: Main
+        component: _Clean
     },
-    {
+    /*{
         path: '/about',
         name: 'about',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
+        component: () => import(/!* webpackChunkName: "about" *!/ '../views/AboutView.vue')
+    }*/
 ]
 
 const router = createRouter({

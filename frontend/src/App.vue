@@ -1,14 +1,10 @@
 <template>
-    <!--  <nav>
-        <router-link to="/">Home</router-link>
-        |
-        <router-link to="/about">About</router-link>
-      </nav>-->
     <app-header @openSidebar="openSidebar">{{ this.$route.name }}</app-header>
 
     <router-view/>
 
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"/>
+
     <loader></loader>
 </template>
 <script>
