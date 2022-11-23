@@ -64,4 +64,32 @@ export default {
         height: 23px;
         line-height: 23px;
     }
+    @media (min-width: 650px) {
+        .dialog-wrapper {
+            height: 60px;
+        }
+        .dialog-name-time-wrapper, .dialog-message {
+            line-height: 30px;
+        }
+        .dialog-message {
+            font-size: 12px;
+        }
+        .dialog-time {
+            font-size: 10px;
+        }
+    }
+    @media (min-width: 1200px) {
+        .dialog-wrapper {
+            height: 60px;
+        }
+        .dialog-name-time-wrapper, .dialog-message {
+            line-height: 30px;
+        }
+        .dialog-message {
+            font-size: 13px;
+        }
+        .dialog-time {
+            font-size: 12px;
+        }
+    }
 </style>
