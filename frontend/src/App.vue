@@ -81,6 +81,10 @@ a {
     color: var(--text);
     text-decoration: none;
 }
+.basePadding {
+    padding-left: 16px;
+    padding-right: 16px;
+}
 /* Стили попапов sweetAlert */
 .swal2-popup {
     color: var(--text) !important;

@@ -1,4 +1,5 @@
 import {createStore} from 'vuex'
+import dialogues from "@/store/dialogues";
 
 export default createStore({
     state: {
@@ -59,5 +60,7 @@ export default createStore({
 		},
 
 	},
-    modules: {}
+    modules: {
+    	dialogues: dialogues,
+	}
 })
