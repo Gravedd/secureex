@@ -11,6 +11,7 @@
 
     <loader></loader>
 </template>
+
 <script>
 import AppSidebar from "@/components/app-sidebar";
 import store from "@/store";
