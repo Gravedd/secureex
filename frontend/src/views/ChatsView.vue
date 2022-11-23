@@ -1,22 +1,19 @@
 <template>
     <action-menu>
         <div>
-            <router-link to="/">To chats</router-link>
+            <router-link to="/clean">To clean</router-link>
         </div>
-        <div>Кнопка 2</div>
     </action-menu>
+    чаты
 </template>
+
 <script>
-
 import ActionMenu from "@/components/action-menu";
-
 export default {
-	name: 'CleanTemplate',
-	components: {ActionMenu}
+    name: "ChatsView",
+    components: {ActionMenu}
 }
-
 </script>
 
-<style>
-
+<style scoped>
 </style>

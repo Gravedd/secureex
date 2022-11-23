@@ -77,17 +77,9 @@ export default {
     font-size: 14px;
 }
 
-nav {
-    padding: 30px;
-}
-
-nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-    color: #42b983;
+a {
+    color: var(--text);
+    text-decoration: none;
 }
 /* Стили попапов sweetAlert */
 .swal2-popup {
