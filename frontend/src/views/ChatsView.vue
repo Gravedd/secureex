@@ -1,17 +1,19 @@
 <template>
-    <action-menu>
-        <div>
-            <router-link to="/clean">To clean</router-link>
+    <div class="componentWrapper">
+        <div class="dialogList-wrapper" v-for="dialogue in dialogues">
+            <dialog-item
+                    :user_id="dialogue.user_id"
+                    :username="dialogue.user_name"
+                    :last-message="dialogue.lastMessage"
+                    :last-time="dialogue.lastTime"
+            />
         </div>
-    </action-menu>
 
-    <div class="dialogList-wrapper" v-for="dialogue in dialogues">
-        <dialog-item
-            :user_id="dialogue.user_id"
-            :username="dialogue.user_name"
-            :last-message="dialogue.lastMessage"
-            :last-time="dialogue.lastTime"
-        />
+        <action-menu>
+            <div>
+                <router-link to="/clean">To clean</router-link>
+            </div>
+        </action-menu>
     </div>
 </template>
 

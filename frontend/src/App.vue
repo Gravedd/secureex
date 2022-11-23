@@ -1,7 +1,11 @@
 <template>
     <app-header @openSidebar="openSidebar">{{ this.$route.name }}</app-header>
 
-    <router-view/>
+    <router-view v-slot="{ Component }">
+        <transition name="fade">
+            <component :is="Component"/>
+        </transition>
+    </router-view>
 
     <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"/>
 
@@ -80,6 +84,9 @@ export default {
 a {
     color: var(--text);
     text-decoration: none;
+}
+.componentWrapper {
+
 }
 .basePadding {
     padding-left: 16px;
