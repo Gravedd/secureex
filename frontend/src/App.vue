@@ -1,5 +1,5 @@
 <template>
-    <app-header @openSidebar="openSidebar">{{ this.$route.name }}</app-header>
+    <app-header @openSidebar="openSidebar"></app-header>
 
     <router-view v-slot="{ Component }">
         <transition name="fade">
@@ -35,6 +35,11 @@ export default {
     },
     created() {
         store.dispatch("updateColors");
+
+        window.addEventListener('resize',function() {
+            store.dispatch("updateDeviceData");
+        });
+        store.dispatch("updateDeviceData");
     },
     mounted() {
         this.$hideLoader();
@@ -92,6 +97,17 @@ a {
 .basePadding {
     padding-left: 16px;
     padding-right: 16px;
+}
+.nice-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    -webkit-appearance: none;
+}
+.nice-scrollbar::-webkit-scrollbar-track {
+    background: none;        /* цвет зоны отслеживания */
+    background-clip: content-box;
+}
+.nice-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--gray5);
 }
 /* Стили попапов sweetAlert */
 .swal2-popup {
