@@ -14,7 +14,12 @@ const routes = [
         path: '/clean',
         name: 'clean page',
         component: () => import( '../views/_Clean')
-    }
+    },
+    {
+        path: "/chat",
+        name: '',
+        component: () => import( '../views/ChatView')
+    },
 ]
 
 const router = createRouter({
@@ -24,7 +29,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-    document.title = to.name + " | SecureEx";//Изменить тайтл страницы
+    store.commit("setHeaderName", to.name)
     store.commit("showLoader");//Показать анимацию загрузки
     store.commit("actionMenuStatus", false);//Закрыть экшн меню
 
