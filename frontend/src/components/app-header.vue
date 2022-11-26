@@ -3,9 +3,11 @@
         <icon v-if="showSidebarBtn" class="menuIcon" @click="$emit('openSidebar')">
             <menu-icon/>
         </icon>
-        <icon v-if="showBackBtn" class="menuIcon" @click="$emit('openSidebar')" viewBox="65 55 400 400">
-            <back-icon/>
-        </icon>
+        <router-link v-if="showBackBtn" :to="backBtnUrl">
+            <icon class="menuIcon" viewBox="65 55 400 400">
+                <back-icon/>
+            </icon>
+        </router-link>
         <div id="headerTitle">
             {{ headerTitle }}
         </div>

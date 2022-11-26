@@ -15,13 +15,13 @@ export default {
             return state.showBackBtn
         },
         backBtnUrl: (state) => {
-            return state.showSidebarBtn
+            return state.backBtnUrl
         },
         headerTitle: (state) => {
             return state.headerTitle
         },
         showActionMenu: (state) => {
-            return state.showSidebarBtn
+            return state.showActionMenu
         },
     },
     mutations: {
