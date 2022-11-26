@@ -3,8 +3,8 @@
         <icon v-if="showSidebarBtn" class="menuIcon" @click="$emit('openSidebar')">
             <menu-icon/>
         </icon>
-        <router-link v-if="showBackBtn" :to="backBtnUrl">
-            <icon class="menuIcon" viewBox="65 55 400 400">
+        <router-link v-if="showBackBtn" :to="backBtnUrl" class="backBtn">
+            <icon viewBox="65 55 400 400">
                 <back-icon/>
             </icon>
         </router-link>
@@ -74,5 +74,9 @@ export default {
     }
     .pointsIcon {
         margin-left: auto;
+    }
+    .backBtn {
+        margin-right: 19px;
+        height: 19px;
     }
 </style>

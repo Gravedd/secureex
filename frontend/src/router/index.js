@@ -29,6 +29,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
+    store.commit("reset");//Сбросить настройки хедера
     store.commit("setHeaderName", to.name)
     store.commit("showLoader");//Показать анимацию загрузки
     store.commit("actionMenuStatus", false);//Закрыть экшн меню

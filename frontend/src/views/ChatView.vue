@@ -127,7 +127,6 @@ export default {
 
 <style>
     .chat-wrapper {
-        /*height: calc(100% - 40px);*/
         width: 100%;
         display: flex;
         flex-direction: column;
