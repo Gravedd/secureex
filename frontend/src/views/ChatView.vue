@@ -8,6 +8,7 @@
              }"
         >
             <div class="basePadding messages-wrapper">
+
                 <div class="message-wrapper message-sent">
                     <div class="message-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
                     <div class="message-time">14:15</div>
@@ -113,6 +114,7 @@ export default {
 
     },
     beforeCreate() {
+
 	    this.$store.commit("setHeaderSetting", {
             showSidebarBtn: false,
             showBackBtn: true,
@@ -120,6 +122,9 @@ export default {
             headerTitle: "UserName",
             showActionMenu: true,
         });
+    },
+    mounted() {
+
     }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="dialog-wrapper basePadding">
+    <router-link to="/chat" class="dialog-wrapper basePadding">
         <div class="dialog-avatar-wrapper">
             <div class="dialog-avatar"></div>
         </div>
@@ -10,7 +10,7 @@
             </div>
             <div class="dialog-message">{{ lastMessage }}</div>
         </div>
-    </div>
+    </router-link>
 </template>
 <script>
 export default {

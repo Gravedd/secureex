@@ -32,7 +32,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: brightness(0.25);
+    backdrop-filter: brightness(0.15);
 }
 .lds-ellipsis {
     display: inline-block;
