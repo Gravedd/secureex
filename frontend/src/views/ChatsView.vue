@@ -11,7 +11,10 @@
 
         <action-menu>
             <div>
-                <router-link to="/clean">To clean</router-link>
+                <router-link to="/clean">Чистый</router-link>
+            </div>
+            <div>
+                <router-link to="/chat">Перейти в диалог</router-link>
             </div>
         </action-menu>
     </div>
