@@ -1,5 +1,6 @@
 import {createStore} from 'vuex'
 import dialogues from "@/store/dialogues";
+import header from "@/store/header";
 
 export default createStore({
     state: {
@@ -26,6 +27,8 @@ export default createStore({
 		isActionMenuOpened: false,
 		//Load indicator
 		showLoader: false,
+		clientWidth: 0,
+		clientHeight: 0,
 	},
     getters: {
 		colors: (state) => {
@@ -36,7 +39,13 @@ export default createStore({
 		},
 		showLoader: (state) => {
 			return state.showLoader
-		}
+		},
+		clientWidth: (state) => {
+			return state.clientWidth
+		},
+		clientHeight: (state) => {
+			return state.clientHeight
+		},
 	},
     mutations: {
 		actionMenuStatus (state, status) {
@@ -48,6 +57,10 @@ export default createStore({
 		hideLoader (state) {
 			state.showLoader = false;
 		},
+		updateClientData(state, data) {
+			state.clientWidth = data.width
+			state.clientHeight = data.height
+		}
 	},
     actions: {
 
@@ -58,9 +71,16 @@ export default createStore({
 				document.documentElement.style.setProperty(cssVar, colors[cssVar]);
 			}
 		},
+		updateDeviceData(context) {
+			context.commit("updateClientData", {
+				"width" : document.documentElement.clientWidth,
+				"height": document.documentElement.clientHeight,
+			})
+		}
 
 	},
     modules: {
     	dialogues: dialogues,
+		header: header,
 	}
 })
