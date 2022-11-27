@@ -103,7 +103,12 @@ export default {
             return state.messagesDialogs
         }
     },
-    mutations: {},
+    mutations: {
+        addMessage (state, data) {
+            let uid = data.user_id
+            state.messagesDialogs['dialogWithUser' + uid].push(data)
+        },
+    },
     actions: {},
     modules: {},
 }
