@@ -10,19 +10,20 @@
             <div class="message-time">{{ message.time }}</div>
         </div>
     </div>
-    <icon viewBox="0 0 30 30" class="down-btn" width="25" height="25" v-if="showDownBtn" @click="scrollBlockDown"><down-icon/></icon>
+    <icon viewBox="0 0 30 30" class="down-btn" width="25" height="25" v-if="showDownBtn" @click="scrollBlockDown()"><down-icon/></icon>
 </template>
 <script>
-
 import store from "@/store";
 import Icon from "@/components/icons/icon";
 import DownIcon from "@/components/icons/downIcon";
+
 export default {
     name: "Dialog-messages",
     components: {DownIcon, Icon},
     data() {
         return {
             showDownBtn: false,
+            unsubscribe: null,
         }
     },
     computed: {
@@ -53,12 +54,13 @@ export default {
 
         },
 
-        async scrollBlockDown() {
+        async scrollBlockDown(behavior = "smooth") {
             function scrollBlock() {
                 let messageBlock = document.getElementById("messageBlock");
+                console.log(behavior)
                 messageBlock.scrollTo({
                     top: messageBlock.scrollHeight,
-                    behavior: 'smooth'
+                    behavior: behavior
                 });
             }
             setTimeout(scrollBlock, 25);
@@ -66,13 +68,13 @@ export default {
     },
     mounted() {
         //Подписка на изменение диалога
-        let unsubscribe = store.subscribe((mutation) => {
+        this.unsubscribe = store.subscribe((mutation) => {
             if (mutation.type === "addMessage" && mutation.payload.user_id == 1) {
                 this.newMessageEvent(mutation.payload);
             }
-        })
+        });
         //Перемотать блок до конца
-        this.scrollBlockDown();
+        this.scrollBlockDown("instant");
 
         //Генератор сообщений(временно)
         setInterval(() => {
@@ -86,10 +88,11 @@ export default {
                 time: "14:"+random3,
                 type: random >= 1 ? "sent" : "received"
             });
-        }, 4000);
+        }, 1000);
     },
     beforeUnmount() {
-
+        this.unsubscribe();
+        console.log(this.unsubscribe());
     }
 }
 </script>

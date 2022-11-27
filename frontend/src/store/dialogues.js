@@ -92,6 +92,71 @@ export default {
                     time: "14:15",
                     type: "sent"
                 },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "sent"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "sent"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "sent"
+                },{
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "received"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "sent"
+                },
+                {
+                    id: 1,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    time: "14:15",
+                    type: "sent"
+                },
             ]
         },
     },
