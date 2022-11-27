@@ -33,7 +33,6 @@ export default {
     },
     methods: {
         newMessageEvent(message) {
-            console.log("Новое сообщение")
             if (!this.checkBlockScrolledMax(document.getElementById("messageBlock"), false)) {
                 this.scrollBlockDown();
             } else {
@@ -57,7 +56,6 @@ export default {
         async scrollBlockDown(behavior = "smooth") {
             function scrollBlock() {
                 let messageBlock = document.getElementById("messageBlock");
-                console.log(behavior)
                 messageBlock.scrollTo({
                     top: messageBlock.scrollHeight,
                     behavior: behavior
@@ -92,7 +90,6 @@ export default {
     },
     beforeUnmount() {
         this.unsubscribe();
-        console.log(this.unsubscribe());
     }
 }
 </script>
