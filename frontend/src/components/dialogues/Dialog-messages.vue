@@ -88,7 +88,7 @@ export default {
                 time: "14:"+random3,
                 type: random >= 1 ? "sent" : "received"
             });
-        }, 1000);
+        }, 4000);
     },
     beforeUnmount() {
         this.unsubscribe();
@@ -139,12 +139,22 @@ export default {
 .message-sent {
     margin-left: auto;
     background: linear-gradient(97.99deg, var(--main) -11.81%, var(--main2) 130.29%);
+    animation: 0.3s show-sent ease-in-out;
 }
 .message-received {
     background-color: var(--bg3);
     margin-right: auto;
+    animation: 0.3s show-received ease-in-out;
 }
 .down-btn {
     position: fixed; right: 18px; bottom: 70px;
+}
+@keyframes show-sent {
+    from { opacity: 0; transform: translateX(100px) scale(0) ; }
+    to { opacity: 1; transform: translateX(0) scale(1);}
+}
+@keyframes show-received {
+    from { opacity: 0; transform: translateX(-100px) scale(0) ; }
+    to { opacity: 1; transform: translateX(0) scale(1);}
 }
 </style>
