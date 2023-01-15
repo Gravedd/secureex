@@ -91,6 +91,12 @@ a {
     color: var(--text);
     text-decoration: none;
 }
+.colored_gradient {
+    background: linear-gradient(90.16deg, var(--main) -31.7%, var(--main2) 136.91%);
+}
+.flex {
+    display: flex;
+}
 .componentWrapper {
 
 }

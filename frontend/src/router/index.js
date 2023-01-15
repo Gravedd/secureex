@@ -20,6 +20,12 @@ const routes = [
         name: '',
         component: () => import( '../views/ChatView')
     },
+    {
+        path: "/login",
+        name: '',
+        component: () => import( '../views/AuthView')
+    },
+
 ]
 
 const router = createRouter({
