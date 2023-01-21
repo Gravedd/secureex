@@ -5,7 +5,9 @@ export default {
         backBtnUrl: "",
         headerTitle: "secureex",
         showActionMenu: true,
-
+        showHeader: true,
+        inputInsteadOfText: false,
+        headerInputValue: "",
     },
     getters: {
         showSidebarBtn: (state) => {
@@ -22,6 +24,15 @@ export default {
         },
         showActionMenu: (state) => {
             return state.showActionMenu
+        },
+        showHeader: (state) => {
+            return state.showHeader
+        },
+        inputInsteadOfText: (state) => {
+            return state.inputInsteadOfText
+        },
+        headerInputValue: (state) => {
+            return state.headerInputValue
         },
     },
     mutations: {
@@ -44,7 +55,16 @@ export default {
             state.backBtnUrl = ""
             state.headerTitle = "secureex"
             state.showActionMenu = true
-        }
+        },
+        showHeader(state, value) {
+            state.showHeader = value;
+        },
+        inputInsteadOfText(state, value) {
+            state.inputInsteadOfText = value;
+        },
+        headerInputValue(state, value) {
+            state.headerInputValue = value;
+        },
 
     },
     actions: {},
