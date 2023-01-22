@@ -123,7 +123,18 @@ a {
 .swal2-styled.swal2-confirm {
     background-color: var(--main2) !important;
 }
+.col-1-1 {
+    width: 100%;
+    padding: 16px 16px;
+}
+.col-1-2 {
+    width: 50%;
+}
 
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
     /* Анимации */
 /* fade */
 .fade-enter-active, .fade-leave-active {
