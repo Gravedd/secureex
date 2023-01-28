@@ -33,7 +33,8 @@ export default {
     },
     methods: {
         newMessageEvent(message) {
-            if (!this.checkBlockScrolledMax(document.getElementById("messageBlock"), false)) {
+            const messageBlock = document.getElementById("messageBlock");
+            if (!this.checkBlockScrolledMax(messageBlock, false)) {
                 this.scrollBlockDown();
             } else {
                 this.showDownBtn = true;
@@ -43,23 +44,17 @@ export default {
             this.showDownBtn = this.checkBlockScrolledMax(e.target, true);
         },
         checkBlockScrolledMax(e) {
-
-            if ( e.scrollTop - (e.scrollHeight - e.clientHeight) <= -25) {//Определить насколько промотан блок
-                return true;
-            } else {
-                return false;
-            }
-
-
+            return e.scrollTop - (e.scrollHeight - e.clientHeight) <= -25;
         },
 
         async scrollBlockDown(behavior = "smooth") {
             function scrollBlock() {
-                let messageBlock = document.getElementById("messageBlock");
-                messageBlock.scrollTo({
+                const messageBlock = document.getElementById("messageBlock");
+                const scrollOptions = {
                     top: messageBlock.scrollHeight,
-                    behavior: behavior
-                });
+                    behavior: "smooth"
+                };
+                messageBlock.scrollTo(scrollOptions);
             }
             setTimeout(scrollBlock, 25);
         }
