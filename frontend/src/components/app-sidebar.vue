@@ -106,12 +106,16 @@ export default {
     }
 
     .sidebarMenu {
-        padding: 20px 16px;
+        padding: 20px 0px;
     }
     .sidebarMenu .item {
         display: flex;
         align-items: center;
-        margin-bottom: 20px;
+        padding: 10px 16px;
+        /*margin-bottom: 20px;*/
+    }
+    .sidebarMenu .item:hover,.sidebarMenu .item:focus {
+        backdrop-filter: brightness(1.15);
     }
     .item-text {
         margin-left: 15px;
