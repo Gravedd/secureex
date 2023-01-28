@@ -11,6 +11,7 @@
             <div class="dialog-message">{{ lastMessage }}</div>
         </div>
     </router-link>
+    <hr>
 </template>
 <script>
 export default {
@@ -29,7 +30,9 @@ export default {
         width: 100%;
         display: flex;
         margin-bottom: 4px;
-        border-bottom: 1px solid var(--bg2);
+    }
+    hr {
+        border: 1px solid var(--bg2);
     }
     .dialog-avatar-wrapper {
         width: 39px;
