@@ -8,6 +8,7 @@ export default {
         showHeader: true,
         inputInsteadOfText: false,
         headerInputValue: "",
+        showOkBtn: false,
     },
     getters: {
         showSidebarBtn: (state) => {
@@ -33,6 +34,9 @@ export default {
         },
         headerInputValue: (state) => {
             return state.headerInputValue
+        },
+        showOkBtn: (state) => {
+            return state.showOkBtn
         },
     },
     mutations: {
@@ -64,6 +68,9 @@ export default {
         },
         headerInputValue(state, value) {
             state.headerInputValue = value;
+        },
+        showOkBtn(state, value) {
+            state.showOkBtn = value;
         },
 
     },

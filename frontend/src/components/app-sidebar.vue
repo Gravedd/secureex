@@ -13,12 +13,14 @@
                     </div>
                 </div>
                 <div class="sidebarMenu">
-                    <div class="item">
+
+                    <router-link to="/settings" class="item" @click="$emit('closeSidebar')">
                         <icon color="#5C04BB">
                             <settings-icon/>
                         </icon>
                         <span class="item-text">Настройки</span>
-                    </div>
+                    </router-link>
+
                     <div class="item">
                         <icon color="#5C04BB">
                             <key-icon/>

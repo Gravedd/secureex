@@ -25,6 +25,9 @@
                     <input type="text" placeholder="О себе">
                 </div>
             </div>
+            <div class="savebtnwrap">
+                <div class="savebutton">Сохранить</div>
+            </div>
         </div>
 
 
@@ -99,5 +102,16 @@ export default {
 }
 .inputSetting input::placeholder {
     color: var(--bg4);
+}
+.savebtnwrap {
+    width: 100%;
+    padding: 16px 16px;
+    text-align: center;
+}
+.savebutton {
+    width: 100%;
+    background-color: var(--main2);
+    line-height: 40px;
+    border-radius: 10px;
 }
 </style>
