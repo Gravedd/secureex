@@ -133,7 +133,12 @@ export default {
         .sidebarWrapper {
             max-width: 236px;
         }
+    }
 
+    @media (min-width: 1000px) {
+      .sidebarWrapper {
+        max-width: 390px;
+      }
     }
 
 </style>

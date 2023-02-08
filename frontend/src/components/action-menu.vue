@@ -65,4 +65,9 @@ export default {
         transform: translateX(30px);
         opacity: 0;
     }
+    @media (min-width: 1000px) {
+        .menuwrapper-flex {
+            padding: 8px 400px;
+        }
+    }
 </style>

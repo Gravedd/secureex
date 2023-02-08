@@ -143,4 +143,21 @@ a {
 .fade-enter-from, .fade-leave-to {
     opacity: 0;
 }
+
+@media (min-width: 1000px) {
+  .componentWrapper {
+      padding: 0 100px;
+  }
+  header {
+    padding: 0 100px !important;
+  }
+}
+@media (min-width: 1500px) {
+  .componentWrapper {
+    padding: 0 400px;
+  }
+  header {
+    padding: 0 400px !important;
+  }
+}
 </style>
