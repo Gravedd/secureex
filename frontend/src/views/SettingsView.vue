@@ -114,4 +114,10 @@ export default {
     line-height: 40px;
     border-radius: 10px;
 }
+@media (min-width: 400px) {
+    .profileInfoAvatar {
+        width: auto;
+        margin-right: 19px;
+    }
+}
 </style>

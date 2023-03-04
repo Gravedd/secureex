@@ -149,4 +149,18 @@ export default {
     from { opacity: 0; transform: translateX(-100px) scale(0) ; }
     to { opacity: 1; transform: translateX(0) scale(1);}
 }
+@media (min-width: 1000px) {
+    .messages-wrapper {
+        border-left: 1px solid var(--bg2);
+        border-right: 1px solid var(--bg2);
+    }
+    .down-btn {
+        position: fixed; right: 120px; bottom: 70px;
+    }
+}
+@media (min-width: 1500px) {
+    .down-btn {
+        position: fixed; right: 420px; bottom: 70px;
+    }
+}
 </style>
