@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -47,5 +48,11 @@ class AuthController extends Controller
         $token = Auth::user()->createToken('authtoken')->plainTextToken;
 
         return response(["status" => true, "token" => $token, "user" => Auth::user()]);
+    }
+
+    public function logout(Request $request) {
+        $tokenId = Str::before($request->bearerToken(), '|');
+        $request->user()->tokens()->where('id', $tokenId)->delete();
+        return response("", 204);
     }
 }
