@@ -55,4 +55,8 @@ class AuthController extends Controller
         $request->user()->tokens()->where('id', $tokenId)->delete();
         return response("", 204);
     }
+
+    public function user(Request $request) {
+        return $request->user();
+    }
 }
