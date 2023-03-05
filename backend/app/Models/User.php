@@ -41,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected static function getUserPublic() {
+        return self::select(["id", "name", "email", "created_at"]);
+    }
+
+    public static function getUserById($id) {
+        return self::getUserPublic()->find($id);
+    }
+
+    public static function getUserByName($name) {
+        return self::getUserPublic()->Where('name', 'LIKE', $name)->first();
+    }
+
 }

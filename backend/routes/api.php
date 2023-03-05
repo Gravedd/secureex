@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
+Route::group(['middleware' => 'auth:sanctum'], function() {
+
+    Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUserById"])->name("getUserById");
+
+});
+
+//////////////////////////
+/// AUTH
+//////////////////////////
 Route::post("/register", [\App\Http\Controllers\AuthController::class, "register"])->name("register");
 Route::post("/login", [\App\Http\Controllers\AuthController::class, "login"])->name("login");
 Route::post("/logout", [\App\Http\Controllers\AuthController::class, "logout"])->name("logout")->middleware('auth:sanctum');
