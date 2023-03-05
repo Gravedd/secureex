@@ -8,14 +8,9 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     public function getUser($param) {
-
         $user = $this->isIdOrName($param) ? User::getUserById($param) : User::getUserByName($param);
 
-        if (!$user) {
-            return response(["status" => false, "message" => "Пользователь не найден"], 404);
-        }
-
-        return response($user);
+        return $user ? response($user) : response(["status" => false, "message" => "Пользователь не найден"], 404);
     }
 
     private function isIdOrName($nameOrId) {
