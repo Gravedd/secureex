@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUser"])->name("users.public.get");
+    Route::put("/user/himself", [\App\Http\Controllers\UsersController::class, "selfEditUser"])->name("users.self.edit");
 });
 
 //////////////////////////

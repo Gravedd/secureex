@@ -12,6 +12,8 @@ class UsersTest extends TestCase {
 
     private string $loginRoute = "login";
     private string $getUserRoute = "users.public.get";
+    private string $editHimselfRoute = "users.self.edit";
+
     private string $validPassword = "111111111";
     private array $headers = [
         "Accept" => "application/json"
@@ -89,4 +91,35 @@ class UsersTest extends TestCase {
     }
 
 
+    //edit himself user()
+
+    public function test_can_user_edit_himself() {
+        $response = $this->put(route($this->editHimselfRoute), [
+            "name" => "useredit_".\Str::random(10),
+            'email' => "useredit_".\Str::random(10)."@gmail.com",
+            "password" => $this->validPassword,
+        ],array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+
+        $response->assertStatus(200);
+    }
+
+    public function test_cannot_user_edit_himself_without_auth() {
+        $response = $this->put(route($this->editHimselfRoute), [
+            "name" => "useredit_".\Str::random(10),
+            'email' => "useredit_".\Str::random(10)."@gmail.com",
+            //"password" => $this->validPassword,
+        ],array_merge($this->headers, ["Authorization" => "Bearer 15|3123123213213"]));
+
+        $response->assertStatus(401);
+    }
+
+    public function test_cannot_user_edit_himself_with_bad_data() {
+        $response = $this->put(route($this->editHimselfRoute), [
+            "name" => "",
+            'email' => "notaemail",
+            "password" => "ps",
+        ],array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+
+        $response->assertStatus(422);
+    }
 }
