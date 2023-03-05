@@ -11,7 +11,7 @@ use Tests\TestCase;
 class UsersTest extends TestCase {
 
     private string $loginRoute = "login";
-    private string $getUserByIdRoute = "getUserById";
+    private string $getUserRoute = "users.public.get";
     private string $validPassword = "111111111";
     private array $headers = [
         "Accept" => "application/json"
@@ -21,30 +21,6 @@ class UsersTest extends TestCase {
     public function assertUserJson($response) {
         $response->assertJsonStructure(["id", "name", "email", "created_at"]);
     }
-
-    public function test_can_get_user_by_id_with_auth() {
-        $user = User::first();
-
-        $response = $this->get(route($this->getUserByIdRoute, $user['id']), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
-
-        $response->assertStatus(200);
-        $this->assertUserJson($response);
-    }
-
-    public function test_cannot_get_user_by_id_without_auth() {
-        $user = User::first();
-
-        $response = $this->get(route($this->getUserByIdRoute, $user['id']), array_merge($this->headers, ["Authorization" => "Bearer 1|dasdasdad"]));
-
-        $response->assertStatus(401);
-    }
-
-
-    public function test_cannot_get_non_existent_user_user_by_id() {
-        $response = $this->get(route($this->getUserByIdRoute, 0), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
-        $response->assertStatus(404);
-    }
-
 
     public function getAuthToken() {
         if (!empty(self::$token)) {
@@ -68,4 +44,49 @@ class UsersTest extends TestCase {
 
         return self::$token = $loginToken;
     }
+
+    //Get user by id
+
+    public function test_can_get_user_by_id_with_auth() {
+        $user = User::first();
+
+        $response = $this->get(route($this->getUserRoute, $user['id']), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+
+        $response->assertStatus(200);
+        $this->assertUserJson($response);
+    }
+
+    public function test_cannot_get_user_by_id_without_auth() {
+        $user = User::first();
+
+        $response = $this->get(route($this->getUserRoute, $user['id']), array_merge($this->headers, ["Authorization" => "Bearer 1|dasdasdad"]));
+
+        $response->assertStatus(401);
+    }
+
+    public function test_cannot_get_non_existent_user_user_by_id() {
+        $response = $this->get(route($this->getUserRoute, 0), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+        $response->assertStatus(404);
+    }
+
+    //Get user by name
+
+    public function test_can_get_user_by_name_with_auth() {
+        $user = User::first();
+
+        $response = $this->get(route($this->getUserRoute, $user['name']), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+
+        $response->assertStatus(200);
+        $this->assertUserJson($response);
+    }
+
+    public function test_cannot_get_user_by_bad_name_with_auth() {
+        $user = User::first();
+
+        $response = $this->get(route($this->getUserRoute, $user['name']."dpasdpasdpaspdsapaspdadpa"), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+
+        $response->assertStatus(404);
+    }
+
+
 }

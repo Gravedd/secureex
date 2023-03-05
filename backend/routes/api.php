@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-
-    Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUserById"])->name("getUserById");
-
+    Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUser"])->name("users.public.get");
 });
 
 //////////////////////////
