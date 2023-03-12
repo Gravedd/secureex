@@ -1,4 +1,4 @@
-const requests = class requests {
+export default class {
 
     static apiUrl = 'https://jsonplaceholder.typicode.com/1';
     static baseHeaders = {
@@ -44,10 +44,4 @@ const requests = class requests {
     }
 
 
-}
-
-export default {
-    install(Vue, args) {
-        Vue.config.globalProperties.$request = requests
-    }
 }
