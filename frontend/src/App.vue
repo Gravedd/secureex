@@ -43,6 +43,7 @@ export default {
     },
     mounted() {
         this.$hideLoader();
+        this.$store.dispatch("CheckAuth");
     }
 }
 </script>
