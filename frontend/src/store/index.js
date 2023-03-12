@@ -1,6 +1,7 @@
 import {createStore} from 'vuex'
 import dialogues from "@/store/dialogues";
 import header from "@/store/header";
+import auth from "@/store/auth";
 
 export default createStore({
     state: {
@@ -82,5 +83,6 @@ export default createStore({
     modules: {
     	dialogues: dialogues,
 		header: header,
+		auth: auth,
 	}
 })
