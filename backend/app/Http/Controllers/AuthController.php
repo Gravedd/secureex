@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         return response([
             'created' => (bool) $user,
-            'uid' => $user->id,
+            'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
             'token' => $token,
