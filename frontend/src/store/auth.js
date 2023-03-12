@@ -35,7 +35,14 @@ export default {
                 localStorage.setItem("token", user.token);
             }
         },
-        authFailed(state) {},
+        authFailed(state) {
+            state.isAuthorized = false;
+            state.user_id = null;
+            state.user_name = null;
+            state.user_email = null;
+            state.user_token = null;
+            localStorage.removeItem("token");
+        },
     },
     actions: {
         async Register(context, credentials) {
@@ -108,7 +115,8 @@ export default {
             requests.baseHeaders["Authorization"] = "Bearer " + context.getters.user_token;
         },
 
-        async userIsNotAuthorized() {
+        async userIsNotAuthorized(context) {
+            context.commit("authFailed");
             await router.push('/login');
         }
     }
