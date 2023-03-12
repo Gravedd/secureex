@@ -6,17 +6,17 @@
             <h3 class="authHeader">АВТОРИЗАЦИЯ</h3>
             <div class="authinputswrap">
                 <div v-if="loginOrRegister">
-                    <input type="text" placeholder="Почта" autocomplete="off">
-                    <input type="password" placeholder="Пароль">
-                    <input class="colored_gradient" type="submit" value="Войти">
+                    <input type="text" placeholder="Почта" autocomplete="off" v-model="email">
+                    <input type="password" placeholder="Пароль" v-model="password">
+                    <input class="colored_gradient" type="submit" value="Войти" @click="login">
                     <a class="resetpassbtn">Забыли пароль?</a>
                 </div>
                 <div v-if="!loginOrRegister">
-                    <input type="text" placeholder="Никнейм" autocomplete="off">
-                    <input type="text" placeholder="Почта" autocomplete="off">
-                    <input type="password" placeholder="Пароль">
-                    <input type="password" placeholder="Повтор пароля">
-                    <input class="colored_gradient" type="submit" value="Создать аккаунт">
+                    <input type="text" placeholder="Никнейм" autocomplete="off" v-model="reg_name">
+                    <input type="text" placeholder="Почта" autocomplete="off" v-model="reg_email">
+                    <input type="password" placeholder="Пароль" v-model="reg_password">
+                    <input type="password" placeholder="Повтор пароля" v-model="reg_password_confirm">
+                    <input class="colored_gradient" type="submit" value="Создать аккаунт" @click="register">
                 </div>
             </div>
 
@@ -53,11 +53,37 @@ export default {
 	name: 'AuthView',
     data() {
         return {
-            loginOrRegister: true,
+            loginOrRegister: false,
+            //Авторизация
+            "email": "",
+            "password": "",
+            //Регистрация
+            "reg_name": "",
+            "reg_email": "",
+            "reg_password": "",
+            "reg_password_confirm": "",
+            "reg_errors": {},
         }
     },
     methods: {
-	    toggleLoginOrRegister() { this.loginOrRegister = !this.loginOrRegister }
+	    toggleLoginOrRegister() { this.loginOrRegister = !this.loginOrRegister },
+        async register() {
+            let result = await this.$store.dispatch("Register", {
+                "name"                 : this.reg_name,
+                "email"                : this.reg_email,
+                "password"             : this.reg_password,
+                "password_confirmation": this.reg_password_confirm,
+            });
+            /*if (!await result.status) {
+                this.reg_errors = result.errors
+            }*/
+        },
+        async login() {
+            let result = await this.$store.dispatch("Login", {
+                "email"   : this.email,
+                "password": this.password,
+            })
+        }
     },
 	components: {LogoIcon, Icon, ActionMenu}
 }
