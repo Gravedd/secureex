@@ -2,6 +2,7 @@ import router from "@/router";
 import config from "@/config";
 import requests from "@/plugins/requests";
 import Swal from "sweetalert2";
+import store from "@/store";
 
 export default {
     state: {
@@ -46,7 +47,9 @@ export default {
     },
     actions: {
         async Register(context, credentials) {
+            store.commit("showLoader");
             let response = await requests.post(config.api + "register", credentials);
+            store.commit("hideLoader");
             let data = await response.json();
             if (response.ok) {
                 //успешная регистрация
@@ -65,7 +68,9 @@ export default {
         },
 
         async Login(context, credentials) {
+            store.commit("showLoader");
             let response = await requests.post(config.api + "login", credentials);
+            store.commit("hideLoader");
             let data = await response.json();
             if (response.ok) {
                 //успешная авторизация
@@ -90,7 +95,7 @@ export default {
         },
 
         async CheckAuth(context) {
-
+            store.commit("showLoader");
             if (!context.getters.user_token) {
                 return await context.dispatch("userIsNotAuthorized");
             }
@@ -98,6 +103,7 @@ export default {
             let response = await requests.get(config.api + "user", {
                 "Authorization": "Bearer " + context.getters.user_token
             });
+            store.commit("hideLoader");
 
             if (!response.ok) {
                 return await context.dispatch("userIsNotAuthorized");
