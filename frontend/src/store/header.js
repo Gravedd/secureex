@@ -9,6 +9,7 @@ export default {
         inputInsteadOfText: false,
         headerInputValue: "",
         showOkBtn: false,
+        showSearchIcon: false,
     },
     getters: {
         showSidebarBtn: (state) => {
@@ -38,16 +39,20 @@ export default {
         showOkBtn: (state) => {
             return state.showOkBtn
         },
+        showSearchIcon: (state) => {
+            return state.showSearchIcon
+        }
     },
     mutations: {
         //settings = {"showSidebarBtn"=true,"showBackBtn"=false,"backBtnUrl"='',"headerTitle"=false,"showActionMenu"=true,}
         setHeaderSetting (state, settings) {
             this.commit("reset", true);
             this.commit("setHeaderName", settings.headerTitle);
-            state.showSidebarBtn = settings.showSidebarBtn;
-            state.showBackBtn = settings.showBackBtn;
-            state.backBtnUrl = settings.backBtnUrl;
-            state.showActionMenu = settings.showActionMenu;
+            state.showSidebarBtn = settings.showSidebarBtn ?? false;
+            state.showBackBtn = settings.showBackBtn ?? false;
+            state.backBtnUrl = settings.backBtnUrl ?? "";
+            state.showActionMenu = settings.showActionMenu ?? true;
+            state.showSearchIcon = settings.showSearchIcon ?? false;
         },
         setHeaderName (state, name) {
             state.headerTitle = name;

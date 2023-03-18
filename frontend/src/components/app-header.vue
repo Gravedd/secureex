@@ -14,9 +14,14 @@
         <div class="headerInput" v-if="inputInsteadOfText">
             <input type="text" autofocus placeholder="Поиск..." @input="updateInput">
         </div>
-        <icon class="pointsIcon" @click="openMenu">
-            <points-icon/>
-        </icon>
+        <div class="right">
+            <icon width="21" height="21" class="search-icon" v-if="showSearchIcon">
+                <search-icon/>
+            </icon>
+            <icon class="pointsIcon" @click="openMenu">
+                <points-icon/>
+            </icon>
+        </div>
     </header>
 </template>
 <script>
@@ -27,10 +32,11 @@ import PointsIcon from "@/components/icons/pointsIcon";
 import ActionMenu from "@/components/action-menu";
 import store from "@/store";
 import BackIcon from "@/components/icons/backIcon";
+import SearchIcon from "@/components/icons/searchIcon";
 
 export default {
 	name: "app-header",
-	components: {BackIcon, ActionMenu, PointsIcon, MenuIcon, Icon},
+	components: {SearchIcon, BackIcon, ActionMenu, PointsIcon, MenuIcon, Icon},
 
     computed: {
         showSidebarBtn() {
@@ -54,6 +60,9 @@ export default {
         inputInsteadOfText() {
             return this.$store.getters.inputInsteadOfText;
         },
+        showSearchIcon() {
+            return this.$store.getters.showSearchIcon;
+        }
     },
 
     methods: {
@@ -104,5 +113,11 @@ export default {
     }
     .headerInput input:focus {
         outline: none;
+    }
+    .search-icon {
+        margin-right: 19px;
+    }
+    .right {
+        margin-left: auto;
     }
 </style>
