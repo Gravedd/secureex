@@ -48,13 +48,16 @@ export default {
     actions: {
         async Register(context, credentials) {
             store.commit("showLoader");
+
             let response = await requests.post(config.api + "register", credentials);
+
             store.commit("hideLoader");
+
             let data = await response.json();
             if (response.ok) {
                 //успешная регистрация
                 await context.dispatch("userSuccessAuthorized", data);
-                return alert("успешно");
+                return true;
             }
 
             Swal.fire({
@@ -80,7 +83,7 @@ export default {
                     "email": data.user.email,
                     "token": data.token,
                 });
-                return alert("успешно вошел");
+                return true;
             }
 
             Swal.fire({
@@ -113,7 +116,16 @@ export default {
         },
 
         async Logout(context) {
+            store.commit("showLoader");
+            if (!context.getters.user_token) {
+                return await context.dispatch("userIsNotAuthorized");
+            }
 
+            let response = await requests.get(config.api + "logout", {
+                "Authorization": "Bearer " + context.getters.user_token
+            });
+
+            return await context.dispatch("userIsNotAuthorized");
         },
 
         userSuccessAuthorized(context, user) {
