@@ -8,7 +8,7 @@
                         <div class="avatar"></div>
                     </div>
                     <div class="userdata">
-                        <div class="userdata-name">Username</div>
+                        <div class="userdata-name">{{ $store.getters.user_name }}</div>
                         <div class="userdata-nickname">@username</div>
                     </div>
                 </div>
