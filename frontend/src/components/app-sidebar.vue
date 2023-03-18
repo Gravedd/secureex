@@ -1,7 +1,7 @@
 <template>
-    <div class="background" v-if="opened"></div>
+    <div class="background" v-if="showSidebar"></div>
     <transition name="slide">
-        <div class="sidebarContainer" v-if="opened" @click="$emit('closeSidebar')">
+        <div class="sidebarContainer" v-if="showSidebar" @click="this.$store.commit('closeSidebar')">
             <div class="sidebarWrapper" @click="clickOnSidebar">
                 <div class="sidebarHeader">
                     <div class="avatar-wrapper">
@@ -48,17 +48,15 @@ import PeopleIcon from "@/components/icons/peopleIcon";
 
 export default {
 	name: "app-sidebar",
-    props: {
-	    "opened" : false,
+    computed: {
+        showSidebar() {
+            return this.$store.getters.showSidebar;
+        },
     },
     methods: {
         clickOnSidebar(event) { event.stopPropagation(); }//Клик на сайдбар
     },
 	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon},
-    emits: {
-        closeSidebar: null,
-    }
-
 }
 </script>
 

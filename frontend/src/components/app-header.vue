@@ -1,6 +1,6 @@
 <template>
     <header v-if="showHeader">
-        <icon v-if="showSidebarBtn" class="menuIcon" @click="$emit('openSidebar')">
+        <icon v-if="showSidebarBtn" class="menuIcon" @click="this.$store.commit('showSidebar')">
             <menu-icon/>
         </icon>
         <router-link v-if="showBackBtn" :to="backBtnUrl" class="backBtn">
@@ -72,9 +72,6 @@ export default {
         updateInput(e) {
             this.$store.commit("headerInputValue", e.target.value);
         }
-    },
-    emits: {
-        openSidebar: null,
     }
 }
 </script>

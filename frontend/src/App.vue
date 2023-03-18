@@ -1,5 +1,5 @@
 <template>
-    <app-header @openSidebar="openSidebar"></app-header>
+    <app-header></app-header>
 
     <router-view v-slot="{ Component }">
         <transition name="fade">
@@ -7,7 +7,7 @@
         </transition>
     </router-view>
 
-    <app-sidebar :opened="isSidebarOpened" @closeSidebar="closeSidebar"/>
+    <app-sidebar/>
 
     <loader></loader>
 </template>
@@ -23,12 +23,11 @@ export default {
     components: {Loader, ActionMenu, AppHeader, AppSidebar},
     data() {
         return {
-            isSidebarOpened: false,
+
         }
     },
     methods: {
-        openSidebar() { this.isSidebarOpened = true },
-        closeSidebar() { this.isSidebarOpened = false },
+
     },
     beforeCreate() {
         this.$showLoader();

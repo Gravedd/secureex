@@ -26,6 +26,8 @@ export default createStore({
 		},
 		//Action menu
 		isActionMenuOpened: false,
+		//sidebar
+		showSidebar: false,
 		//Load indicator
 		showLoader: false,
 		clientWidth: 0,
@@ -47,6 +49,9 @@ export default createStore({
 		clientHeight: (state) => {
 			return state.clientHeight
 		},
+		showSidebar: (state) => {
+			return state.showSidebar;
+		}
 	},
     mutations: {
 		actionMenuStatus (state, status) {
@@ -61,7 +66,13 @@ export default createStore({
 		updateClientData(state, data) {
 			state.clientWidth = data.width
 			state.clientHeight = data.height
-		}
+		},
+		showSidebar (state) {
+			state.showSidebar = true;
+		},
+		closeSidebar (state) {
+			state.showSidebar = false;
+		},
 	},
     actions: {
 
