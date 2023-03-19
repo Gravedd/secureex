@@ -26,9 +26,15 @@
 import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
 import AppHeader from "@/components/headers/app-header";
+import config from "@/config";
 
 export default {
     name: 'CleanTemplate',
+    data() {
+        return {
+            searchResult: [],
+        }
+    },
     computed: {
         dialogues() {
             return this.$store.getters.dialogues;
@@ -38,6 +44,25 @@ export default {
         },
     },
     components: {AppHeader, DialogItem, ActionMenu},
+    methods: {
+        async searchUser() {
+            let response = await this.$request.get(config.api + "user/find/" + this.searchQuery);
+            let result = await response.json();
+
+            if (!response.ok) {
+                return this.searchResult = [];
+            }
+
+            this.searchResult = result;
+
+            return result;
+        }
+    },
+    watch: {
+        searchQuery(now, old) {
+            this.searchUser();
+        }
+    }
 }
 </script>
 <style>

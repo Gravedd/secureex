@@ -4,7 +4,7 @@ export default {
             this.$store.commit("actionMenuStatus", true);
         },
         updateInput(e) {
-            this.$store.commit("headerInputValue", e.target.value);
+            this.$store.commit("headerInput", e.target.value);
         }
     },
     props: {

@@ -14,6 +14,13 @@ class UsersController extends Controller
         return $user ? response($user) : response(["status" => false, "message" => "Пользователь не найден"], 404);
     }
 
+    public function findUsersByParam($param) {
+        $result = User::where("name", 'like', "%$param%")->get();
+
+        return response($result);
+    }
+
+
     public function selfEditUser(Request $request){
         $fields = $request->validate([
             'name' => 'string|unique:users,name',
