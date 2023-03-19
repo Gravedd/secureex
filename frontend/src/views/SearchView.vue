@@ -2,7 +2,7 @@
 
     <div class="appWrapper">
 
-        <input-header/>
+        <app-header :input-instead-of-text="true"></app-header>
 
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
@@ -25,7 +25,7 @@
 <script>
 import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
-import InputHeader from "@/components/headers/input-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
     name: 'CleanTemplate',
@@ -37,7 +37,7 @@ export default {
             return this.$store.getters.headerInputValue;
         },
     },
-    components: {InputHeader, DialogItem, ActionMenu},
+    components: {AppHeader, DialogItem, ActionMenu},
     beforeCreate() {
         this.$store.commit("inputInsteadOfText", true);
     },

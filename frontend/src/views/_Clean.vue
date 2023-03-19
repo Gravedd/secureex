@@ -1,6 +1,6 @@
 <template>
     <div class="appWrapper">
-        <basic-header>Страница</basic-header>
+        <app-header>Страница</app-header>
 
         <div class="componentWrapper">
             <action-menu>
@@ -15,11 +15,11 @@
 <script>
 
 import ActionMenu from "@/components/action-menu";
-import BasicHeader from "@/components/headers/basic-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
 	name: 'CleanTemplate',
-	components: {BasicHeader, ActionMenu}
+	components: {AppHeader, ActionMenu}
 }
 
 </script>

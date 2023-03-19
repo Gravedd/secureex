@@ -1,9 +1,4 @@
-import store from "@/store";
-
 export default {
-    /*created() {
-        console.log('вызван хук из примеси')
-    }*/
     methods: {
         openMenu () {
             this.$store.commit("actionMenuStatus", true);
@@ -12,31 +7,35 @@ export default {
             this.$store.commit("headerInputValue", e.target.value);
         }
     },
-    computed: {
-        showSidebarBtn() {
-            return this.$store.getters.showSidebarBtn;
+    props: {
+        showHeader: {
+            default: true,
+            type: Boolean,
         },
-        showBackBtn() {
-            return this.$store.getters.showBackBtn;
+        backBtnUrl: {
+            default: "/",
+            type: String,
         },
-        backBtnUrl() {
-            return this.$store.getters.backBtnUrl;
+        showSidebarBtn: {
+            default: false,
+            type: Boolean,
         },
-        headerTitle() {
-            return store.getters.headerTitle;
+        showBackBtn: {
+            default: true,
+            type: Boolean,
         },
-        showActionMenu() {
-            return this.$store.getters.showActionMenu;
+        showActionMenu: {
+            default: true,
+            type: Boolean,
         },
-        showHeader() {
-            return this.$store.getters.showHeader;
+        inputInsteadOfText: {
+            default: false,
+            type: Boolean,
         },
-        inputInsteadOfText() {
-            return this.$store.getters.inputInsteadOfText;
+        showSearchIcon: {
+            default: false,
+            type: Boolean,
         },
-        showSearchIcon() {
-            return this.$store.getters.showSearchIcon;
-        }
-    },
 
+    },
 }

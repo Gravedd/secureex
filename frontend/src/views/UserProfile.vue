@@ -2,7 +2,7 @@
 
     <div class="appWrapper">
 
-        <back-header>Профиль</back-header>
+        <app-header></app-header>
 
         <div class="componentWrapper">
 
@@ -50,11 +50,11 @@
 import ActionMenu from "@/components/action-menu";
 import Icon from "@/components/icons/icon";
 import MessageIcon from "@/components/icons/messageIcon";
-import BackHeader from "@/components/headers/back-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
 	name: 'CleanTemplate',
-	components: {BackHeader, MessageIcon, Icon, ActionMenu}
+	components: {AppHeader, MessageIcon, Icon, ActionMenu}
 }
 
 </script>

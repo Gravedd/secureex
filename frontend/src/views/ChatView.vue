@@ -1,7 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <back-header/>
+        <app-header back-btn-url="/">UserName</app-header>
 
 
         <div class="componentWrapper">
@@ -26,25 +26,21 @@ import AttachIcon from "@/components/icons/attachIcon";
 import SendIcon from "@/components/icons/sendIcon";
 import store from "@/store"
 import DialogComponent from "@/components/dialogues/Dialog-component";
-import BackHeader from "@/components/headers/back-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
 	name: 'ChatView',
-	components: {BackHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
+	components: {AppHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
     data() {
 	    return {
 
         }
     },
-    beforeCreate() {
-	    this.$store.commit("setHeaderSetting", {
-            showSidebarBtn: false,
-            showBackBtn: true,
-            backBtnUrl: "/",
-            headerTitle: "UserName",
-            showActionMenu: true,
-        });
-    },
+    methods: {
+        onClickOnHeaderTitle() {
+	        console.log(111)
+        }
+    }
 }
 
 </script>

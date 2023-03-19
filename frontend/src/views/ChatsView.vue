@@ -1,6 +1,6 @@
 <template>
     <div class="appWrapper">
-        <dialogues-header/>
+        <app-header :show-back-btn="false" :show-sidebar-btn="true">Диалоги</app-header>
 
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
@@ -27,11 +27,11 @@
 <script>
 import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
-import DialoguesHeader from "@/components/headers/dialogues-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
     name: "ChatsView",
-    components: {DialoguesHeader, DialogItem, ActionMenu},
+    components: {AppHeader, DialogItem, ActionMenu},
     computed: {
         dialogues() {
             return this.$store.getters.dialogues;

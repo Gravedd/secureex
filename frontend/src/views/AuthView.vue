@@ -1,7 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <clean-header></clean-header>
+        <app-header></app-header>
 
         <div class="componentWrapper">
 
@@ -48,7 +48,7 @@
 import ActionMenu from "@/components/action-menu";
 import Icon from "@/components/icons/icon";
 import LogoIcon from "@/components/icons/LogoIcon";
-import CleanHeader from "@/components/headers/clean-header";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
 	name: 'AuthView',
@@ -86,7 +86,7 @@ export default {
             })
         }
     },
-	components: {CleanHeader, LogoIcon, Icon, ActionMenu}
+	components: {AppHeader, CleanHeader, LogoIcon, Icon, ActionMenu}
 }
 
 </script>

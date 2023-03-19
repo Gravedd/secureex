@@ -2,7 +2,7 @@
 
     <div class="appWrapper">
 
-        <back-header>Настройки</back-header>
+        <app-header>Настройки</app-header>
 
         <div class="componentWrapper">
 
@@ -48,11 +48,12 @@
 <script>
 
 import ActionMenu from "@/components/action-menu";
-import BackHeader from "@/components/headers/back-header";
+import AppSidebar from "@/components/app-sidebar";
+import AppHeader from "@/components/headers/app-header";
 
 export default {
 	name: 'CleanTemplate',
-	components: {BackHeader, ActionMenu}
+	components: {AppSidebar, ActionMenu, AppHeader}
 }
 
 </script>

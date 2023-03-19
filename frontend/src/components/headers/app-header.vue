@@ -1,24 +1,29 @@
 <template>
     <header v-if="showHeader">
-        <icon v-if="showSidebarBtn" class="menuIcon" @click="this.$store.commit('showSidebar')">
+
+        <icon class="menuIcon" v-if="showSidebarBtn" @click="this.$store.commit('showSidebar')">
             <menu-icon/>
         </icon>
-        <router-link v-if="showBackBtn" :to="backBtnUrl" class="backBtn">
+
+        <router-link :to="backBtnUrl" class="backBtn" v-if="showBackBtn">
             <icon viewBox="65 55 400 400">
                 <back-icon/>
             </icon>
         </router-link>
-        <div id="headerTitle" v-if="!inputInsteadOfText">
-            Диалоги
+
+        <div id="headerTitle" v-if="!inputInsteadOfText" @click="$emit('clickOnHeaderTitle')">
+            <slot></slot>
         </div>
-        <div class="headerInput" v-if="inputInsteadOfText">
+
+        <div class="headerInput" v-if="inputInsteadOfText" @click="$emit('clickOnHeaderInput')">
             <input type="text" autofocus placeholder="Поиск..." @input="updateInput">
         </div>
+
         <div class="right">
-            <icon width="21" height="21" class="search-icon" v-if="showSearchIcon">
+            <icon width="21" height="21" class="search-icon" v-if="showSearchIcon" @click="$emit('clickOnHeaderSearch')">
                 <search-icon/>
             </icon>
-            <icon class="pointsIcon" @click="openMenu">
+            <icon class="pointsIcon" v-if="showActionMenu" @click="openMenu">
                 <points-icon/>
             </icon>
         </div>
@@ -36,12 +41,10 @@ import SearchIcon from "@/components/icons/searchIcon";
 import headerMixin from "@/mixins/headerMixin";
 
 export default {
-	name: "dialogues-header",
+	name: "app-header",
 	components: {SearchIcon, BackIcon, ActionMenu, PointsIcon, MenuIcon, Icon},
-    methods: {
-
-    },
-    mixins: [headerMixin]
+    mixins: [headerMixin],
+    emits: ["clickOnHeaderTitle", "clickOnHeaderInput", "clickOnHeaderSearch"]
 }
 </script>
 
