@@ -1,6 +1,4 @@
 <template>
-    <app-header></app-header>
-
     <router-view v-slot="{ Component }">
         <transition name="fade">
             <component :is="Component"/>
@@ -15,12 +13,11 @@
 <script>
 import AppSidebar from "@/components/app-sidebar";
 import store from "@/store";
-import AppHeader from "@/components/app-header";
 import ActionMenu from "@/components/action-menu";
 import Loader from "@/components/loader";
 
 export default {
-    components: {Loader, ActionMenu, AppHeader, AppSidebar},
+    components: {Loader, ActionMenu, AppSidebar},
     data() {
         return {
 

@@ -1,32 +1,37 @@
 <template>
-    <div class="componentWrapper">
-        <div class="dialogList-wrapper" v-for="dialogue in dialogues">
-            <dialog-item
-                    :user_id="dialogue.user_id"
-                    :username="dialogue.user_name"
-                    :last-message="dialogue.lastMessage"
-                    :last-time="dialogue.lastTime"
-            />
-        </div>
+    <div class="appWrapper">
+        <dialogues-header/>
 
-        <action-menu>
-            <div>
-                <router-link to="/clean">Чистый</router-link>
+        <div class="componentWrapper">
+            <div class="dialogList-wrapper" v-for="dialogue in dialogues">
+                <dialog-item
+                        :user_id="dialogue.user_id"
+                        :username="dialogue.user_name"
+                        :last-message="dialogue.lastMessage"
+                        :last-time="dialogue.lastTime"
+                />
             </div>
-            <div>
-                <router-link to="/chat">Перейти в диалог</router-link>
-            </div>
-        </action-menu>
+
+            <action-menu>
+                <div>
+                    <router-link to="/clean">Чистый</router-link>
+                </div>
+                <div>
+                    <router-link to="/chat">Перейти в диалог</router-link>
+                </div>
+            </action-menu>
+        </div>
     </div>
 </template>
 
 <script>
 import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
+import DialoguesHeader from "@/components/headers/dialogues-header";
 
 export default {
     name: "ChatsView",
-    components: {DialogItem, ActionMenu},
+    components: {DialoguesHeader, DialogItem, ActionMenu},
     computed: {
         dialogues() {
             return this.$store.getters.dialogues;

@@ -9,7 +9,7 @@
             </icon>
         </router-link>
         <div id="headerTitle" v-if="!inputInsteadOfText">
-            {{ headerTitle }}
+            Диалоги
         </div>
         <div class="headerInput" v-if="inputInsteadOfText">
             <input type="text" autofocus placeholder="Поиск..." @input="updateInput">
@@ -36,7 +36,7 @@ import SearchIcon from "@/components/icons/searchIcon";
 import headerMixin from "@/mixins/headerMixin";
 
 export default {
-	name: "app-header",
+	name: "dialogues-header",
 	components: {SearchIcon, BackIcon, ActionMenu, PointsIcon, MenuIcon, Icon},
     methods: {
 
