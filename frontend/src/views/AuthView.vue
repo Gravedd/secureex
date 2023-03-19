@@ -86,7 +86,7 @@ export default {
             })
         }
     },
-	components: {AppHeader, CleanHeader, LogoIcon, Icon, ActionMenu}
+	components: {AppHeader, LogoIcon, Icon, ActionMenu}
 }
 
 </script>

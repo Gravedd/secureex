@@ -1,6 +1,5 @@
 import {createStore} from 'vuex'
 import dialogues from "@/store/dialogues";
-import header from "@/store/header";
 import auth from "@/store/auth";
 
 export default createStore({
@@ -32,6 +31,10 @@ export default createStore({
 		showLoader: false,
 		clientWidth: 0,
 		clientHeight: 0,
+
+		//header
+		headerInput: "",
+
 	},
     getters: {
 		colors: (state) => {
@@ -51,7 +54,10 @@ export default createStore({
 		},
 		showSidebar: (state) => {
 			return state.showSidebar;
-		}
+		},
+		headerInput: (state) => {
+			return state.headerInput;
+		},
 	},
     mutations: {
 		actionMenuStatus (state, status) {
@@ -73,6 +79,9 @@ export default createStore({
 		closeSidebar (state) {
 			state.showSidebar = false;
 		},
+		headerInput (state, value) {
+			state.headerInput = value;
+		}
 	},
     actions: {
 
@@ -93,7 +102,6 @@ export default createStore({
 	},
     modules: {
     	dialogues: dialogues,
-		header: header,
 		auth: auth,
 	}
 })

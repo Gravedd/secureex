@@ -38,20 +38,10 @@ export default {
         },
     },
     beforeCreate() {
-        this.$store.commit("setHeaderSetting", {
-            showSidebarBtn: true,
-            showBackBtn: false,
-            backBtnUrl: "/",
-            headerTitle: "Диалоги",
-            showActionMenu: true,
-            showSearchIcon: true,
-        });
+
     },
     beforeUnmount() {
-        this.$store.commit("setHeaderSetting", {
-            showSearchIcon: true,
-            showSidebarBtn: true,
-        });
+
     }
 }
 </script>

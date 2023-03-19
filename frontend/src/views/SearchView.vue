@@ -34,16 +34,10 @@ export default {
             return this.$store.getters.dialogues;
         },
         searchQuery() {
-            return this.$store.getters.headerInputValue;
+            return this.$store.getters.headerInput;
         },
     },
     components: {AppHeader, DialogItem, ActionMenu},
-    beforeCreate() {
-        this.$store.commit("inputInsteadOfText", true);
-    },
-    beforeUnmount() {
-        this.$store.commit("inputInsteadOfText", false);
-    }
 }
 </script>
 <style>

@@ -1,7 +1,7 @@
 <template>
     <div class="background" v-if="showSidebar"></div>
     <transition name="slide">
-        <div class="sidebarContainer" v-if="showSidebar" @click="this.$store.commit('closeSidebar')">
+        <div class="sidebarContainer" v-if="showSidebar" @click="closeSidebar">
             <div class="sidebarWrapper" @click="clickOnSidebar">
                 <div class="sidebarHeader">
                     <div class="avatar-wrapper">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="sidebarMenu">
 
-                    <router-link to="/settings" class="item" @click="$emit('closeSidebar')">
+                    <router-link to="/settings" class="item" @click="closeSidebar">
                         <icon color="#5C04BB">
                             <settings-icon/>
                         </icon>
@@ -54,7 +54,11 @@ export default {
         },
     },
     methods: {
-        clickOnSidebar(event) { event.stopPropagation(); }//Клик на сайдбар
+        clickOnSidebar(event) { event.stopPropagation(); },//Клик на сайдбар
+        closeSidebar(event) {
+            return this.$store.commit("closeSidebar");
+        }
+
     },
 	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon},
 }

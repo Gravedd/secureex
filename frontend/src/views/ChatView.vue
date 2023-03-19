@@ -1,7 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <app-header back-btn-url="/">UserName</app-header>
+        <app-header>UserName</app-header>
 
 
         <div class="componentWrapper">
@@ -37,9 +37,7 @@ export default {
         }
     },
     methods: {
-        onClickOnHeaderTitle() {
-	        console.log(111)
-        }
+
     }
 }
 
