@@ -1,46 +1,46 @@
 <template>
-    <div class="componentWrapper">
+    <div class="appWrapper">
 
-        <div class="authwrapper flex-center">
-            <icon class="authLogo" width="97" height="97" viewBox="0 0 97 97"><LogoIcon/></icon>
-            <h3 class="authHeader">АВТОРИЗАЦИЯ</h3>
-            <div class="authinputswrap">
-                <div v-if="loginOrRegister">
-                    <input type="text" placeholder="Почта" autocomplete="off" v-model="email">
-                    <input type="password" placeholder="Пароль" v-model="password">
-                    <input class="colored_gradient" type="submit" value="Войти" @click="login">
-                    <a class="resetpassbtn">Забыли пароль?</a>
-                </div>
-                <div v-if="!loginOrRegister">
-                    <input type="text" placeholder="Никнейм" autocomplete="off" v-model="reg_name">
-                    <input type="text" placeholder="Почта" autocomplete="off" v-model="reg_email">
-                    <input type="password" placeholder="Пароль" v-model="reg_password">
-                    <input type="password" placeholder="Повтор пароля" v-model="reg_password_confirm">
-                    <input class="colored_gradient" type="submit" value="Создать аккаунт" @click="register">
-                </div>
-            </div>
+        <clean-header></clean-header>
 
-            <div class="auth_regBtn_wrapper" v-if="loginOrRegister">
-                <div>Не зарегистрированы?</div>
-                <div class="regbtn" @click="toggleLoginOrRegister">Создать аккаунт</div>
+        <div class="componentWrapper">
+
+            <div class="authwrapper flex-center">
+                <icon class="authLogo" width="97" height="97" viewBox="0 0 97 97"><LogoIcon/></icon>
+                <h3 class="authHeader">АВТОРИЗАЦИЯ</h3>
+                <div class="authinputswrap">
+                    <div v-if="loginOrRegister">
+                        <input type="text" placeholder="Почта" autocomplete="off" v-model="email">
+                        <input type="password" placeholder="Пароль" v-model="password">
+                        <input class="colored_gradient" type="submit" value="Войти" @click="login">
+                        <a class="resetpassbtn">Забыли пароль?</a>
+                    </div>
+                    <div v-if="!loginOrRegister">
+                        <input type="text" placeholder="Никнейм" autocomplete="off" v-model="reg_name">
+                        <input type="text" placeholder="Почта" autocomplete="off" v-model="reg_email">
+                        <input type="password" placeholder="Пароль" v-model="reg_password">
+                        <input type="password" placeholder="Повтор пароля" v-model="reg_password_confirm">
+                        <input class="colored_gradient" type="submit" value="Создать аккаунт" @click="register">
+                    </div>
+                </div>
+
+                <div class="auth_regBtn_wrapper" v-if="loginOrRegister">
+                    <div>Не зарегистрированы?</div>
+                    <div class="regbtn" @click="toggleLoginOrRegister">Создать аккаунт</div>
+                </div>
+                <div class="auth_regBtn_wrapper small" v-if="!loginOrRegister">
+                    <div>Уже зарегистрированы?</div>
+                    <div class="regbtn" @click="toggleLoginOrRegister">Войти</div>
+                </div>
             </div>
-            <div class="auth_regBtn_wrapper small" v-if="!loginOrRegister">
-                <div>Уже зарегистрированы?</div>
-                <div class="regbtn" @click="toggleLoginOrRegister">Войти</div>
-            </div>
+            <action-menu>
+                <div>
+                    <router-link to="/">To chats</router-link>
+                </div>
+                <div>Кнопка 2</div>
+            </action-menu>
+
         </div>
-
-
-
-
-
-
-        <action-menu>
-            <div>
-                <router-link to="/">To chats</router-link>
-            </div>
-            <div>Кнопка 2</div>
-        </action-menu>
     </div>
 </template>
 <script>
@@ -48,6 +48,7 @@
 import ActionMenu from "@/components/action-menu";
 import Icon from "@/components/icons/icon";
 import LogoIcon from "@/components/icons/LogoIcon";
+import CleanHeader from "@/components/headers/clean-header";
 
 export default {
 	name: 'AuthView',
@@ -85,7 +86,7 @@ export default {
             })
         }
     },
-	components: {LogoIcon, Icon, ActionMenu}
+	components: {CleanHeader, LogoIcon, Icon, ActionMenu}
 }
 
 </script>

@@ -1,15 +1,19 @@
 <template>
-    <div class="componentWrapper">
+    <div class="appWrapper">
+
+        <back-header/>
 
 
-        <dialog-component></dialog-component>
+        <div class="componentWrapper">
+            <dialog-component></dialog-component>
 
-        <action-menu>
-            <div>
-                <router-link to="/">To chats</router-link>
-            </div>
-            <div>Кнопка 2</div>
-        </action-menu>
+            <action-menu>
+                <div>
+                    <router-link to="/">To chats</router-link>
+                </div>
+                <div>Кнопка 2</div>
+            </action-menu>
+        </div>
     </div>
 </template>
 <script>
@@ -22,10 +26,11 @@ import AttachIcon from "@/components/icons/attachIcon";
 import SendIcon from "@/components/icons/sendIcon";
 import store from "@/store"
 import DialogComponent from "@/components/dialogues/Dialog-component";
+import BackHeader from "@/components/headers/back-header";
 
 export default {
 	name: 'ChatView',
-	components: {DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
+	components: {BackHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
     data() {
 	    return {
 

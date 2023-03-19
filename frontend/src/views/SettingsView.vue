@@ -1,51 +1,58 @@
 <template>
-    <div class="componentWrapper">
 
-        <div class="settingsContainer">
-            <div class="profileInfoWrapper flex col-1-1">
-            <!--TODO: сделать фон блюром аватарки-->
-                <div class="profileInfoAvatar">
-                    <div class="avatar"></div>
+    <div class="appWrapper">
+
+        <back-header>Настройки</back-header>
+
+        <div class="componentWrapper">
+
+            <div class="settingsContainer">
+                <div class="profileInfoWrapper flex col-1-1">
+                <!--TODO: сделать фон блюром аватарки-->
+                    <div class="profileInfoAvatar">
+                        <div class="avatar"></div>
+                    </div>
+                    <div class="profileInfo">
+                        <div class="username">{{ $store.getters.user_name }}</div>
+                        <div class="nickname">@username</div>
+                    </div>
                 </div>
-                <div class="profileInfo">
-                    <div class="username">{{ $store.getters.user_name }}</div>
-                    <div class="nickname">@username</div>
+
+                <div class="settingsWrapper">
+                    <div class="settingHeader">Основная информация</div>
+                    <div class="inputSetting">
+                        <input type="text" placeholder="Ваше имя">
+                    </div>
+                    <div class="inputSetting">
+                        <input type="text" placeholder="Никнейм профиля">
+                    </div>
+                    <div class="inputSetting">
+                        <input type="text" placeholder="О себе">
+                    </div>
+                </div>
+                <div class="savebtnwrap">
+                    <div class="savebutton">Сохранить</div>
                 </div>
             </div>
 
-            <div class="settingsWrapper">
-                <div class="settingHeader">Основная информация</div>
-                <div class="inputSetting">
-                    <input type="text" placeholder="Ваше имя">
+
+            <action-menu>
+                <div>
+                    <router-link to="/">To chats</router-link>
                 </div>
-                <div class="inputSetting">
-                    <input type="text" placeholder="Никнейм профиля">
-                </div>
-                <div class="inputSetting">
-                    <input type="text" placeholder="О себе">
-                </div>
-            </div>
-            <div class="savebtnwrap">
-                <div class="savebutton">Сохранить</div>
-            </div>
+                <div>Кнопка 2</div>
+            </action-menu>
         </div>
-
-
-        <action-menu>
-            <div>
-                <router-link to="/">To chats</router-link>
-            </div>
-            <div>Кнопка 2</div>
-        </action-menu>
     </div>
 </template>
 <script>
 
 import ActionMenu from "@/components/action-menu";
+import BackHeader from "@/components/headers/back-header";
 
 export default {
 	name: 'CleanTemplate',
-	components: {ActionMenu}
+	components: {BackHeader, ActionMenu}
 }
 
 </script>
