@@ -1,6 +1,6 @@
 <template>
     <div class="appWrapper">
-        <app-header :show-back-btn="false" :show-sidebar-btn="true">Диалоги</app-header>
+        <app-header :show-back-btn="false" :show-sidebar-btn="true" :show-search-icon="true" @clickOnHeaderSearch="clickOnHeaderSearch">Диалоги</app-header>
 
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
@@ -36,6 +36,11 @@ export default {
         dialogues() {
             return this.$store.getters.dialogues;
         },
+    },
+    methods: {
+        clickOnHeaderSearch() {
+            this.$router.push("/search");
+        }
     },
     beforeCreate() {
 
