@@ -1,6 +1,6 @@
 <template>
     <div class="user-list-wrapper">
-        <user-item v-for="user in users" :name="user.name" :avatar="{}" :text="user.last_online"/>
+        <user-item v-for="user in users" :id="user.id" :name="user.name" :avatar="{}" :text="user.last_online"/>
     </div>
 </template>
 

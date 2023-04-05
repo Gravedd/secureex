@@ -51,6 +51,12 @@ const routes = [
         component: () => import( '../views/UserProfile')
     },
     {
+        path: "/user/:id",
+        name: 'user.profile',
+        beforeEnter: ifAuthenticated,
+        component: () => import( '../views/UserProfile')
+    },
+    {
         path: "/search",
         name: '',
         beforeEnter: ifAuthenticated,

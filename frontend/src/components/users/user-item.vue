@@ -1,22 +1,20 @@
 <template>
-    <div class="user-list-item-wrapper">
-        <div class="user-avatar-wrapper">
-            <div class="avatar"></div>
+    <router-link :to="{ name: 'user.profile', params: {id} }">
+        <div class="user-list-item-wrapper">
+            <div class="user-avatar-wrapper">
+                <div class="avatar"></div>
+            </div>
+            <div class="user-data-wrapper">
+                <div class="user-name">{{ name }}</div>
+                <div class="user-text">{{ text }}</div>
+            </div>
         </div>
-        <div class="user-data-wrapper">
-            <div class="user-name">{{ name }}</div>
-            <div class="user-text">{{ text }}</div>
-        </div>
-    </div>
+    </router-link>
 </template>
 <script>
 export default {
     name: "user-item",
-    props: [
-        "avatar",
-        "name",
-        "text",
-    ]
+    props: ["id", "avatar", "name", "text"]
 }
 </script>
 <style scoped>
