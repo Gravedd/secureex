@@ -5,20 +5,7 @@
         <app-header :input-instead-of-text="true"></app-header>
 
         <div class="componentWrapper">
-            <div class="dialogList-wrapper" v-for="dialogue in dialogues">
-                <dialog-item
-                        :user_id="dialogue.user_id"
-                        :username="dialogue.user_name"
-                        :last-message="dialogue.lastMessage"
-                        :last-time="dialogue.lastTime"
-                />
-            </div>
-            <action-menu>
-                <div>
-                    <router-link to="/">To chats</router-link>
-                </div>
-                <div>Кнопка 2</div>
-            </action-menu>
+            <user-list></user-list>
         </div>
     </div>
 </template>
@@ -27,6 +14,7 @@ import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
 import AppHeader from "@/components/headers/app-header";
 import config from "@/config";
+import UserList from "@/components/users/user-list";
 
 export default {
     name: 'CleanTemplate',
@@ -43,7 +31,7 @@ export default {
             return this.$store.getters.headerInput;
         },
     },
-    components: {AppHeader, DialogItem, ActionMenu},
+    components: {UserList, AppHeader, DialogItem, ActionMenu},
     methods: {
         async searchUser() {
             let response = await this.$request.get(config.api + "user/find/" + this.searchQuery);
