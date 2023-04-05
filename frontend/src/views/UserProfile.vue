@@ -10,18 +10,18 @@
             <div class="profile-wrapper">
                 <div class="profile_header">
                     <div class="profile_avatar"></div>
-                    <div class="profile_name">Username</div>
+                    <div class="profile_name">{{ user.name ?? "..."}}</div>
                 </div>
 
                 <div class="profile_info_wrapper">
                     <div>Информация</div>
                     <div class="profile_info">
                         <div class="profile_info_item">
-                            <div class="value">example@gmail.com</div>
+                            <div class="value">{{ user.email }}</div>
                             <div class="title">Почта</div>
                         </div>
                         <div class="profile_info_item">
-                            <div class="value">@username</div>
+                            <div class="value">{{ user.nickname ?? "@username"}}</div>
                             <div class="title">Имя пользователя</div>
                         </div>
                     </div>
@@ -51,10 +51,30 @@ import ActionMenu from "@/components/action-menu";
 import Icon from "@/components/icons/icon";
 import MessageIcon from "@/components/icons/messageIcon";
 import AppHeader from "@/components/headers/app-header";
+import config from "@/config";
 
 export default {
-	name: 'CleanTemplate',
-	components: {AppHeader, MessageIcon, Icon, ActionMenu}
+	name: 'UserProfile',
+	components: {AppHeader, MessageIcon, Icon, ActionMenu},
+    props: ["id"],
+    data() {
+	    return {
+	        user: []
+        }
+    },
+    async mounted() {
+	    this.$showLoader();
+
+        let response = await this.$request.get(config.api + "user/" + this.$route.params.id);
+
+        this.$hideLoader();
+
+        if (!response.ok) {
+            return alert("Юзер не найден");
+        }
+
+        return this.user = await response.json();
+    }
 }
 
 </script>
