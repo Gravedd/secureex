@@ -5,7 +5,7 @@
         <app-header :input-instead-of-text="true"></app-header>
 
         <div class="componentWrapper">
-            <user-list></user-list>
+            <user-list :users="searchResult"></user-list>
         </div>
     </div>
 </template>
@@ -34,13 +34,13 @@ export default {
     components: {UserList, AppHeader, DialogItem, ActionMenu},
     methods: {
         async searchUser() {
-            let response = await this.$request.get(config.api + "user/find/" + this.searchQuery);
-            let result = await response.json();
+            let response = await this.$request.get(config.api + "users/find?query=" + this.searchQuery);
 
             if (!response.ok) {
                 return this.searchResult = [];
             }
 
+            let result = await response.json();
             this.searchResult = result;
 
             return result;

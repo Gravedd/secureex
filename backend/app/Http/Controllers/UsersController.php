@@ -6,15 +6,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
-{
+class UsersController extends Controller {
+
     public function getUser($param) {
         $user = $this->isIdOrName($param) ? User::getUserById($param) : User::getUserByName($param);
 
         return $user ? response($user) : response(["status" => false, "message" => "Пользователь не найден"], 404);
     }
 
-    public function findUsersByParam($param) {
+    public function findUsersByParam(Request $request) {
+        $param = $request->get("query");
+
+        if (empty($param)) {
+            return response([]);
+        }
+
         $result = User::where("name", 'like', "%$param%")->get();
 
         return response($result);

@@ -11,16 +11,7 @@ export default {
     components: {UserItem},
     props: {
         users: {
-            default: [
-                {
-                    name: "Anderson",
-                    last_online: "Сегодня в 10:45",
-                },
-                {
-                    name: "Alex Hibbdy",
-                    last_online: "Вчера в 10:45",
-                },
-            ],
+            default: [],
             type: Array,
         },
     }
