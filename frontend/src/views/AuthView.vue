@@ -16,7 +16,8 @@
                         <a class="resetpassbtn">Забыли пароль?</a>
                     </div>
                     <div v-if="!loginOrRegister">
-                        <input type="text" placeholder="Никнейм" autocomplete="off" v-model="reg_name">
+                        <input type="text" placeholder="Ваше имя" autocomplete="off" v-model="reg_name">
+                        <input type="text" placeholder="Никнейм" autocomplete="off" v-model="reg_nickname">
                         <input type="text" placeholder="Почта" autocomplete="off" v-model="reg_email">
                         <input type="password" placeholder="Пароль" v-model="reg_password">
                         <input type="password" placeholder="Повтор пароля" v-model="reg_password_confirm">
@@ -60,9 +61,11 @@ export default {
             "password": "",
             //Регистрация
             "reg_name": "",
+            "reg_nickname": "",
             "reg_email": "",
             "reg_password": "",
             "reg_password_confirm": "",
+
             "reg_errors": {},
         }
     },
@@ -71,6 +74,7 @@ export default {
         async register() {
             let result = await this.$store.dispatch("Register", {
                 "name"                 : this.reg_name,
+                "nickname"             : this.reg_nickname,
                 "email"                : this.reg_email,
                 "password"             : this.reg_password,
                 "password_confirmation": this.reg_password_confirm,

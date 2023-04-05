@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'user.profile', params: {id} }">
         <div class="user-list-item-wrapper">
             <div class="user-avatar-wrapper">
-                <div class="avatar"></div>
+                <user-avatar :username="name" :avatar-src="avatar"/>
             </div>
             <div class="user-data-wrapper">
                 <div class="user-name">{{ name }}</div>
@@ -12,8 +12,10 @@
     </router-link>
 </template>
 <script>
+import UserAvatar from "@/components/users/user-avatar";
 export default {
     name: "user-item",
+    components: {UserAvatar},
     props: ["id", "avatar", "name", "text"]
 }
 </script>

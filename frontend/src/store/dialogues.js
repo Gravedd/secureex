@@ -5,14 +5,14 @@ export default {
             {
                 id: 1,
                 user_id: 2,
-                user_name: "Lorem Ipsum",
+                user_name: "Jason Gibson",
                 lastMessage: "Lorem ipsum dolor sit amet, consectetur-adipiscy...",
                 lastTime: "14:15",
             },
             {
                 id: 2,
                 user_id: 3,
-                user_name: "Lorem2 Ipsum2",
+                user_name: "Bruce Schmidt",
                 lastMessage: "Lorem2 ipsum dolor amet, consectetur-adipiscy...",
                 lastTime: "14:15",
             },

@@ -1,7 +1,7 @@
 <template>
     <router-link to="/chat" class="dialog-wrapper basePadding">
         <div class="dialog-avatar-wrapper">
-            <div class="dialog-avatar"></div>
+            <user-avatar :avatar-src="null" :username="username"/>
         </div>
         <div class="dialog-data">
             <div class="dialog-name-time-wrapper">
@@ -14,8 +14,10 @@
     <hr>
 </template>
 <script>
+import UserAvatar from "@/components/users/user-avatar";
 export default {
     name: "dialog-item",
+    components: {UserAvatar},
     props: {
         user_id: null,
         username: null,

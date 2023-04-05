@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
+
     public function register(Request $request) {
         $fields = $request->validate([
-            'name' => 'required|string|unique:users,name',
+            'name' => 'required|string',
+            'nickname' => 'required|string|unique:users,nickname',
             'email' => 'required|string|unique:users,email|email',
             'password' => 'required|string|confirmed',
         ]);
@@ -21,6 +22,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
+            'nickname' => $fields['nickname'],
             'password' => Hash::make($fields['password']),
         ]);
 
@@ -30,6 +32,7 @@ class AuthController extends Controller
             'created' => (bool) $user,
             'id' => $user->id,
             'name' => $user->name,
+            'nickname' => $user->nickname,
             'email' => $user->email,
             'token' => $token,
         ], 201);

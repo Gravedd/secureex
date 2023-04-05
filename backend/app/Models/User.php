@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nickname',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -44,7 +46,7 @@ class User extends Authenticatable
 
 
     protected static function getUserPublic() {
-        return self::select(["id", "name", "email", "created_at"]);
+        return self::select(["id", "name", "nickname", "email", "avatar", "created_at"]);
     }
 
     public static function getUserById($id) {
@@ -52,7 +54,7 @@ class User extends Authenticatable
     }
 
     public static function getUserByName($name) {
-        return self::getUserPublic()->Where('name', 'LIKE', $name)->first();
+        return self::getUserPublic()->Where('nickname', 'LIKE', $name)->first();
     }
 
 }
