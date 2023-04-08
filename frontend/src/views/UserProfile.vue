@@ -9,7 +9,7 @@
 
             <div class="profile-wrapper">
                 <div class="profile_header">
-                    <div class="profile_avatar"></div>
+                    <user-avatar class="profile_avatar" :username="user.name"/>
                     <div class="profile_name">{{ user.name ?? "..."}}</div>
                 </div>
 
@@ -52,10 +52,11 @@ import Icon from "@/components/icons/icon";
 import MessageIcon from "@/components/icons/messageIcon";
 import AppHeader from "@/components/headers/app-header";
 import config from "@/config";
+import UserAvatar from "@/components/users/user-avatar";
 
 export default {
 	name: 'UserProfile',
-	components: {AppHeader, MessageIcon, Icon, ActionMenu},
+	components: {UserAvatar, AppHeader, MessageIcon, Icon, ActionMenu},
     props: ["id"],
     data() {
 	    return {

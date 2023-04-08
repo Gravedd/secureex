@@ -5,7 +5,7 @@
             <div class="sidebarWrapper" @click="clickOnSidebar">
                 <div class="sidebarHeader">
                     <div class="avatar-wrapper">
-                        <div class="avatar"></div>
+                        <user-avatar class="avatar" :username="$store.getters.user_name" />
                     </div>
                     <div class="userdata">
                         <div class="userdata-name">{{ $store.getters.user_name }}</div>
@@ -45,6 +45,7 @@ import SettingsIcon from "@/components/icons/settingsIcon";
 import Icon from "@/components/icons/icon";
 import KeyIcon from "@/components/icons/keyIcon";
 import PeopleIcon from "@/components/icons/peopleIcon";
+import UserAvatar from "@/components/users/user-avatar";
 
 export default {
 	name: "app-sidebar",
@@ -60,7 +61,7 @@ export default {
         }
 
     },
-	components: {PeopleIcon, KeyIcon, Icon, SettingsIcon},
+	components: {UserAvatar, PeopleIcon, KeyIcon, Icon, SettingsIcon},
 }
 </script>
 
