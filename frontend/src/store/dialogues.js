@@ -5,6 +5,7 @@ export default {
             {
                 id: 1,
                 user_id: 2,
+                avatar: "/images/avatars/avatar.jpg",
                 user_name: "Jason Gibson",
                 lastMessage: "Lorem ipsum dolor sit amet, consectetur-adipiscy...",
                 lastTime: "14:15",

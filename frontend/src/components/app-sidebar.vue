@@ -5,7 +5,7 @@
             <div class="sidebarWrapper" @click="clickOnSidebar">
                 <div class="sidebarHeader">
                     <div class="avatar-wrapper">
-                        <user-avatar class="avatar" :username="$store.getters.user_name" />
+                        <user-avatar class="avatar" :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"/>
                     </div>
                     <div class="userdata">
                         <div class="userdata-name">{{ $store.getters.user_name }}</div>

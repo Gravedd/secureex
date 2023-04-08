@@ -5,6 +5,8 @@
     >{{ usernameFirstLetter }}</div>
 </template>
 <script>
+import config from "@/config";
+
 export default {
     name: "user-avatar",
     data() {
@@ -40,7 +42,10 @@ export default {
     computed: {
         avatarStyle () {
             if (this.avatarSrc != null) {
-                return {'background-image': 'url(https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png)'}
+                return {
+                    'background-image': 'url(' + config.img + this.avatarSrc +')',
+                    'font-size': "0px"
+                }
             }
 
             return {
@@ -63,5 +68,6 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    background-size: cover;
 }
 </style>

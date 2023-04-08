@@ -5,10 +5,11 @@
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
                 <dialog-item
-                        :user_id="dialogue.user_id"
-                        :username="dialogue.user_name"
-                        :last-message="dialogue.lastMessage"
-                        :last-time="dialogue.lastTime"
+                    :user_id="dialogue.user_id"
+                    :user_avatar="dialogue.avatar"
+                    :username="dialogue.user_name"
+                    :last-message="dialogue.lastMessage"
+                    :last-time="dialogue.lastTime"
                 />
             </div>
 

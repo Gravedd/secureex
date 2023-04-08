@@ -11,6 +11,7 @@ export default {
         "user_name"   : null,
         "user_email"  : null,
         "user_token"  : localStorage.getItem('token') ?? null,
+        "user_avatar" : null,
     },
     getters: {
         isAuthorized: state => state.isAuthorized,
@@ -18,6 +19,7 @@ export default {
         user_name: state => state.user_name,
         user_email: state => state.user_email,
         user_token: state => state.user_token,
+        user_avatar: state => state.user_avatar,
     },
     mutations: {
 
@@ -31,6 +33,7 @@ export default {
             state.user_id = user.id;
             state.user_name = user.name;
             state.user_email = user.email;
+            state.user_avatar = user.avatar;
             if (user.token) {
                 state.user_token = user.token;
                 localStorage.setItem("token", user.token);
@@ -42,6 +45,7 @@ export default {
             state.user_name = null;
             state.user_email = null;
             state.user_token = null;
+            state.user_avatar = null;
             localStorage.removeItem("token");
         },
     },

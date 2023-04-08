@@ -1,7 +1,7 @@
 <template>
     <router-link to="/chat" class="dialog-wrapper basePadding">
         <div class="dialog-avatar-wrapper">
-            <user-avatar :avatar-src="null" :username="username"/>
+            <user-avatar :avatar-src="user_avatar" :username="username"/>
         </div>
         <div class="dialog-data">
             <div class="dialog-name-time-wrapper">
@@ -20,6 +20,7 @@ export default {
     components: {UserAvatar},
     props: {
         user_id: null,
+        user_avatar: null,
         username: null,
         lastMessage: null,
         lastTime: null,
