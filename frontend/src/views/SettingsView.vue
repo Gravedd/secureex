@@ -10,28 +10,27 @@
                 <div class="profileInfoWrapper flex col-1-1" @click="openModal">
                 <!--TODO: сделать фон блюром аватарки-->
                     <div class="profileInfoAvatar">
-                        <user-avatar class="avatar" :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"  />
+                        <user-avatar class="avatar" :username="username" :avatar-src="$store.getters.user_avatar"  />
                     </div>
                     <div class="profileInfo">
-                        <div class="username">{{ $store.getters.user_name }}</div>
-                        <div class="nickname">@username</div>
+                        <div class="username">{{ username }}</div>
+                        <div class="nickname">@{{ userNickname }}</div>
                     </div>
                 </div>
 
                 <div class="settingsWrapper">
                     <div class="settingHeader">Основная информация</div>
                     <div class="inputSetting">
-                        <input type="text" placeholder="Ваше имя">
+                        <input type="text" placeholder="Имя..." v-model="newUserName">
+                        <label>Ваше имя</label>
                     </div>
                     <div class="inputSetting">
-                        <input type="text" placeholder="Никнейм профиля">
-                    </div>
-                    <div class="inputSetting">
-                        <input type="text" placeholder="О себе">
+                        <input type="text" placeholder="Никнейм..."  v-model="newUserNickname">
+                        <label>Никнейм профиля</label>
                     </div>
                 </div>
                 <div class="savebtnwrap">
-                    <div class="savebutton">Сохранить</div>
+                    <div class="savebutton" @click="saveSettings">Сохранить</div>
                 </div>
             </div>
 
@@ -65,14 +64,27 @@ import Modal from "@/components/modal";
 import InputFile from "@/components/ui/input-file";
 import config from "@/config";
 import UserAvatar from "@/components/users/user-avatar";
+import store from "@/store";
 
 export default {
-	name: 'CleanTemplate',
+	name: 'SettingsView',
 	components: {UserAvatar, InputFile, Modal, AppSidebar, ActionMenu, AppHeader},
     data() {
 	    return {
 	        showAvatarModal: false,
+            newUserName: "",
+            newUserNickname: "",
         }
+    },
+    computed: {
+        username() {
+            this.newUserName = this.$store.getters.user_name;
+            return this.$store.getters.user_name;
+        },
+        userNickname() {
+            this.newUserNickname = this.$store.getters.user_nickname;
+            return this.$store.getters.user_nickname;
+        },
     },
     methods: {
         closeModal() {
@@ -108,8 +120,25 @@ export default {
             this.$store.commit("setUserAvatar", data.path);
             this.$swal.fire('Успешно', 'Аватар изменен!', 'success');
             this.closeModal();
-        }
-    }
+        },
+
+        async saveSettings() {
+            const response = await this.$request.put(config.api + "user/himself", {
+                name: this.newUserName,
+                nickname: this.newUserNickname,
+            })
+
+            let result = await response.json();
+            if (!response.ok) {
+                this.$swal.fire({
+                    "title": "Ошибка!",
+                    "text": result.message,
+                })
+            }
+            this.$store.commit("successAuth", result.user);
+            this.$swal.fire("Успешно!", "Настройки сохранены", "success");
+        },
+    },
 }
 
 </script>
@@ -165,6 +194,10 @@ export default {
     outline: none;
 }
 .inputSetting input::placeholder {
+    color: var(--bg4);
+}
+.inputSetting label {
+    font-size: 12px;
     color: var(--bg4);
 }
 .savebtnwrap {

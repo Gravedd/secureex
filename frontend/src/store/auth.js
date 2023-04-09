@@ -6,12 +6,13 @@ import store from "@/store";
 
 export default {
     state: {
-        "user_id"     : null,
-        "isAuthorized": !!localStorage.getItem('token'),
-        "user_name"   : null,
-        "user_email"  : null,
-        "user_token"  : localStorage.getItem('token') ?? null,
-        "user_avatar" : null,
+        "user_id"      : null,
+        "isAuthorized" : !!localStorage.getItem('token'),
+        "user_name"    : null,
+        "user_nickname": null,
+        "user_email"   : null,
+        "user_token"   : localStorage.getItem('token') ?? null,
+        "user_avatar"  : null,
     },
     getters: {
         isAuthorized: state => state.isAuthorized,
@@ -20,6 +21,7 @@ export default {
         user_email: state => state.user_email,
         user_token: state => state.user_token,
         user_avatar: state => state.user_avatar,
+        user_nickname: state => state.user_nickname,
     },
     mutations: {
 
@@ -34,6 +36,7 @@ export default {
             state.isAuthorized = true;
 
             state.user_id = user.id;
+            state.user_nickname = user.nickname;
             state.user_name = user.name;
             state.user_email = user.email;
             state.user_avatar = user.avatar;
@@ -46,6 +49,7 @@ export default {
             state.isAuthorized = false;
             state.user_id = null;
             state.user_name = null;
+            state.user_nickname = null;
             state.user_email = null;
             state.user_token = null;
             state.user_avatar = null;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller {
 
@@ -28,25 +29,22 @@ class UsersController extends Controller {
 
 
     public function selfEditUser(Request $request){
-        $fields = $request->validate([
-            'name' => 'string|unique:users,name',
-            'email' => 'string|unique:users,email|email',
-            'password' => 'string',
+        $user = $request->user();
+
+        $newUserData = $request->validate([
+            'name' => ['string', 'max:255'],
+            'nickname' => ['string', 'max:255', Rule::unique('users')->ignore($user->id)],
         ]);
 
-        $user = $request->user();
-        $user->fill($fields);
-
-        if ($request->password) {
-            $user->password = Hash::make($fields['password']);
+        if ($newUserData['name']) {
+            $user->name = $newUserData['name'];
         }
-
+        if ($newUserData['nickname']) {
+            $user->nickname = $newUserData['nickname'];
+        }
         $user->save();
 
-        return response([
-            "status" => true,
-            "user" => $user,
-        ]);
+        return response()->json(["status" => true, "user" => $user]);
     }
 
     public function uploadAvatar(Request $request) {
