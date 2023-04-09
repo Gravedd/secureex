@@ -10,7 +10,7 @@
                 <div class="profileInfoWrapper flex col-1-1" @click="openModal">
                 <!--TODO: сделать фон блюром аватарки-->
                     <div class="profileInfoAvatar">
-                        <user-avatar :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"  />
+                        <user-avatar class="avatar" :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"  />
                     </div>
                     <div class="profileInfo">
                         <div class="username">{{ $store.getters.user_name }}</div>
@@ -138,7 +138,7 @@ export default {
 .profileInfo .nickname {
     font-size: 12px;
 }
-.avatar {
+.profileInfoAvatar .avatar {
     width: 57px;
     height: 57px;
     background-color: var(--gray1);
