@@ -35,6 +35,17 @@
                 </div>
             </div>
 
+            <modal header="Загрузить аватар" @closeModal="closeModal" :show="showAvatarModal">
+                <p>Загрузить файл</p>
+                <form method="post" enctype="multipart/form-data">
+
+                    <input-file>Выберете аватар</input-file>
+
+                    <div class="center-input margin-top-16">
+                        <input type="submit" class="submit-btn" value="Подтвердить">
+                    </div>
+                </form>
+            </modal>
 
             <action-menu>
                 <div>
@@ -50,10 +61,22 @@
 import ActionMenu from "@/components/action-menu";
 import AppSidebar from "@/components/app-sidebar";
 import AppHeader from "@/components/headers/app-header";
+import Modal from "@/components/modal";
+import InputFile from "@/components/ui/input-file";
 
 export default {
 	name: 'CleanTemplate',
-	components: {AppSidebar, ActionMenu, AppHeader}
+	components: {InputFile, Modal, AppSidebar, ActionMenu, AppHeader},
+    data() {
+	    return {
+	        showAvatarModal: true,
+        }
+    },
+    methods: {
+        closeModal() {
+
+        }
+    }
 }
 
 </script>
