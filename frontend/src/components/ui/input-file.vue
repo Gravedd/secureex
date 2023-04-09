@@ -3,7 +3,7 @@
         <label for="file-upload" class="custom-file-upload">
             <slot></slot>
         </label>
-        <input id="file-upload" type="file">
+        <input id="file-upload" type="file" name="file" required>
     </div>
 </template>
 <script>
@@ -23,7 +23,7 @@ label.custom-file-upload {
 }
 
 input[type="file"] {
-    display: none;
+    /*display: none;*/
 }
 
 label.custom-file-upload:hover {

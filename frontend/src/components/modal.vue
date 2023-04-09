@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .modal-container {
     position: fixed;
-    backdrop-filter: brightness(0.9);
+    backdrop-filter: brightness(0.6);
     top: 0;
     left: 0;
     width: 100%;

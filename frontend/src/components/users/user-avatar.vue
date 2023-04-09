@@ -29,6 +29,9 @@ export default {
             const colors = ["#a84242", "#d49030", "#a88f11", "#2c6bd7", "#0c8270", "#b60c0c", "#7a0cb6", "#8b0b51"];
             function hashCode(str) {
                 let hash = 0;
+                if (!str) {
+                    return "";
+                }
                 for (let i = 0; i < str.length; i++) {
                     hash = ((hash << 5) - hash) + str.charCodeAt(i);
                     hash |= 0;
@@ -53,7 +56,7 @@ export default {
             }
         },
         usernameFirstLetter() {
-            return this.username[0];
+            return this.username ? this.username[0] : "";
         }
     }
 }

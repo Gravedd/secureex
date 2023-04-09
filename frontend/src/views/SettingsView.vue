@@ -7,10 +7,10 @@
         <div class="componentWrapper">
 
             <div class="settingsContainer">
-                <div class="profileInfoWrapper flex col-1-1">
+                <div class="profileInfoWrapper flex col-1-1" @click="openModal">
                 <!--TODO: сделать фон блюром аватарки-->
                     <div class="profileInfoAvatar">
-                        <div class="avatar"></div>
+                        <user-avatar :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"  />
                     </div>
                     <div class="profileInfo">
                         <div class="username">{{ $store.getters.user_name }}</div>
@@ -37,7 +37,7 @@
 
             <modal header="Загрузить аватар" @closeModal="closeModal" :show="showAvatarModal">
                 <p>Загрузить файл</p>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" id="avatar-form" @submit="updateAvatar">
 
                     <input-file>Выберете аватар</input-file>
 
@@ -63,18 +63,51 @@ import AppSidebar from "@/components/app-sidebar";
 import AppHeader from "@/components/headers/app-header";
 import Modal from "@/components/modal";
 import InputFile from "@/components/ui/input-file";
+import config from "@/config";
+import UserAvatar from "@/components/users/user-avatar";
 
 export default {
 	name: 'CleanTemplate',
-	components: {InputFile, Modal, AppSidebar, ActionMenu, AppHeader},
+	components: {UserAvatar, InputFile, Modal, AppSidebar, ActionMenu, AppHeader},
     data() {
 	    return {
-	        showAvatarModal: true,
+	        showAvatarModal: false,
         }
     },
     methods: {
         closeModal() {
+            this.showAvatarModal = false;
+        },
+        openModal() {
+            this.showAvatarModal = true;
+        },
+        async updateAvatar(event) {
+            event.preventDefault();
+            this.$showLoader();
 
+            let form = new FormData(document.getElementById("avatar-form"));
+            const response = await fetch(config.api + "user/himself/avatar", {
+                method: "POST",
+                body: form,
+                headers: {"Authorization": "Bearer " + this.$store.getters.user_token, "Accept": "application/json"},
+            });
+
+            this.$hideLoader();
+
+            let uploadResult = await response.json();
+
+            if (response.status !== 201) {
+                return await this.$swal.fire({
+                    "title": "Ошибка!",
+                    "text": uploadResult.message,
+                })
+            }
+            await this.setNewAvatar(uploadResult);
+        },
+        setNewAvatar(data) {
+            this.$store.commit("setUserAvatar", data.path);
+            this.$swal.fire('Успешно', 'Аватар изменен!', 'success');
+            this.closeModal();
         }
     }
 }

@@ -27,7 +27,9 @@ export default class {
         return this.sendRequest(url, "DELETE", body, headers);
     }
 
-
+    static getAuthHeaders(headers) {
+        return Object.assign(this.baseHeaders, headers)
+    }
 
     static getOptions (method, body, headers = {}) {
         method = method.toUpperCase();

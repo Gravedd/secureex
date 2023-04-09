@@ -49,6 +49,22 @@ class UsersController extends Controller {
         ]);
     }
 
+    public function uploadAvatar(Request $request) {
+        $file = $request->file("file");
+        if (!$file) {
+            return response()->json(["message" => "файл не загружен"], 422);
+        }
+
+        $path = $file->store('public/avatars');
+        $filename = basename($path);
+        $user = $request->user();
+        $user->avatar = $filename;
+        $user->save();
+
+        return response()->json(['path' => $filename], 201);
+    }
+
+
     private function isIdOrName($nameOrId) {
         return (bool) intval($nameOrId);
     }

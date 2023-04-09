@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get("/users/find", [\App\Http\Controllers\UsersController::class, "findUsersByParam"])->name("users.find");
     Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUser"])->name("users.public.get");
     Route::put("/user/himself", [\App\Http\Controllers\UsersController::class, "selfEditUser"])->name("users.self.edit");
+    Route::post("/user/himself/avatar", [\App\Http\Controllers\UsersController::class, "uploadAvatar"])->name("users.self.avatar");
 });
 
 

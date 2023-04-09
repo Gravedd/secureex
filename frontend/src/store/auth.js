@@ -26,6 +26,9 @@ export default {
         isAuthorized: (state, value) => {
             state.isAuthorized = value;
         },
+        setUserAvatar: (state, value) => {
+            state.user_avatar = value
+        },
 
         successAuth(state, user) {
             state.isAuthorized = true;
