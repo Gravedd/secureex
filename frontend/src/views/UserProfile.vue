@@ -9,7 +9,7 @@
 
             <div class="profile-wrapper">
                 <div class="profile_header">
-                    <user-avatar class="profile_avatar" :username="user.name"/>
+                    <user-avatar class="profile_avatar" :username="user.name" :avatar-src="user.avatar"/>
                     <div class="profile_name">{{ user.name ?? "..."}}</div>
                 </div>
 
