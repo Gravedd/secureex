@@ -38,7 +38,7 @@
                 <p>Загрузить файл</p>
                 <form method="post" enctype="multipart/form-data" id="avatar-form" @submit="updateAvatar">
 
-                    <input-file>Выберете аватар</input-file>
+                    <input-file name="file">Выберете аватар</input-file>
 
                     <div class="center-input margin-top-16">
                         <input type="submit" class="submit-btn" value="Подтвердить">
