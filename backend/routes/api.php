@@ -23,6 +23,11 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get("/user/{userid}", [\App\Http\Controllers\UsersController::class, "getUser"])->name("users.public.get");
     Route::put("/user/himself", [\App\Http\Controllers\UsersController::class, "selfEditUser"])->name("users.self.edit");
     Route::post("/user/himself/avatar", [\App\Http\Controllers\UsersController::class, "uploadAvatar"])->name("users.self.avatar");
+
+    Route::get("/user/conversations/all", [\App\Http\Controllers\ConversationsController::class, "getUserConversationsAll"])->name("user.conversations.all");
+    Route::get("/user/conversations/users", [\App\Http\Controllers\ConversationsController::class, "getUserConversationsUsers"])->name("user.conversations.users");
+    Route::get("/user/conversations/clean", [\App\Http\Controllers\ConversationsController::class, "getUserConversationsClean"])->name("user.conversations.clean");
+
 });
 
 

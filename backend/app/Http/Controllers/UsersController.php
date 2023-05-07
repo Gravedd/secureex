@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use App\Models\Conversation;
 
 class UsersController extends Controller {
 
@@ -62,6 +63,24 @@ class UsersController extends Controller {
         return response()->json(['path' => $filename], 201);
     }
 
+
+    public function test(Request $request) {
+        $user = User::find($request->user()['id']);
+
+        //$conversations = $user->conversations()->with('user1')->with('user2')->get(); //Все диалоги
+        /*$conversations = Conversation::where('user1_id', $user['id']) //Диалоги со всеми сообщениями
+            ->orWhere('user2_id', $user['id'])
+            ->with('messages')
+            ->with('user1')
+            ->with('user2')
+            ->get();*/
+
+        $conversations = $user->conversations()->with(['messages' => function ($query) {
+            $query->orderBy('id', "desc")->take(1)/*->with('user')*/;
+        }])->get();
+
+        return response()->json(["chats" => $conversations]);
+    }
 
     private function isIdOrName($nameOrId) {
         return (bool) intval($nameOrId);

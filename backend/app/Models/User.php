@@ -44,6 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function conversations() {
+        return $this->hasMany(Conversation::class, 'user1_id', 'id')
+            ->orWhere('user2_id', $this->id);
+    }
+
+    public function messages() {
+        return $this->hasMany(Message::class, 'user_id', 'id');
+    }
 
     protected static function getUserPublic() {
         return self::select(["id", "name", "nickname", "email", "avatar", "created_at"]);
