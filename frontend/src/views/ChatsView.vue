@@ -5,11 +5,11 @@
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
                 <dialog-item
-                    :user_id="dialogue.user_id"
-                    :user_avatar="dialogue.avatar"
-                    :username="dialogue.user_name"
-                    :last-message="dialogue.lastMessage"
-                    :last-time="dialogue.lastTime"
+                    :user_id="isMe(dialogue.user1.id) ? dialogue.user2.id : dialogue.user1.id"
+                    :user_avatar="isMe(dialogue.user1.id) ? dialogue.user2.avatar : dialogue.user1.avatar"
+                    :username="isMe(dialogue.user1.id) ? dialogue.user2.name : dialogue.user1.name"
+                    :last-message="dialogue.messages[0].body"
+                    :last-time="dialogue.messages[0].created_at"
                 />
             </div>
 
@@ -41,6 +41,9 @@ export default {
     methods: {
         clickOnHeaderSearch() {
             this.$router.push("/search");
+        },
+        isMe(user_id) {
+            return this.$store.getters.user_id === user_id;
         }
     },
     beforeCreate() {

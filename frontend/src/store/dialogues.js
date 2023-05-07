@@ -1,8 +1,11 @@
+import requests from "@/plugins/requests";
+import config from "@/config";
+
 export default {
     state: {
         //Диалоги юзера
         dialogues: [
-            {
+            /*{
                 id: 1,
                 user_id: 2,
                 avatar: "/images/avatars/avatar.jpg",
@@ -16,7 +19,7 @@ export default {
                 user_name: "Bruce Schmidt",
                 lastMessage: "Lorem2 ipsum dolor amet, consectetur-adipiscy...",
                 lastTime: "14:15",
-            },
+            },*/
         ],
         //Диалог с юзером 1
         messagesDialogs: {
@@ -174,7 +177,22 @@ export default {
             let uid = data.user_id
             state.messagesDialogs['dialogWithUser' + uid].push(data)
         },
+        setDialogues(state, dialogues) {
+            state.dialogues = dialogues;
+        }
     },
-    actions: {},
+    actions: {
+        async getConversations (context) {
+            let response = await requests.get(config.api + "user/conversations/all");
+            let data = await response.json();
+            if (!response.ok) {
+                return false;
+            }
+
+            context.commit("setDialogues", data.conversations);
+
+            return data.conversations;
+        }
+    },
     modules: {},
 }

@@ -36,10 +36,13 @@ export default {
             store.dispatch("updateDeviceData");
         });
         store.dispatch("updateDeviceData");
+
+        this.$store.dispatch("CheckAuth");
+
+        store.dispatch("getConversations");
     },
     mounted() {
         this.$hideLoader();
-        this.$store.dispatch("CheckAuth");
     }
 }
 </script>
