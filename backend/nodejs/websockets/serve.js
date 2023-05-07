@@ -1,5 +1,5 @@
-let Server = require("./src/server");
+import Server from "./src/server.js";
 
-server = new Server();
+let server = new Server();
 
 server.start();

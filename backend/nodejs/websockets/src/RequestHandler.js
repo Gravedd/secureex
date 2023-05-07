@@ -1,17 +1,20 @@
-import Controller from "./Controller";
+import Controller from "./Controller.js";
+import Server from "./Server.js";
 
 
 export default class RequestHandler {
 
     routes = {
         "auth" : "auth",
+        "pong" : "pong",
     }
 
-    constructor(socket, message) {
+    constructor(socket, message, uuid) {
         this.socket = socket;
         this.message = JSON.parse(message);
         this.type = this.getType(this.message);
         this.controller = new Controller();
+        this.uuid = uuid;
 
         this.requestHandler();
     }
@@ -27,7 +30,7 @@ export default class RequestHandler {
             return console.log("Метода не существует");
         }
 
-        return this.controller[route](this.socket, this.message.data);
+        return this.controller[route](this.socket, this.message.data, this.uuid);
     }
 
     getType(message) {
@@ -46,6 +49,22 @@ export default class RequestHandler {
         return socket.send(JSON.stringify({
             "action" : "auth",
             "data"   : "Авторизуйтесь!",
+        }))
+    }
+
+    static sendPing(socket, uuid) {
+        Server.users[uuid]["ping_count"]++;
+
+        let ping = Server.users[uuid]["ping_count"];
+        let pong = Server.users[uuid]["pong_count"];
+
+        if (pong > ping - 1) {
+            console.log("Кик!");
+            socket.close();
+        }
+
+        return socket.send(JSON.stringify({
+            "action" : "ping"
         }))
     }
 }

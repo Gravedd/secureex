@@ -1,28 +1,62 @@
-import WebSocket from "ws";
-import RequestHandler from "./WsRequest";
+import WebSocket, { WebSocketServer } from 'ws';
+import RequestHandler from "./RequestHandler.js";
 
 
 export default class Server {
 
-    start() {
-        this.server = new WebSocket.Server({ port: 8080 });
+    static users = {};
 
-        this.server.on('connection', (socket) => this.onConnection(socket));
+    start() {
+        this.server = new WebSocketServer({ port: 8080 });
+
+        this.server.on('connection', (socket) => this.onConnection(socket, Server.generateUUID()));
     }
 
-    onConnection(socket) {
+    onConnection(socket, uuid) {
         console.log('Client connected');
+
         RequestHandler.requestAuth(socket);
 
-        socket.on('message', (message) => this.onMessage(socket, message));
-        socket.on('close', () => this.onClose());
+        let intervalId = setInterval(() => {
+            RequestHandler.sendPing(socket, uuid);
+        }, 5000);
+
+        socket.on('message', (message) => this.onMessage(socket, message, uuid));
+
+        socket.on('close', () => this.onClose(uuid, intervalId));
     }
 
-    onMessage(socket, message) {
-        new RequestHandler(socket, message);
+    onMessage(socket, message, uuid) {
+        new RequestHandler(socket, message, uuid);
     }
 
-    onClose() {
-        console.log('Client disconnected');
+    onClose(uuid, intervalId) {
+        console.log("Отсоединение: " + uuid);
+        delete Server.users[uuid];
+        clearInterval(intervalId);
+        console.log(Server.users);
+    }
+
+    static onUserSuccessAuthorized(user, socket, uuid) {
+        Server.users[uuid] = {
+            "ws" : socket,
+            "data" : user,
+            "ping_count" : 0,
+            "pong_count" : 0,
+        };
+        console.log("Юзер авторизовался: uuid=" + uuid);
+    }
+
+    static generateUUID() {
+        let uuid = '';
+
+        for (let i = 0; i < 3; i++) {
+            uuid += Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
+            uuid += '';
+        }
+
+        uuid += Math.floor(Math.random() * 0xffffffffffff).toString(16).padStart(12, '0');
+
+        return uuid;
     }
 }

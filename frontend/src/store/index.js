@@ -1,6 +1,7 @@
 import {createStore} from 'vuex'
 import dialogues from "@/store/dialogues";
 import auth from "@/store/auth";
+import websocket from "@/store/websocket";
 
 export default createStore({
     state: {
@@ -103,5 +104,6 @@ export default createStore({
     modules: {
     	dialogues: dialogues,
 		auth: auth,
+		ws: websocket,
 	}
 })

@@ -44,6 +44,7 @@ export default {
                 state.user_token = user.token;
                 localStorage.setItem("token", user.token);
             }
+            store.dispatch("connect", user);
         },
         authFailed(state) {
             state.isAuthorized = false;
