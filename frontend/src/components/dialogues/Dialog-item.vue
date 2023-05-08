@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/chat" class="dialog-wrapper basePadding">
+    <router-link :to="{ name: 'chat', params: {id: user_id} }" class="dialog-wrapper basePadding">
         <div class="dialog-avatar-wrapper">
             <user-avatar :avatar-src="user_avatar" :username="username"/>
         </div>

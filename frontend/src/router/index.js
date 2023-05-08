@@ -33,8 +33,8 @@ const routes = [
         component: () => import( '../views/_Clean')
     },
     {
-        path: "/chat",
-        name: '',
+        path: "/chat/:id",
+        name: 'chat',
         beforeEnter: ifAuthenticated,
         component: () => import( '../views/ChatView')
     },

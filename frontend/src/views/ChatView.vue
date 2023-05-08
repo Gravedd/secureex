@@ -33,10 +33,17 @@ export default {
 	components: {AppHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
     data() {
 	    return {
-
+            with_user: this.$route.params.id,
         }
     },
+    props: ["id"],
     methods: {
+
+    },
+    beforeMount() {
+
+    },
+    mounted() {
 
     }
 }
