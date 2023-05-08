@@ -35,10 +35,8 @@ export default class Controller {
     }
 
     async newMessage(socket, data, uuid) {
-        console.log("Отправка: ", data);
         let fromId = Server.users[uuid].data.id;
         let toId = data.to_user;
-
 
         const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
             [fromId, toId, fromId, toId]
@@ -71,6 +69,27 @@ export default class Controller {
                 "created_at": created_at,
                 "uuid" : data.uuid,
             }
-        }))
+        }));
+
+        for (let uuid in Server.users) {
+
+            if (Server.users[uuid].data.id == data.to_user) {
+                Server.users[uuid].ws.send(JSON.stringify({
+                    "action": "new_message",
+                    "data": {
+                        "message_id": message_result.insertId,
+                        "body": data.text,
+                        "user_id": fromId,
+                        "created_at": created_at,
+                        "updated_at": created_at,
+                        "read": 0,
+                        "conversation_id": conversation_id,
+                    }
+                }));
+            }
+        }
+
+
+
     }
 }

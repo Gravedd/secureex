@@ -7,17 +7,8 @@ export default {
     state: {
         //Диалоги юзера
         dialogues: Cache.get("dialogues"),
-        //Диалог с юзером 1
-        messagesDialogs: {
-            "dialogWithUser1": [
-                {
-                    id: 1,
-                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                    time: "14:15",
-                    type: "received"
-                }
-            ]
-        },
+
+        messagesDialogs: {},
     },
     getters: {
         dialogues: (state) => {
@@ -46,7 +37,12 @@ export default {
             message.body = data.body;
             message.created_at = data.created_at;
             delete message.uuid;
+        },
+        newMessage(state, data) {
+            let uid = data.user_id;
+            state.messagesDialogs['dialogWithUser' + uid].push(data);
         }
+
 
     },
     actions: {

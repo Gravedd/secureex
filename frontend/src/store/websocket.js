@@ -15,9 +15,9 @@ export default {
         connect(context, user) {
             context.state.ws = new WebSocket(config.ws);
 
-            context.state.ws.onerror = function (error) {
+            /*context.state.ws.onerror = function (error) {
                 location.reload()
-            }
+            }*/
 
             context.state.ws.onclose = event => {
                 console.log('Переподключение...');

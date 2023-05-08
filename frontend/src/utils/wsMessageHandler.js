@@ -46,8 +46,11 @@ export default class {
     }
 
     onMessage_sent() {
-        console.log(this.message);
         store.commit("updateMessageIfSent", this.message.data);
     }
 
+    onNew_message() {
+        console.log(this.message);
+        store.commit("newMessage", this.message.data);
+    }
 }
