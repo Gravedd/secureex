@@ -5,9 +5,9 @@
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
                 <dialog-item
-                    :user_id="isMe(dialogue.user1.id) ? dialogue.user2.id : dialogue.user1.id"
-                    :user_avatar="isMe(dialogue.user1.id) ? dialogue.user2.avatar : dialogue.user1.avatar"
-                    :username="isMe(dialogue.user1.id) ? dialogue.user2.name : dialogue.user1.name"
+                    :user_id="dialogue.user.id"
+                    :user_avatar="dialogue.user.avatar"
+                    :username="dialogue.user.name"
                     :last-message="dialogue.messages[0].body"
                     :last-time="dialogue.messages[0].created_at"
                 />

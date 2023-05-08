@@ -1,26 +1,11 @@
 import requests from "@/plugins/requests";
 import config from "@/config";
+import Cache from "@/utils/cache";
 
 export default {
     state: {
         //Диалоги юзера
-        dialogues: [
-            /*{
-                id: 1,
-                user_id: 2,
-                avatar: "/images/avatars/avatar.jpg",
-                user_name: "Jason Gibson",
-                lastMessage: "Lorem ipsum dolor sit amet, consectetur-adipiscy...",
-                lastTime: "14:15",
-            },
-            {
-                id: 2,
-                user_id: 3,
-                user_name: "Bruce Schmidt",
-                lastMessage: "Lorem2 ipsum dolor amet, consectetur-adipiscy...",
-                lastTime: "14:15",
-            },*/
-        ],
+        dialogues: Cache.get("dialogues"),
         //Диалог с юзером 1
         messagesDialogs: {
             "dialogWithUser1": [
@@ -179,6 +164,7 @@ export default {
         },
         setDialogues(state, dialogues) {
             state.dialogues = dialogues;
+            Cache.set("dialogues", dialogues);
         }
     },
     actions: {

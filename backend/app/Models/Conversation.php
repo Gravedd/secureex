@@ -23,5 +23,16 @@ class Conversation extends Model
         return $this->hasMany(Message::class, 'conversation_id', 'id');
     }
 
+    public static function filterUser($conversations, $user_id) {
+        foreach ($conversations as &$conversation) {
+            $user_key = $conversation['user1']['id'] == $user_id ? 'user1' : 'user2';
+            $conversation['user'] = $conversation[$user_key];
+            unset($conversation['user1'], $conversation['user2']);
+        }
+
+        return $conversations;
+    }
+
+
 
 }
