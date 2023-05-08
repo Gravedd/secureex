@@ -1,3 +1,5 @@
+import store from "@/store";
+
 export default class {
 
     constructor(store, message, ws) {
@@ -17,7 +19,7 @@ export default class {
     }
 
     getType(message) {
-        console.log(`Сервер: '${message.action}';`);
+        //console.log(`Сервер: '${message.action}';`);
         let action = message.action;
         return "on" + action[0].toUpperCase() + action.slice(1);
     }
@@ -41,6 +43,11 @@ export default class {
             "action": "pong",
             "data": {}
         }));
+    }
+
+    onMessage_sent() {
+        console.log(this.message);
+        store.commit("updateMessageIfSent", this.message.data);
     }
 
 }

@@ -13,7 +13,7 @@
             :style="{'height': `${inputHeight}px`}"
         ></textarea>
 
-        <icon class="sent-btn">
+        <icon class="sent-btn" @click="sendMessage">
             <send-icon/>
         </icon>
     </div>
@@ -23,10 +23,12 @@
 import SendIcon from "@/components/icons/sendIcon";
 import AttachIcon from "@/components/icons/attachIcon";
 import Icon from "@/components/icons/icon";
+import Uuid from "@/utils/uuid";
 
 export default {
     name: "message-write",
     components: {SendIcon, AttachIcon, Icon},
+    props: ["with_user"],
     data() {
         return {
             inputHeight: 19,//base - 19px
@@ -37,15 +39,40 @@ export default {
     },
     methods: {
         messageInput(e) {
-            this.changeInputSize(e)
+            this.changeInputSize()
         },
-        changeInputSize(e) {
+        changeInputSize() {
             let oldHeight = this.inputHeight;
             let height = 19 * (((this.inputText.match(/\n/g) || {}).length || 0) + 1);
             this.inputHeight = `${Math.min(height, this.maxInputHeight)}`;
             if (this.inputHeight != oldHeight) {
                 this.inputBlockHeight = parseInt(this.inputHeight) + 21;
             }
+        },
+        sendMessage() {
+            let uuid = Uuid.generateUUID();
+            this.$store.commit("addMessage", {
+                "user_id": this.with_user,
+                "message": {
+                    "id": null,
+                    "body": this.inputText,
+                    "user_id": this.$store.getters.user_id,
+                    "created_at": Date.now(),
+                    "updated_at": Date.now(),
+                    "read": 0,
+                    "uuid": uuid,
+                }
+            });
+
+            this.$store.getters.ws.send(JSON.stringify({
+                "action": "message",
+                "data": {
+                    "text": this.inputText,
+                    "to_user": this.with_user,
+                    "uuid" : uuid,
+                }
+            }));
+            this.inputText = "";
         }
 
     },

@@ -1,5 +1,6 @@
 import Db from "./Db.js";
 import Server from "./Server.js";
+import moment from "moment";
 
 
 export default class Controller {
@@ -31,5 +32,45 @@ export default class Controller {
 
     async pong(socket, data, uuid) {
         Server.users[uuid]["pong_count"]++;
+    }
+
+    async newMessage(socket, data, uuid) {
+        console.log("Отправка: ", data);
+        let fromId = Server.users[uuid].data.id;
+        let toId = data.to_user;
+
+
+        const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
+            [fromId, toId, fromId, toId]
+        );
+
+        let conversation_id = 0;
+        if (rows.length === 0) {
+            const [result] = await Db.execute(
+                'INSERT INTO `conversations` (user1_id, user2_id) VALUES (?, ?)',
+                [fromId, toId]
+            );
+            conversation_id = result.insertId;
+        } else {
+            conversation_id = rows[0].id;
+        }
+
+        let created_at = moment().format('YYYY-MM-DD HH:mm:ss');
+
+        const [message_result] = await Db.execute(
+            'INSERT INTO `messages` (`body`, `user_id`, `read`, `conversation_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)',
+            [data.text, fromId, 0, conversation_id, created_at, created_at]
+        );
+
+        socket.send(JSON.stringify({
+            "action": "message_sent",
+            "data": {
+                "message_id": message_result.insertId,
+                "body": data.text,
+                "to_user": data.to_user,
+                "created_at": created_at,
+                "uuid" : data.uuid,
+            }
+        }))
     }
 }

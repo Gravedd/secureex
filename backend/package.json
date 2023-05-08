@@ -10,9 +10,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "moment": "^2.29.4",
         "mysql2": "^3.2.4",
         "uuid": "^9.0.0",
         "ws": "^8.13.0"
     },
-    "type" : "module"
+    "type": "module"
 }

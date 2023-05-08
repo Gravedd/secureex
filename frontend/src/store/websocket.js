@@ -5,7 +5,11 @@ export default {
     state: {
         ws: null,
     },
-    getters: {},
+    getters: {
+        ws: (state) => {
+            return state.ws
+        },
+    },
     mutations: {},
     actions: {
         connect(context, user) {
@@ -22,6 +26,7 @@ export default {
                 }
             }
 
+            /*context.state.ws.send();*/
             context.state.ws.onmessage = message => {
                 new wsMessageHandler(context, message, context.state.ws)
             }

@@ -5,7 +5,7 @@
              }"
     >
         <dialog-messages :with_user="with_user"/>
-        <message-write/>
+        <message-write :with_user="with_user"/>
     </div>
 </template>
 <script>

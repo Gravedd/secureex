@@ -17,8 +17,8 @@ export default new class Db {
     }
 
     //const [rows] = await Db.execute("SELECT * FROM `users`");
-    execute(query) {
-        return this.pool.execute(query);
+    execute(query, params = []) {
+        return this.pool.execute(query, params);
     }
 
 }

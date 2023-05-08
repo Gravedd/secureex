@@ -1,6 +1,7 @@
 import requests from "@/plugins/requests";
 import config from "@/config";
 import Cache from "@/utils/cache";
+import store from "@/store/index";
 
 export default {
     state: {
@@ -28,8 +29,8 @@ export default {
     },
     mutations: {
         addMessage (state, data) {
-            let uid = data.user_id
-            state.messagesDialogs['dialogWithUser' + uid].push(data)
+            let uid = data.user_id;
+            state.messagesDialogs['dialogWithUser' + uid].push(data.message);
         },
         setDialogues(state, dialogues) {
             state.dialogues = dialogues;
@@ -37,7 +38,16 @@ export default {
         },
         setMessagesInDialog(state, data) {
             state.messagesDialogs['dialogWithUser' + data.with_user] = data.messages;
+        },
+        updateMessageIfSent(state, data) {
+            let key = "dialogWithUser" + data.to_user;
+            let message = state.messagesDialogs[key].find(message => message.uuid === data.uuid);
+            message.id = data.message_id;
+            message.body = data.body;
+            message.created_at = data.created_at;
+            delete message.uuid;
         }
+
     },
     actions: {
         async getConversations (context) {

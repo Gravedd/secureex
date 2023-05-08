@@ -7,6 +7,7 @@ export default class RequestHandler {
     routes = {
         "auth" : "auth",
         "pong" : "pong",
+        "message": "newMessage"
     }
 
     constructor(socket, message, uuid) {
@@ -34,7 +35,6 @@ export default class RequestHandler {
     }
 
     getType(message) {
-        console.log(`Пользователь отправил сообщение. Тип: '${message.action}';`);
         return message.action;
     }
 
