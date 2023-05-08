@@ -2,12 +2,12 @@
     <div class="basePadding messages-wrapper" id="messageBlock" @scroll="blockScrolled">
 
         <div
-            v-for="message in messages['dialogWithUser1']"
+            v-for="message in messages['dialogWithUser' + with_user]"
             class="message-wrapper"
-            :class="{'message-sent' : message.type === 'sent', 'message-received' : message.type === 'received'}"
+            :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}"
         >
-            <div class="message-text">{{ message.text }}</div>
-            <div class="message-time">{{ message.time }}</div>
+            <div class="message-text">{{ message.body }}</div>
+            <div class="message-time">{{ message.created_at }}</div>
         </div>
     </div>
     <icon viewBox="0 0 30 30" class="down-btn" width="25" height="25" v-if="showDownBtn" @click="scrollBlockDown()"><down-icon/></icon>
@@ -20,6 +20,7 @@ import DownIcon from "@/components/icons/downIcon";
 export default {
     name: "Dialog-messages",
     components: {DownIcon, Icon},
+    props: ["with_user"],
     data() {
         return {
             showDownBtn: false,
@@ -70,7 +71,7 @@ export default {
         this.scrollBlockDown("instant");
 
         //Генератор сообщений(временно)
-        setInterval(() => {
+        /*setInterval(() => {
             let random = Math.floor(Math.random() * 2);
             let random2 = Math.floor(Math.random() * 1000);
             let random3 = Math.floor(Math.random() * 59);
@@ -81,7 +82,7 @@ export default {
                 time: "14:"+random3,
                 type: random >= 1 ? "sent" : "received"
             });
-        }, 4000);
+        }, 4000);*/
     },
     beforeUnmount() {
         this.unsubscribe();

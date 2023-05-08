@@ -4,7 +4,7 @@
                     'height': `${clientHeight - 40}px`
              }"
     >
-        <dialog-messages/>
+        <dialog-messages :with_user="with_user"/>
         <message-write/>
     </div>
 </template>
@@ -14,6 +14,7 @@ import DialogMessages from "@/components/dialogues/Dialog-messages";
 export default {
     name: "Dialog-component",
     components: {DialogMessages, MessageWrite},
+    props: ["with_user"],
     computed: {
         clientWidth() {
             return this.$store.getters.clientWidth;

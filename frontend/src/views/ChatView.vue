@@ -5,7 +5,7 @@
 
 
         <div class="componentWrapper">
-            <dialog-component></dialog-component>
+            <dialog-component :with_user="with_user"></dialog-component>
 
             <action-menu>
                 <div>
@@ -36,15 +36,15 @@ export default {
             with_user: this.$route.params.id,
         }
     },
-    props: ["id"],
     methods: {
 
     },
     beforeMount() {
-
+	    this.$showLoader();
+        store.dispatch("getMessages", this.with_user);
     },
     mounted() {
-
+        this.$hideLoader();
     }
 }
 
