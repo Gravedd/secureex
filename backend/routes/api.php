@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get("/user/conversations/users", [\App\Http\Controllers\ConversationsController::class, "getUserConversationsUsers"])->name("user.conversations.users");
     Route::get("/user/conversations/clean", [\App\Http\Controllers\ConversationsController::class, "getUserConversationsClean"])->name("user.conversations.clean");
 
+    Route::get("/conversations/{conversationid}", [\App\Http\Controllers\ConversationsController::class, "getMessages"])->name("conversations.messages");
 });
 
 
