@@ -9,7 +9,6 @@ export default class {
         this.message = JSON.parse(message.data);
         this.type = this.getType(this.message);
 
-        console.log(this.type)
         let methodExists = this.type in this;
         if (!methodExists) {
             return console.log(`Метода '${this.type}' не существует`);
@@ -19,7 +18,6 @@ export default class {
     }
 
     getType(message) {
-        //console.log(`Сервер: '${message.action}';`);
         let action = message.action;
         return "on" + action[0].toUpperCase() + action.slice(1);
     }
@@ -50,7 +48,6 @@ export default class {
     }
 
     onNew_message() {
-        console.log(this.message);
         store.commit("newMessage", this.message.data);
     }
 }

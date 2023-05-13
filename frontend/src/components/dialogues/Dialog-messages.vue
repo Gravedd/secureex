@@ -45,7 +45,7 @@ export default {
             this.showDownBtn = this.checkBlockScrolledMax(e.target, true);
         },
         checkBlockScrolledMax(e) {
-            return e.scrollTop - (e.scrollHeight - e.clientHeight) <= -25;
+            return e.scrollTop - (e.scrollHeight - e.clientHeight) <= -55;
         },
 
         async scrollBlockDown(behavior = "smooth") {
@@ -63,26 +63,13 @@ export default {
     mounted() {
         //Подписка на изменение диалога
         this.unsubscribe = store.subscribe((mutation) => {
-            if (mutation.type === "addMessage" && mutation.payload.user_id == 1) {
+            console.log(111);
+            if (mutation.type === "addMessage" || mutation.type === "newMessage") {
                 this.newMessageEvent(mutation.payload);
             }
         });
         //Перемотать блок до конца
         this.scrollBlockDown("instant");
-
-        //Генератор сообщений(временно)
-        /*setInterval(() => {
-            let random = Math.floor(Math.random() * 2);
-            let random2 = Math.floor(Math.random() * 1000);
-            let random3 = Math.floor(Math.random() * 59);
-            this.$store.commit("addMessage", {
-                user_id: 1,
-                id: 1,
-                text: "text" + random2,
-                time: "14:"+random3,
-                type: random >= 1 ? "sent" : "received"
-            });
-        }, 4000);*/
     },
     beforeUnmount() {
         this.unsubscribe();

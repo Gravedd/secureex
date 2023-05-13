@@ -9,9 +9,10 @@
             class="nice-scrollbar"
             placeholder="Сообщение"
             @input="messageInput"
+            @keyup.enter="onEnterPressed"
             v-model="inputText"
             :style="{'height': `${inputHeight}px`}"
-        ></textarea>
+        />
 
         <icon class="sent-btn" @click="sendMessage">
             <send-icon/>
@@ -39,7 +40,7 @@ export default {
     },
     methods: {
         messageInput(e) {
-            this.changeInputSize()
+            this.changeInputSize();
         },
         changeInputSize() {
             let oldHeight = this.inputHeight;
@@ -50,6 +51,10 @@ export default {
             }
         },
         sendMessage() {
+            if (this.inputText.length <= 1) {
+                return ;
+            }
+
             let uuid = Uuid.generateUUID();
             this.$store.commit("addMessage", {
                 "user_id": this.with_user,
@@ -73,9 +78,21 @@ export default {
                 }
             }));
             this.inputText = "";
+            this.changeInputSize();
+        },
+        onEnterPressed(event) {
+            if (this.inputText.length <= 1) {
+                this.inputText = "";
+                this.changeInputSize();
+            }
+            if (event.ctrlKey) {
+                this.inputText += "\n";
+            } else {
+                this.sendMessage();
+            }
         }
-
     },
+
 }
 </script>
 <style scoped>
