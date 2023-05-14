@@ -88,8 +88,27 @@ export default class Controller {
                 }));
             }
         }
+    }
 
+    async allMessagesRead(socket, data, uuid) {
+        let fromId = Server.users[uuid].data.id;
+        let toId = data.dialogWith;
+        console.log(111);
 
+        const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
+            [fromId, toId, fromId, toId]
+        );
+
+        let conversation_id = 0;
+        if (rows.length === 0) {
+            console.log("Беседа не найдена: ", rows);
+            return ;
+        }
+        conversation_id = rows[0].id;
+        const [read_result] = await Db.execute(
+            'UPDATE `messages` SET `read` = 1 WHERE `read` = 0 AND `conversation_id` = ? AND `id` <= ? AND `user_id` != ?',
+            [conversation_id, data.lastMessageId, fromId]
+        );
 
     }
 }

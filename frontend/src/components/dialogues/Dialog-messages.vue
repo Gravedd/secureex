@@ -49,7 +49,7 @@ export default {
                 const messageBlock = document.getElementById("messageBlock");
                 const scrollOptions = {
                     top: messageBlock.scrollHeight,
-                    behavior: "smooth"
+                    behavior: behavior
                 };
                 messageBlock.scrollTo(scrollOptions);
             }

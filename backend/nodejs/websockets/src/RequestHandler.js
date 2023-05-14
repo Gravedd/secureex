@@ -7,7 +7,8 @@ export default class RequestHandler {
     routes = {
         "auth" : "auth",
         "pong" : "pong",
-        "message": "newMessage"
+        "message": "newMessage",
+        "allMessagesRead": "allMessagesRead",
     }
 
     constructor(socket, message, uuid) {
@@ -23,7 +24,7 @@ export default class RequestHandler {
     requestHandler() {
         let route = this.routes[this.message.action];
         if (!route) {
-            return console.log("Роута не существует");
+            return console.log("Роута не существует", this.message.action);
         }
 
         let methodExists = route in this.controller;

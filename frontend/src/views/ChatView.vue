@@ -40,6 +40,10 @@ export default {
         onGetMessages() {
             this.$hideLoader();
             this.$refs.dialogComponent.onGetMessages();
+            this.$store.dispatch("markAllMessagesMarked", {
+                dialogWith: this.with_user
+            })
+            this.$store.commit("readAllDialogMessagesLocal", this.with_user);
         }
     },
     beforeMount() {

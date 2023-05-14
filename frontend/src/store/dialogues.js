@@ -40,7 +40,19 @@ export default {
         },
         newMessage(state, data) {
             let uid = data.user_id;
-            state.messagesDialogs['dialogWithUser' + uid].push(data);
+            if (state.messagesDialogs['dialogWithUser' + uid]) {
+                state.messagesDialogs['dialogWithUser' + uid].push(data);
+            }
+        },
+        readAllDialogMessagesLocal(state, with_user) {
+            with_user = parseInt(with_user);
+            state.messagesDialogs['dialogWithUser' + with_user].forEach(elem => {
+                elem.read = 0;
+            });
+            let dialog = state.dialogues.find(dialogue => dialogue.user.id === with_user);
+            if (dialog) {
+                dialog.unread_count = 0;
+            }
         }
 
 
@@ -67,6 +79,22 @@ export default {
             context.commit("setMessagesInDialog", {"with_user": with_user, "messages": data.messages});
 
             return data.messages;
+        },
+        async markAllMessagesMarked(context, data) {
+            let lastMessageId;
+
+            context.getters.getDialogById['dialogWithUser' + data.dialogWith].findLast(message => {
+                return lastMessageId = message.id;
+            });
+
+            context.commit("readAllDialogMessagesLocal", data.dialogWith);
+            context.getters.ws.send(JSON.stringify({
+                action: "allMessagesRead",
+                data: {
+                    "dialogWith"   : data.dialogWith,
+                    "lastMessageId": lastMessageId,
+                }
+            }));
         }
     },
     modules: {},

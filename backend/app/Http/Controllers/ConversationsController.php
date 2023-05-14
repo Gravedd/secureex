@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\DB;
 class ConversationsController extends Controller {
 
     public function getUserConversationsAll(Request $request) {
+        $user_id = $request->user()['id'];
         $conversations = $request->user()->conversations()
             ->with(['messages' => function ($query) {
                 $query->orderBy('id', "desc")->take(1)/*->with('user')*/;
             }])
             ->with('user1')
             ->with('user2')
-            ->withCount(['messages as unread_count' => function ($query) {
-                $query->where('read', 0);
+            ->withCount(['messages as unread_count' => function ($query) use ($user_id) {
+                $query->where('read', 0)->where("user_id", "!=", $user_id);
             }])
             ->get();
 

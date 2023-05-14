@@ -20,4 +20,19 @@ class Message extends Model {
     {
         return $this->belongsTo(Conversation::class, 'conversation_id', 'id');
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:H:i:s Y-m-d',
+        'updated_at' => 'datetime:H:i:s Y-m-d',
+    ];
+
+    /*
+     * Подготовить дату для сериализации массива / JSON.
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+    protected function `serializeDate`(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d');
+    }*/
 }
