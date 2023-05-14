@@ -8,7 +8,13 @@
                 <div class="dialog-name">{{ username }}</div>
                 <div class="dialog-time">{{ lastTime }}</div>
             </div>
-            <div class="dialog-message">{{ lastMessage }}</div>
+            <div class="dialog-name-time-wrapper">
+                <div class="dialog-message">{{ lastMessage }}</div>
+
+                <div class="dialog-unread-wrapper">
+                    <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">{{ unread_count }}</div>
+                </div>
+            </div>
         </div>
     </router-link>
     <hr>
@@ -24,6 +30,7 @@ export default {
         username: null,
         lastMessage: null,
         lastTime: null,
+        unread_count: null,
     }
 }
 </script>
@@ -70,6 +77,23 @@ export default {
         height: 23px;
         line-height: 23px;
     }
+    .dialog-unread-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .dialog-unread-count {
+        background-color: var(--main2);
+        border-radius: 100px;
+        text-align: center;
+        position: relative;
+        height: 20px;
+        line-height: 20px;
+        top: -2px;
+        padding: 0 6px;
+        font-size: 10px;
+    }
+
     @media (min-width: 650px) {
         .dialog-wrapper {
             height: 60px;
@@ -82,6 +106,13 @@ export default {
         }
         .dialog-time {
             font-size: 10px;
+        }
+        .dialog-unread-count {
+            height: 25px;
+            line-height: 25px;
+            top: 4px;
+            padding: 0 9px;
+            font-size: 12px;
         }
     }
     @media (min-width: 1200px) {

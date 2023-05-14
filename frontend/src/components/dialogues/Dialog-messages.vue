@@ -63,7 +63,6 @@ export default {
     mounted() {
         //Подписка на изменение диалога
         this.unsubscribe = store.subscribe((mutation) => {
-            console.log(111);
             if (mutation.type === "addMessage" || mutation.type === "newMessage") {
                 this.newMessageEvent(mutation.payload);
             }

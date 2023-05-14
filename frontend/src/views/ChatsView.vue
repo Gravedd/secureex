@@ -10,6 +10,7 @@
                     :username="dialogue.user.name"
                     :last-message="dialogue.messages[0].body"
                     :last-time="dialogue.messages[0].created_at"
+                    :unread_count="dialogue.unread_count"
                 />
             </div>
 

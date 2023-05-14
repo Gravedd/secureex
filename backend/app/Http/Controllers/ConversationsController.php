@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Conversation;
 use App\Models\Message;
+use Illuminate\Support\Facades\DB;
 
 class ConversationsController extends Controller {
 
     public function getUserConversationsAll(Request $request) {
-        $conversations = $request->user()->conversations()->with(['messages' => function ($query) {
-            $query->orderBy('id', "desc")->take(1)/*->with('user')*/;
-        }])->with('user1')->with('user2')->get();
+        $conversations = $request->user()->conversations()
+            ->with(['messages' => function ($query) {
+                $query->orderBy('id', "desc")->take(1)/*->with('user')*/;
+            }])
+            ->with('user1')
+            ->with('user2')
+            ->withCount(['messages as unread_count' => function ($query) {
+                $query->where('read', 0);
+            }])
+            ->get();
 
         $conversations = Conversation::filterUser($conversations, $request->user()['id']);
 
