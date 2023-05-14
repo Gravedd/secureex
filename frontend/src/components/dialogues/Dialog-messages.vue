@@ -1,14 +1,9 @@
 <template>
     <div class="basePadding messages-wrapper" id="messageBlock" @scroll="blockScrolled">
-
-        <div
+        <message
             v-for="message in messages['dialogWithUser' + with_user]"
-            class="message-wrapper"
-            :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}"
-        >
-            <div class="message-text">{{ message.body }}</div>
-            <div class="message-time">{{ message.created_at }}</div>
-        </div>
+            :message="message"
+        />
     </div>
     <icon viewBox="0 0 30 30" class="down-btn" width="25" height="25" v-if="showDownBtn" @click="scrollBlockDown()"><down-icon/></icon>
 </template>
@@ -16,10 +11,11 @@
 import store from "@/store";
 import Icon from "@/components/icons/icon";
 import DownIcon from "@/components/icons/downIcon";
+import Message from "@/components/dialogues/message";
 
 export default {
     name: "Dialog-messages",
-    components: {DownIcon, Icon},
+    components: {Message, DownIcon, Icon},
     props: ["with_user"],
     data() {
         return {
@@ -76,7 +72,6 @@ export default {
 }
 </script>
 <style scoped>
-
 .messages-wrapper {
     width: 100%;
     padding-top: 4px;
@@ -95,36 +90,7 @@ export default {
 .messages-wrapper::-webkit-scrollbar-thumb {
     background-color: var(--gray5);
 }
-.message-wrapper {
-    width: 70%;
-    font-size: 12px;
-    padding: 4px;
-    border-radius: 8px;
-    margin-bottom: 4px;
-    transition: 0.25s;
-}
-.message-wrapper:hover {
-    transform: scale(1.01);
-}
 
-.message-text {
-    width: 100%;
-}
-.message-time {
-    width: 100%;
-    text-align: right;
-    font-size: 8px;
-}
-.message-sent {
-    margin-left: auto;
-    background: linear-gradient(97.99deg, var(--main) -11.81%, var(--main2) 130.29%);
-    animation: 0.3s show-sent ease-in-out;
-}
-.message-received {
-    background-color: var(--bg3);
-    margin-right: auto;
-    animation: 0.3s show-received ease-in-out;
-}
 .down-btn {
     position: fixed; right: 18px; bottom: 70px;
 }
