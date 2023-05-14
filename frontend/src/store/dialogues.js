@@ -2,6 +2,7 @@ import requests from "@/plugins/requests";
 import config from "@/config";
 import Cache from "@/utils/cache";
 import store from "@/store/index";
+import router from "@/router";
 
 export default {
     state: {
@@ -39,10 +40,25 @@ export default {
             delete message.uuid;
         },
         newMessage(state, data) {
-            let uid = data.user_id;
-            if (state.messagesDialogs['dialogWithUser' + uid]) {
-                state.messagesDialogs['dialogWithUser' + uid].push(data);
+            let key = 'dialogWithUser' + data.user_id;
+            if (!state.messagesDialogs[key]) {
+                state.messagesDialogs[key] = [];
             }
+
+            state.messagesDialogs[key].push(data);
+            if (router.currentRoute._rawValue.name === "chat") {
+                return ;
+            }
+
+            //Обновить кол-во не прочитанных
+            let dialog = state.dialogues.find(dialogue => dialogue.user.id === data.user_id);
+            if (!dialog) {
+                console.log("TODO: Создать чат!");//TODO: Создать чат
+                return ;
+            }
+            dialog.unread_count = !Number.isInteger(dialog.unread_count) ? 1 : dialog.unread_count + 1;
+            //Установить сообщение как последнее
+            dialog.messages[0] = data;
         },
         readAllDialogMessagesLocal(state, with_user) {
             with_user = parseInt(with_user);

@@ -93,7 +93,6 @@ export default class Controller {
     async allMessagesRead(socket, data, uuid) {
         let fromId = Server.users[uuid].data.id;
         let toId = data.dialogWith;
-        console.log(111);
 
         const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
             [fromId, toId, fromId, toId]
