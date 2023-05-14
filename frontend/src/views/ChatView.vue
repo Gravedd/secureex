@@ -5,7 +5,7 @@
 
 
         <div class="componentWrapper">
-            <dialog-component :with_user="with_user"></dialog-component>
+            <dialog-component :with_user="with_user" ref="dialogComponent"></dialog-component>
 
             <action-menu>
                 <div>
@@ -37,14 +37,17 @@ export default {
         }
     },
     methods: {
-
+        onGetMessages() {
+            this.$hideLoader();
+            this.$refs.dialogComponent.onGetMessages();
+        }
     },
     beforeMount() {
 	    this.$showLoader();
-        store.dispatch("getMessages", this.with_user);
+        store.dispatch("getMessages", this.with_user).then(() => this.onGetMessages());
     },
     mounted() {
-        this.$hideLoader();
+
     }
 }
 

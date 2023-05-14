@@ -4,7 +4,7 @@
                     'height': `${clientHeight - 40}px`
              }"
     >
-        <dialog-messages :with_user="with_user"/>
+        <dialog-messages :with_user="with_user" ref="dialogMessages"/>
         <message-write :with_user="with_user"/>
     </div>
 </template>
@@ -23,6 +23,11 @@ export default {
             return this.$store.getters.clientHeight;
         },
     },
+    methods: {
+        onGetMessages() {
+            this.$refs.dialogMessages.scrollBlockDown();
+        }
+    }
 }
 </script>
 <style scoped>
