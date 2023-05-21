@@ -115,13 +115,13 @@ export default {
             });
 
             context.commit("readAllDialogMessagesLocal", data.dialogWith);
-            context.getters.ws.send(JSON.stringify({
+            store.dispatch("sendWs", {
                 action: "allMessagesRead",
                 data: {
                     "dialogWith"   : data.dialogWith,
                     "lastMessageId": lastMessageId,
                 }
-            }));
+            });
         }
     },
     modules: {},

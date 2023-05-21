@@ -26,21 +26,21 @@ export default class {
      * Сервер требует авторизацию
      */
     onAuth() {
-        this.ws.send(JSON.stringify({
+        store.dispatch("sendWs", {
             "action": "auth",
             "data": {
                 "user_id": this.store.getters.user_id,
                 "token" : this.store.getters.user_token,
             }
-        }));
+        });
 
     }
 
     onPing() {
-        this.ws.send(JSON.stringify({
+        store.dispatch("sendWs", {
             "action": "pong",
             "data": {}
-        }));
+        });
     }
 
     onMessage_sent() {
@@ -53,5 +53,9 @@ export default class {
 
     onMessages_read() {
         store.commit("userReadMessages", this.message.data);
+    }
+
+    onAuth_success() {
+        store.commit("wsSuccessAuthorized");
     }
 }

@@ -68,15 +68,14 @@ export default {
                     "uuid": uuid,
                 }
             });
-
-            this.$store.getters.ws.send(JSON.stringify({
+            this.$store.dispatch("sendWs", {
                 "action": "message",
                 "data": {
                     "text": this.inputText,
                     "to_user": this.with_user,
                     "uuid" : uuid,
                 }
-            }));
+            });
             this.inputText = "";
             this.changeInputSize();
         },
