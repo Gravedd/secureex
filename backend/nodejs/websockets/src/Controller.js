@@ -71,27 +71,22 @@ export default class Controller {
             }
         }));
 
-        for (let uuid in Server.users) {
-
-            if (Server.users[uuid].data.id == data.to_user) {
-                Server.users[uuid].ws.send(JSON.stringify({
-                    "action": "new_message",
-                    "data": {
-                        "message_id": message_result.insertId,
-                        "body": data.text,
-                        "user_id": fromId,
-                        "created_at": created_at,
-                        "updated_at": created_at,
-                        "read": 0,
-                        "conversation_id": conversation_id,
-                    }
-                }));
+        Server.sendMessageToUserId(data.to_user, {
+            "action": "new_message",
+            "data"  : {
+                "message_id"     : message_result.insertId,
+                "body"           : data.text,
+                "user_id"        : fromId,
+                "created_at"     : created_at,
+                "updated_at"     : created_at,
+                "read"           : 0,
+                "conversation_id": conversation_id,
             }
-        }
+        });
     }
 
     async allMessagesRead(socket, data, uuid) {
-        let fromId = Server.users[uuid].data.id;
+        let fromId = Server.getUser(uuid).data.id;
         let toId = data.dialogWith;
 
         const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
@@ -108,6 +103,14 @@ export default class Controller {
             'UPDATE `messages` SET `read` = 1 WHERE `read` = 0 AND `conversation_id` = ? AND `id` <= ? AND `user_id` != ?',
             [conversation_id, data.lastMessageId, fromId]
         );
+
+        Server.sendMessageToUserId(toId, {
+            "action": "messages_read",
+            "data": {
+                "from_id": fromId,
+                "lastMessageId": data.lastMessageId,
+            }
+        })
 
     }
 }

@@ -50,4 +50,8 @@ export default class {
     onNew_message() {
         store.commit("newMessage", this.message.data);
     }
+
+    onMessages_read() {
+        store.commit("userReadMessages", this.message.data);
+    }
 }

@@ -69,6 +69,17 @@ export default {
             if (dialog) {
                 dialog.unread_count = 0;
             }
+        },
+        userReadMessages(state, data) {
+            if (!state.messagesDialogs['dialogWithUser' + data.from_id]) {
+                return ;
+            }
+
+            state.messagesDialogs['dialogWithUser' + data.from_id].forEach(message => {
+                if (message.id <= data.lastMessageId) {
+                    message.read = 1;
+                }
+            });
         }
 
 
