@@ -1,7 +1,7 @@
 <template>
     <div class="message-wrapper" :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}">
         <div class="message-text">{{ message.body }}</div>
-        <div class="message-time-wrapper">
+        <div class="message-time-wrapper" :title="message.id">
             <div class="message-time">{{ message.created_at }}</div>
             <div class="message-read">
                 <span v-if="message.uid === undefined">✓</span>

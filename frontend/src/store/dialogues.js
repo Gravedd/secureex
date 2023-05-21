@@ -76,7 +76,7 @@ export default {
             }
 
             state.messagesDialogs['dialogWithUser' + data.from_id].forEach(message => {
-                if (message.id <= data.lastMessageId) {
+                if (message.id <= (data.lastMessageId + 1)) {
                     message.read = 1;
                 }
             });

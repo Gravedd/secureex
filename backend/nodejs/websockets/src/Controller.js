@@ -64,6 +64,7 @@ export default class Controller {
             "action": "message_sent",
             "data": {
                 "message_id": message_result.insertId,
+                "id": message_result.insertId,
                 "body": data.text,
                 "to_user": data.to_user,
                 "created_at": created_at,
@@ -74,7 +75,7 @@ export default class Controller {
         Server.sendMessageToUserId(data.to_user, {
             "action": "new_message",
             "data"  : {
-                "message_id"     : message_result.insertId,
+                "id"     : message_result.insertId,
                 "body"           : data.text,
                 "user_id"        : fromId,
                 "created_at"     : created_at,

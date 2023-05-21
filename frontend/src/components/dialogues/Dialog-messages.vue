@@ -36,6 +36,12 @@ export default {
             } else {
                 this.showDownBtn = true;
             }
+            let sender_id = message.message ? message.message.user_id : message.user_id;
+            if (sender_id != store.getters.user_id) {
+                store.dispatch("markAllMessagesMarked", {
+                    "dialogWith": this.with_user,
+                });
+            }
         },
         blockScrolled(e) {
             this.showDownBtn = this.checkBlockScrolledMax(e.target, true);
