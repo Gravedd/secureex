@@ -14,8 +14,6 @@ export default class Server {
     }
 
     onConnection(socket, uuid) {
-        console.log('Client connected');
-
         RequestHandler.requestAuth(socket);
 
         let intervalId = setInterval(() => {
@@ -47,7 +45,11 @@ export default class Server {
             "ping_count" : 0,
             "pong_count" : 0,
         };
-        console.log("Юзер авторизовался: uuid=" + uuid);
+
+        socket.send(JSON.stringify({
+            "action": "auth_success",
+            "data": {}
+        }))
     }
 
     static getUser(uuid) {

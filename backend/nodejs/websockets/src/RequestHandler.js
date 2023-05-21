@@ -31,7 +31,7 @@ export default class RequestHandler {
         if (!methodExists) {
             return console.log("Метода не существует");
         }
-
+        //console.log("Роут " + route + " " + this.uuid);
         return this.controller[route](this.socket, this.message.data, this.uuid);
     }
 
