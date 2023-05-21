@@ -50,6 +50,19 @@ export default class Server {
         console.log("Юзер авторизовался: uuid=" + uuid);
     }
 
+    static getUser(uuid) {
+        return Server.users[uuid] ?? null;
+    }
+
+    static sendMessageToUserId(user_id, message = {}) {
+        for (let uuid in Server.users) {
+            if (!Server.users[uuid].data || Server.users[uuid].data.id != user_id) {
+                continue;
+            }
+            Server.getUser(uuid).ws.send(JSON.stringify(message));
+        }
+    }
+
     static generateUUID() {
         let uuid = '';
 
