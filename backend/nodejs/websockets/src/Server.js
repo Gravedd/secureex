@@ -1,5 +1,6 @@
 import WebSocket, { WebSocketServer } from 'ws';
 import RequestHandler from "./RequestHandler.js";
+import Log from "./Log.js";
 
 
 export default class Server {
@@ -27,14 +28,16 @@ export default class Server {
     }
 
     onMessage(socket, message, uuid) {
-        new RequestHandler(socket, message, uuid);
+        try {
+            new RequestHandler(socket, message, uuid);
+        } catch (error) {
+            Log.error("RequestHandler " + error.name, ": " + error.message, error);
+        }
     }
 
     onClose(uuid, intervalId) {
-        console.log("Отсоединение: " + uuid);
         delete Server.users[uuid];
         clearInterval(intervalId);
-        console.log(Server.users);
     }
 
     static onUserSuccessAuthorized(user, socket, uuid) {
