@@ -1,7 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <app-header>{{user.name}}</app-header>
+        <app-header>{{user.name + (typing["user_" + with_user] ? " Печатает..." : "")}}</app-header>
 
 
         <div class="componentWrapper">
@@ -36,6 +36,11 @@ export default {
 	    return {
             with_user: this.$route.params.id,
             user: {},
+        }
+    },
+    computed: {
+        typing() {
+            return this.$store.getters.getTyping;
         }
     },
     methods: {

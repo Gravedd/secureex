@@ -9,6 +9,7 @@ export default class RequestHandler {
         "pong" : "pong",
         "message": "newMessage",
         "allMessagesRead": "allMessagesRead",
+        "typing": "typing",
     }
 
     constructor(socket, message, uuid) {

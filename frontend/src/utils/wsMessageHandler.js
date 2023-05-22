@@ -58,4 +58,8 @@ export default class {
     onAuth_success() {
         store.commit("wsSuccessAuthorized");
     }
+
+    onUser_typing() {
+        store.commit("userTyping", this.message.data);
+    }
 }

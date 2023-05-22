@@ -114,4 +114,16 @@ export default class Controller {
         })
 
     }
+
+    async typing(socket, data, uuid) {
+        let fromId = Server.getUser(uuid).data.id;
+        let toId = data.to_user;
+
+        Server.sendMessageToUserId(toId, {
+            "action": "user_typing",
+            "data": {
+                "user_id": fromId,
+            }
+        });
+    }
 }

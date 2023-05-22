@@ -9,7 +9,8 @@
                 <div class="dialog-time">{{ lastTime }}</div>
             </div>
             <div class="dialog-name-time-wrapper">
-                <div class="dialog-message">{{ lastMessage }}</div>
+                <div class="dialog-message typed-text" v-if='typing["user_" + user_id]'>{{ "Печатает..." }}</div>
+                <div class="dialog-message" v-if='!typing["user_" + user_id]'>{{ lastMessage }}</div>
 
                 <div class="dialog-unread-wrapper">
                     <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">{{ unread_count }}</div>
@@ -24,6 +25,11 @@ import UserAvatar from "@/components/users/user-avatar";
 export default {
     name: "dialog-item",
     components: {UserAvatar},
+    computed: {
+        typing() {
+            return this.$store.getters.getTyping;
+        }
+    },
     props: {
         user_id: null,
         user_avatar: null,
@@ -128,5 +134,15 @@ export default {
         .dialog-time {
             font-size: 12px;
         }
+    }
+    .typed-text {
+        animation: typing 1.5s infinite;
+        width: 2%;
+        overflow: hidden;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 50%; }
     }
 </style>

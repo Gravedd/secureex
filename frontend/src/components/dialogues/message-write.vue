@@ -36,11 +36,13 @@ export default {
             inputText: "",
             maxInputHeight: 120,
             inputBlockHeight: 40,
+            typingTimeout: null,
         }
     },
     methods: {
         messageInput(e) {
             this.changeInputSize();
+            this.typing();
         },
         changeInputSize() {
             let oldHeight = this.inputHeight;
@@ -49,6 +51,17 @@ export default {
             if (this.inputHeight != oldHeight) {
                 this.inputBlockHeight = parseInt(this.inputHeight) + 21;
             }
+        },
+        typing() {
+            clearTimeout(this.typingTimeout);
+            this.typingTimeout = setTimeout(() => {
+                this.$store.dispatch("sendWs", {
+                    "action": "typing",
+                    "data": {
+                        "to_user": this.with_user,
+                    }
+                });
+            }, 300);
         },
         sendMessage() {
             if (this.inputText.length <= 1) {

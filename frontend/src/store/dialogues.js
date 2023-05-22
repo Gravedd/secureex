@@ -10,6 +10,7 @@ export default {
         dialogues: Cache.get("dialogues"),
 
         messagesDialogs: {},
+        typing: {}
     },
     getters: {
         dialogues: (state) => {
@@ -17,6 +18,9 @@ export default {
         },
         getDialogById: (state) => {
             return state.messagesDialogs
+        },
+        getTyping: (state) => {
+            return state.typing
         }
     },
     mutations: {
@@ -80,9 +84,14 @@ export default {
                     message.read = 1;
                 }
             });
+        },
+        userTyping(state, data) {
+            state.typing["user_" + data.user_id] = true;
+
+            setTimeout(() => {
+                state.typing["user_" + data.user_id] = false;
+            }, 2000);
         }
-
-
     },
     actions: {
         async getConversations (context) {
