@@ -43,11 +43,14 @@ export default {
 }
 .message-time {
     margin-right: 4px;
+    opacity: 0.8;
 }
 .message-read {
-    font-size: 14px;
-    letter-spacing: -5px;
+    font-size: 12px;
+    letter-spacing: -4.5px;
     padding-right: 4px;
+    opacity: 0.6;
+    font-weight: bold;
 }
 .message-sent {
     margin-left: auto;
@@ -62,5 +65,16 @@ export default {
     animation: 0.3s show-received ease-in-out;
     min-width: 20%;
     max-width: 50%;
+}
+@media (max-width: 400px) {
+    .message-read {
+        font-size: 10px;
+        opacity: 0.75;
+        letter-spacing: -5px;
+        font-weight: normal;
+    }
+    .message-time {
+        opacity: 0.75;
+    }
 }
 </style>
