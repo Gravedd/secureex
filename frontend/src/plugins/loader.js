@@ -1,4 +1,5 @@
 import store from "@/store";
+
 export default {
     install(Vue, args) {
         //Включить анимацию загрузки

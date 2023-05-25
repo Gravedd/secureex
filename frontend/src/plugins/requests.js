@@ -8,6 +8,7 @@ export default class {
 
     static async sendRequest(url, method, body, headers) {
         let options = this.getOptions(method, body, headers);
+
         return fetch(url, options);
     }
 
@@ -44,6 +45,5 @@ export default class {
 
         return options;
     }
-
 
 }

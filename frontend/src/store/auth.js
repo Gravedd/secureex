@@ -25,12 +25,8 @@ export default {
     },
     mutations: {
 
-        isAuthorized: (state, value) => {
-            state.isAuthorized = value;
-        },
-        setUserAvatar: (state, value) => {
-            state.user_avatar = value
-        },
+        isAuthorized: (state, value) => state.isAuthorized = value,
+        setUserAvatar: (state, value) => state.user_avatar = value,
 
         successAuth(state, user) {
             state.isAuthorized = true;
@@ -86,12 +82,13 @@ export default {
             store.commit("showLoader");
             let response = await requests.post(config.api + "login", credentials);
             store.commit("hideLoader");
+
             let data = await response.json();
             if (response.ok) {
                 //успешная авторизация
                 await context.dispatch("userSuccessAuthorized", {
-                    "id": data.user.id,
-                    "name": data.user.name,
+                    "id"   : data.user.id,
+                    "name" : data.user.name,
                     "email": data.user.email,
                     "token": data.token,
                 });
@@ -100,7 +97,7 @@ export default {
 
             Swal.fire({
                 "title": "Ошибка!",
-                "text": data.message,
+                "text" : data.message,
             })
 
             return {
@@ -123,6 +120,7 @@ export default {
             if (!response.ok) {
                 return await context.dispatch("userIsNotAuthorized");
             }
+
             let data = await response.json();
             await context.dispatch("userSuccessAuthorized", data);
         },

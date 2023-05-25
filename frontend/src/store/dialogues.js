@@ -13,18 +13,12 @@ export default {
         typing: {}
     },
     getters: {
-        dialogues: (state) => {
-            return state.dialogues
-        },
-        getDialogById: (state) => {
-            return state.messagesDialogs
-        },
-        getTyping: (state) => {
-            return state.typing
-        }
+        dialogues: (state) => { return state.dialogues },
+        getDialogById: (state) => { return state.messagesDialogs },
+        getTyping: (state) => { return state.typing }
     },
     mutations: {
-        addMessage (state, data) {
+        addMessage(state, data) {
             let uid = data.user_id;
             state.messagesDialogs['dialogWithUser' + uid].push(data.message);
         },
@@ -46,7 +40,7 @@ export default {
             let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);
             if (!dialog) {
                 console.log("TODO: Создать чат!");//TODO: Создать чат
-                return ;
+                return;
             }
             dialog.messages[0] = data;
         },
@@ -58,14 +52,14 @@ export default {
 
             state.messagesDialogs[key].push(data);
             if (router.currentRoute._rawValue.name === "chat") {
-                return ;
+                return;
             }
 
             //Обновить кол-во не прочитанных
             let dialog = state.dialogues.find(dialogue => dialogue.user.id === data.user_id);
             if (!dialog) {
                 console.log("TODO: Создать чат!");//TODO: Создать чат
-                return ;
+                return;
             }
             dialog.unread_count = !Number.isInteger(dialog.unread_count) ? 1 : dialog.unread_count + 1;
             //Установить сообщение как последнее
@@ -83,7 +77,7 @@ export default {
         },
         userReadMessages(state, data) {
             if (!state.messagesDialogs['dialogWithUser' + data.from_id]) {
-                return ;
+                return;
             }
 
             state.messagesDialogs['dialogWithUser' + data.from_id].forEach(message => {
@@ -101,7 +95,7 @@ export default {
         }
     },
     actions: {
-        async getConversations (context) {
+        async getConversations(context) {
             let response = await requests.get(config.api + "user/conversations/all");
             let data = await response.json();
             if (!response.ok) {
@@ -133,7 +127,7 @@ export default {
             context.commit("readAllDialogMessagesLocal", data.dialogWith);
             store.dispatch("sendWs", {
                 action: "allMessagesRead",
-                data: {
+                data  : {
                     "dialogWith"   : data.dialogWith,
                     "lastMessageId": lastMessageId,
                 }

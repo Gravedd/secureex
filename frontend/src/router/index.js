@@ -1,6 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
-import _Clean from '../views/_Clean.vue';
 import ChatsView from "@/views/ChatsView";
 import store from "@/store";
 
