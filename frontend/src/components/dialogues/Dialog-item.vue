@@ -10,7 +10,7 @@
             </div>
             <div class="dialog-name-time-wrapper">
                 <div class="dialog-message typed-text" v-if='typing["user_" + user_id]'>{{ "Печатает..." }}</div>
-                <div class="dialog-message" v-if='!typing["user_" + user_id]'>{{ lastMessage }}</div>
+                <div class="dialog-message" v-if='!typing["user_" + user_id]'>{{ lastMessage.length > 50 ? lastMessage.substr(0, 50) + "..." : lastMessage }}</div>
 
                 <div class="dialog-unread-wrapper">
                     <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">{{ unread_count }}</div>
@@ -82,6 +82,7 @@ export default {
         font-size: 10px;
         height: 23px;
         line-height: 23px;
+        overflow: hidden;
     }
     .dialog-unread-wrapper {
         display: flex;
