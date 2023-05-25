@@ -42,6 +42,13 @@ export default {
             message.body = data.body;
             message.created_at = data.created_at;
             delete message.uuid;
+
+            let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);
+            if (!dialog) {
+                console.log("TODO: Создать чат!");//TODO: Создать чат
+                return ;
+            }
+            dialog.messages[0] = data;
         },
         newMessage(state, data) {
             let key = 'dialogWithUser' + data.user_id;
