@@ -1,8 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <app-header>{{user.name + (typing["user_" + with_user] ? " Печатает..." : "")}}</app-header>
-
+        <chat-header :username="user.name" :is-user-typing="typing['user_' + with_user]" user-online-data="Онлайн" :avatar-src="user.avatar" :user_id="with_user"></chat-header>
 
         <div class="componentWrapper">
             <dialog-component :with_user="with_user" ref="dialogComponent"></dialog-component>
@@ -28,10 +27,11 @@ import store from "@/store"
 import DialogComponent from "@/components/dialogues/Dialog-component";
 import AppHeader from "@/components/headers/app-header";
 import config from "@/config";
+import ChatHeader from "@/components/headers/chat-header";
 
 export default {
 	name: 'ChatView',
-	components: {AppHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
+	components: {ChatHeader, AppHeader, DialogComponent, SendIcon, AttachIcon, MenuIcon, BackIcon, Icon, ActionMenu},
     data() {
 	    return {
             with_user: this.$route.params.id,
