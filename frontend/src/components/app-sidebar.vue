@@ -21,12 +21,12 @@
                         <span class="item-text">Настройки</span>
                     </router-link>
 
-                    <div class="item">
+<!--                    <div class="item">
                         <icon color="#5C04BB">
                             <key-icon/>
                         </icon>
                         <span class="item-text">Ключи</span>
-                    </div>
+                    </div>-->
                     <div class="item">
                         <icon color="#5C04BB">
                             <people-icon/>
