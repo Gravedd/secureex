@@ -32,9 +32,9 @@ header {
 .headerInput input:focus {
     outline: none;
 }
-.search-icon {
-    margin-right: 19px;
-}
 .right {
     margin-left: auto;
+}
+.right *:not(:last-child) {
+    margin-right: 19px;
 }
