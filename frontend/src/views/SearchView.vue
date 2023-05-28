@@ -2,7 +2,7 @@
 
     <div class="appWrapper">
 
-        <app-header :input-instead-of-text="true"></app-header>
+        <app-header :input-instead-of-text="true" :show-action-menu="false"></app-header>
 
         <div class="componentWrapper">
             <user-list :users="searchResult"></user-list>

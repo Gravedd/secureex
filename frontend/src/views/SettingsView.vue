@@ -2,7 +2,7 @@
 
     <div class="appWrapper">
 
-        <app-header>Настройки</app-header>
+        <app-header :show-action-menu="false">Настройки</app-header>
 
         <div class="componentWrapper">
 
@@ -46,12 +46,7 @@
                 </form>
             </modal>
 
-            <action-menu>
-                <div>
-                    <router-link to="/">To chats</router-link>
-                </div>
-                <div>Кнопка 2</div>
-            </action-menu>
+            <action-menu></action-menu>
         </div>
     </div>
 </template>

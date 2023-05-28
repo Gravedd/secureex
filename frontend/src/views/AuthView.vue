@@ -1,7 +1,7 @@
 <template>
     <div class="appWrapper">
 
-        <app-header></app-header>
+        <app-header :show-back-btn="false" :show-action-menu="false"></app-header>
 
         <div class="componentWrapper">
 
