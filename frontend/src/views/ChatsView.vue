@@ -1,6 +1,6 @@
 <template>
     <div class="appWrapper">
-        <app-header :show-back-btn="false" :show-sidebar-btn="true" :show-search-icon="true" @clickOnHeaderSearch="clickOnHeaderSearch">Диалоги</app-header>
+        <app-header :show-back-btn="false" :show-sidebar-btn="true" :show-search-icon="true" :show-action-menu="false" @clickOnHeaderSearch="clickOnHeaderSearch">Диалоги</app-header>
 
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
@@ -14,14 +14,7 @@
                 />
             </div>
 
-            <action-menu>
-                <div>
-                    <router-link to="/clean">Чистый</router-link>
-                </div>
-                <div>
-                    <router-link to="/chat">Перейти в диалог</router-link>
-                </div>
-            </action-menu>
+            <action-menu/>
         </div>
     </div>
 </template>
