@@ -28,19 +28,17 @@
                 </div>
 
                 <div class="profile_buttons">
-                    <div class="btn">
+                    <router-link class="btn" :to="{ name: 'chat', params: {'id': this.$route.params.id} }">
                         <icon><message-icon/></icon>
                         <span>Написать сообщение</span>
-                    </div>
+                    </router-link>
                 </div>
 
             </div>
 
             <action-menu>
-                <div>
-                    <router-link to="/">To chats</router-link>
-                </div>
-                <div>Кнопка 2</div>
+                <div><router-link class="btn" :to="{ name: 'chat', params: {'id': this.$route.params.id} }">Перейти в диалог</router-link></div>
+                <div @click="copyUserLink">Поделиться</div>
             </action-menu>
         </div>
     </div>
@@ -75,6 +73,20 @@ export default {
         }
 
         return this.user = await response.json();
+    },
+    methods: {
+        copyUserLink() {
+            let inp = document.createElement('input')
+            inp.value = window.location.href;
+            document.body.appendChild(inp)
+            inp.select();
+
+            document.execCommand('copy');
+
+            document.body.removeChild(inp);
+            this.$store.commit("actionMenuStatus", false);
+            this.$swal("Ссылка скопирована!");
+        }
     }
 }
 
