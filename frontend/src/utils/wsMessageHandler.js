@@ -28,9 +28,9 @@ export default class {
     onAuth() {
         store.dispatch("sendWs", {
             "action": "auth",
-            "data": {
+            "data"  : {
                 "user_id": this.store.getters.user_id,
-                "token" : this.store.getters.user_token,
+                "token"  : this.store.getters.user_token,
             }
         });
 
@@ -39,7 +39,7 @@ export default class {
     onPing() {
         store.dispatch("sendWs", {
             "action": "pong",
-            "data": {}
+            "data"  : {}
         });
     }
 
