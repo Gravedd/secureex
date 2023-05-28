@@ -7,10 +7,8 @@
             <dialog-component :with_user="with_user" ref="dialogComponent"></dialog-component>
 
             <action-menu>
-                <div>
-                    <router-link to="/">To chats</router-link>
-                </div>
-                <div>Кнопка 2</div>
+                <div><router-link :to="{ name: 'user.profile', params: {id: with_user} }">Перейти в профиль</router-link></div>
+<!-- TODO:  <div class="red-text">Удалить переписку</div>-->
             </action-menu>
         </div>
     </div>
