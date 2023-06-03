@@ -51,6 +51,7 @@ import MessageIcon from "@/components/icons/messageIcon";
 import AppHeader from "@/components/headers/app-header";
 import config from "@/config";
 import UserAvatar from "@/components/users/user-avatar";
+import Users from "@/requests/users";
 
 export default {
 	name: 'UserProfile',
@@ -64,15 +65,14 @@ export default {
     async mounted() {
 	    this.$showLoader();
 
-        let response = await this.$request.get(config.api + "user/" + this.$route.params.id);
+        this.user = await Users.getUser(this.$route.params.id);
 
         this.$hideLoader();
 
-        if (!response.ok) {
+        if (!this.user) {
+            this.user = [];
             return alert("Юзер не найден");
         }
-
-        return this.user = await response.json();
     },
     methods: {
         copyUserLink() {
