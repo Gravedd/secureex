@@ -27,7 +27,7 @@
                         </icon>
                         <span class="item-text">Ключи</span>
                     </div>-->
-                    <div class="item">
+                    <div class="item" @click="getSelfLink">
                         <icon color="#5C04BB">
                             <people-icon/>
                         </icon>
@@ -58,8 +58,19 @@ export default {
         clickOnSidebar(event) { event.stopPropagation(); },//Клик на сайдбар
         closeSidebar(event) {
             return this.$store.commit("closeSidebar");
-        }
+        },
+        getSelfLink() {
+            let inp = document.createElement('input')
+            inp.value = window.location.href + "user/" + this.$store.getters.user_id;
+            document.body.appendChild(inp)
+            inp.select();
 
+            document.execCommand('copy');
+
+            document.body.removeChild(inp);
+            this.$store.commit("closeSidebar");
+            this.$swal("Ссылка скопирована!");
+        }
     },
 	components: {UserAvatar, PeopleIcon, KeyIcon, Icon, SettingsIcon},
 }
@@ -115,6 +126,7 @@ export default {
         display: flex;
         align-items: center;
         padding: 10px 16px;
+        cursor: pointer;
         /*margin-bottom: 20px;*/
     }
     .sidebarMenu .item:hover,.sidebarMenu .item:focus {
