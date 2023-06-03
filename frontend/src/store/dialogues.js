@@ -41,7 +41,13 @@ export default {
             let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);
             if (!dialog) {
                 console.log("TODO: Создать чат!");//TODO: Создать чат
-                return;
+                store.dispatch("createLocalChat", {
+                    "with_user": data.to_user,
+                    "message": data,
+                }).then(r =>
+                    store.commit("updateMessageIfSent", data)
+                );
+                return ;
             }
             dialog.messages[0] = data;
         },
