@@ -40,10 +40,14 @@ export default {
 
         this.$store.dispatch("CheckAuth").then(() => {
             store.dispatch("getConversations");
-        }).catch(e => console.log(e));
+            this.$hideLoader();
+        }).catch(e => {
+            console.log(e);
+            this.$hideLoader();
+        });
     },
     mounted() {
-        this.$hideLoader();
+
     }
 }
 </script>
