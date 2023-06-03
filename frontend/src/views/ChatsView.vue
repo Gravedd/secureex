@@ -13,6 +13,10 @@
                     :unread_count="dialogue.unread_count"
                 />
             </div>
+            <div class="dialogs-empty-message" v-if="!dialogues">
+                <p>Нет диалогов с другими пользователями(</p>
+                <p><router-link to="/search" class="colored_text">Поиск пользователей</router-link></p>
+            </div>
 
             <action-menu/>
         </div>
@@ -53,5 +57,12 @@ export default {
     .dialogList-wrapper {
         margin-top: 4px;
         width: 100%;
+    }
+    .dialogs-empty-message {
+        padding: 16px 0;
+        color: var(--gray4);
+    }
+    .colored_text {
+        color: var(--text);
     }
 </style>
