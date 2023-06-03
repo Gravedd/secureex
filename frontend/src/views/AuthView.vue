@@ -123,10 +123,14 @@ export default {
     padding: 0 8px;
     border: none;
     background-color: var(--bg2);
+    color: var(--text);
 }
 .authinputswrap input[type="submit"] {
     width: auto;
     color: var(--text);
+}
+.authinputswrap input:focus {
+    outline: none;
 }
 .resetpassbtn {
     width: 100%;
