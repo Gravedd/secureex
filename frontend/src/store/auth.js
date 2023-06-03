@@ -110,22 +110,29 @@ export default {
         },
 
         async CheckAuth(context) {
-            store.commit("showLoader");
-            if (!context.getters.user_token) {
-                return await context.dispatch("userIsNotAuthorized");
-            }
+            return new Promise(async (resolve, reject) => {
 
-            let response = await requests.get(config.api + "user", {
-                "Authorization": "Bearer " + context.getters.user_token
+                store.commit("showLoader");
+                if (!context.getters.user_token) {
+                    reject("Нет токена авторизации");
+                    return await context.dispatch("userIsNotAuthorized");
+                }
+
+                let response = await requests.get(config.api + "user", {
+                    "Authorization": "Bearer " + context.getters.user_token
+                });
+                store.commit("hideLoader");
+
+                if (!response.ok) {
+                    await context.dispatch("userIsNotAuthorized");
+                    reject("Не удалось авторизоваться на сервере по токену!");
+                    return ;
+                }
+
+                let data = await response.json();
+                await context.dispatch("userSuccessAuthorized", data);
+                resolve();
             });
-            store.commit("hideLoader");
-
-            if (!response.ok) {
-                return await context.dispatch("userIsNotAuthorized");
-            }
-
-            let data = await response.json();
-            await context.dispatch("userSuccessAuthorized", data);
         },
 
         async Logout(context) {

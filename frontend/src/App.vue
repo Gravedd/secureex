@@ -37,9 +37,10 @@ export default {
         });
         store.dispatch("updateDeviceData");
 
-        this.$store.dispatch("CheckAuth");
 
-        store.dispatch("getConversations");
+        this.$store.dispatch("CheckAuth").then(() => {
+            store.dispatch("getConversations");
+        }).catch(e => console.log(e));
     },
     mounted() {
         this.$hideLoader();
