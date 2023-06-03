@@ -5,7 +5,7 @@ import moment from "moment";
 
 export default class Controller {
 
-    api = "http://api.secureex.loc/api";
+    api = "http://api.shadownet.loc/api";
 
     async auth(socket, data, uuid) {
         let token = data.token ?? null;

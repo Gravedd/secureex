@@ -6,7 +6,7 @@
         <div class="componentWrapper">
 
             <div class="authwrapper flex-center">
-                <icon class="authLogo" width="97" height="97" viewBox="0 0 97 97"><LogoIcon/></icon>
+                <icon class="authLogo" width="128" height="128" viewBox="0 0 256 256"><LogoIcon/></icon>
                 <h3 class="authHeader">АВТОРИЗАЦИЯ</h3>
                 <div class="authinputswrap">
                     <div v-if="loginOrRegister">

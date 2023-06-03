@@ -38,7 +38,9 @@
     background-color: var(--bg);
     font-size: 14px;
 }
-
+body {
+    background-color: var(--bg);
+}
 
 /* common styles */
 /*html elements */
