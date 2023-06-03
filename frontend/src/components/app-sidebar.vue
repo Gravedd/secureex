@@ -9,7 +9,7 @@
                     </div>
                     <div class="userdata">
                         <div class="userdata-name">{{ $store.getters.user_name }}</div>
-                        <div class="userdata-nickname">@username</div>
+                        <div class="userdata-nickname">@{{ $store.getters.user_nickname }}</div>
                     </div>
                 </div>
                 <div class="sidebarMenu">
