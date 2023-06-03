@@ -65,6 +65,7 @@ export default {
             if (response.ok) {
                 //успешная регистрация
                 await context.dispatch("userSuccessAuthorized", data);
+                await router.push("/");
                 return true;
             }
 
@@ -92,8 +93,10 @@ export default {
                     "email": data.user.email,
                     "token": data.token,
                 });
+                await router.push("/");
                 return true;
             }
+
 
             Swal.fire({
                 "title": "Ошибка!",
