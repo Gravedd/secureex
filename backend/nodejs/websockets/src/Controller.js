@@ -31,10 +31,16 @@ export default class Controller {
     }
 
     async pong(socket, data, uuid) {
-        Server.users[uuid]["pong_count"]++;
+        let user = Server.getUser(uuid);
+        if (user) {
+            Server.users[uuid]["pong_count"]++;
+        }
     }
 
     async newMessage(socket, data, uuid) {
+        if (!Server.users[uuid]) {
+            return socket.close(1003, "Не найден пользователь!");
+        }
         let fromId = Server.users[uuid].data.id;
         let toId = data.to_user;
 

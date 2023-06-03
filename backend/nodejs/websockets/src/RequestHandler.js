@@ -55,6 +55,10 @@ export default class RequestHandler {
     }
 
     static sendPing(socket, uuid) {
+        if (!Server.users[uuid]) {
+            return ;
+        }
+
         Server.users[uuid]["ping_count"]++;
 
         let ping = Server.users[uuid]["ping_count"];

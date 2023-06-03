@@ -34,7 +34,9 @@ export default class Server {
     }
 
     onClose(uuid, intervalId) {
-        delete Server.users[uuid];
+        if (Server.users[uuid]) {
+            delete Server.users[uuid];
+        }
         clearInterval(intervalId);
     }
 
