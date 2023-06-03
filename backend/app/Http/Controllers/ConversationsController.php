@@ -12,9 +12,6 @@ class ConversationsController extends Controller {
     public function getUserConversationsAll(Request $request) {
         $user_id = $request->user()['id'];
         $conversations = $request->user()->conversations()
-            ->with(['messages' => function ($query) {
-                $query->orderBy('id', "desc")->take(1)/*->with('user')*/;
-            }])
             ->with('user1')
             ->with('user2')
             ->withCount(['messages as unread_count' => function ($query) use ($user_id) {
@@ -23,7 +20,7 @@ class ConversationsController extends Controller {
             ->get();
 
         $conversations = Conversation::filterUser($conversations, $request->user()['id']);
-
+        $conversations = Conversation::getLastMessage($conversations);
 
         return response()->json(["conversations" => $conversations]);
     }
