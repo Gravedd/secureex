@@ -6,6 +6,10 @@
 
         <div class="componentWrapper">
             <user-list :users="searchResult"></user-list>
+
+            <div class="users-empty-message" v-if="searchResult.length === 0 & searchQuery !== ''">
+                <p>Не найдены пользователи по запросу «{{ searchQuery }}»</p>
+            </div>
         </div>
     </div>
 </template>
@@ -54,5 +58,7 @@ export default {
 }
 </script>
 <style>
-
+.users-empty-message {
+    padding: 16px 0;
+}
 </style>
