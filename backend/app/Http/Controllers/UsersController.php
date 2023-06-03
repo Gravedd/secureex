@@ -23,7 +23,7 @@ class UsersController extends Controller {
             return response([]);
         }
 
-        $result = User::where("name", 'like', "%$param%")->get();
+        $result = User::where("name", 'like', "%$param%")->orWhere("nickname", "=", $param)->get();
 
         return response($result);
     }
