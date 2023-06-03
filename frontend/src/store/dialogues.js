@@ -3,6 +3,7 @@ import config from "@/config";
 import Cache from "@/utils/cache";
 import store from "@/store/index";
 import router from "@/router";
+import Users from "@/requests/users";
 
 export default {
     state: {
@@ -58,8 +59,13 @@ export default {
             //Обновить кол-во не прочитанных
             let dialog = state.dialogues.find(dialogue => dialogue.user.id === data.user_id);
             if (!dialog) {
-                console.log("TODO: Создать чат!");//TODO: Создать чат
-                return;
+                store.dispatch("createLocalChat", {
+                    "with_user": data.user_id,
+                    "message": data,
+                }).then(r =>
+                    store.commit("newMessage", data)
+                );
+                return ;
             }
             dialog.unread_count = !Number.isInteger(dialog.unread_count) ? 1 : dialog.unread_count + 1;
             //Установить сообщение как последнее
@@ -92,6 +98,9 @@ export default {
             setTimeout(() => {
                 state.typing["user_" + data.user_id] = false;
             }, 2000);
+        },
+        addNewChat(state, chat) {
+            state.dialogues.push(chat);
         }
     },
     actions: {
@@ -132,6 +141,23 @@ export default {
                     "lastMessageId": lastMessageId,
                 }
             });
+        },
+
+        async createLocalChat(context, data) {
+            let user_id = data.with_user;
+            let user = await Users.getUser(user_id);
+            if (!user) {
+                console.log("Ошибка createLocalChat(). Юзер `user_id` не найден!");
+            }
+
+            let chat = {
+                id: null,
+                messages: [data.message ?? {}],
+                unread_count: 0,
+                user: user,
+            }
+
+            context.commit("addNewChat", chat);
         }
     },
     modules: {},
