@@ -1,7 +1,6 @@
 import router from "@/router";
 import config from "@/config";
 import requests from "@/plugins/requests";
-import Swal from "sweetalert2";
 import store from "@/store";
 
 export default {
@@ -54,58 +53,38 @@ export default {
         },
     },
     actions: {
-        async Register(context, credentials) {
-            store.commit("showLoader");
-
-            let response = await requests.post(config.api + "register", credentials);
-
-            store.commit("hideLoader");
-
-            let data = await response.json();
-            if (response.ok) {
-                //успешная регистрация
-                await context.dispatch("userSuccessAuthorized", data);
-                await router.push("/");
-                return true;
-            }
-
-            Swal.fire({
-                "title": "Ошибка!",
-                "text" : data.message,
-            })
-            return {
-                "status": false,
-                "errors": data.errors,
+        async Register({ commit, dispatch }, credentials) {
+            commit("showLoader");
+            try {
+                const response = await requests.post(config.api + "register", credentials);
+                const data = await response.json();
+                if (response.ok) {
+                    return await dispatch("userSuccessAuthorized", data);
+                }
+                throw new Error(data.message);
+            } finally {
+                commit("hideLoader");
             }
         },
 
-        async Login(context, credentials) {
-            store.commit("showLoader");
-            let response = await requests.post(config.api + "login", credentials);
-            store.commit("hideLoader");
+        async Login({ commit, dispatch }, credentials) {
+            commit("showLoader");
+            try {
+                let response = await requests.post(config.api + "login", credentials);
+                let data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.message);
+                }
 
-            let data = await response.json();
-            if (response.ok) {
-                //успешная авторизация
-                await context.dispatch("userSuccessAuthorized", {
+                await dispatch("userSuccessAuthorized", {
                     "id"   : data.user.id,
                     "name" : data.user.name,
                     "email": data.user.email,
                     "token": data.token,
                 });
-                await router.push("/");
                 return true;
-            }
-
-
-            Swal.fire({
-                "title": "Ошибка!",
-                "text" : data.message,
-            })
-
-            return {
-                "status": false,
-                "errors": data.errors,
+            } finally {
+                commit("hideLoader");
             }
         },
 
@@ -126,7 +105,7 @@ export default {
                 if (!response.ok) {
                     await context.dispatch("userIsNotAuthorized");
                     reject("Не удалось авторизоваться на сервере по токену!");
-                    return ;
+                    return;
                 }
 
                 let data = await response.json();

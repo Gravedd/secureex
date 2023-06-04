@@ -50,6 +50,7 @@ import ActionMenu from "@/components/action-menu";
 import Icon from "@/components/icons/icon";
 import LogoIcon from "@/components/icons/LogoIcon";
 import AppHeader from "@/components/headers/app-header";
+import router from "@/router";
 
 export default {
 	name: 'AuthView',
@@ -70,7 +71,9 @@ export default {
         }
     },
     methods: {
-	    toggleLoginOrRegister() { this.loginOrRegister = !this.loginOrRegister },
+	    toggleLoginOrRegister() {
+	        this.loginOrRegister = !this.loginOrRegister
+        },
         async register() {
             await this.$store.dispatch("Register", {
                 "name"                 : this.reg_name,
@@ -78,16 +81,21 @@ export default {
                 "email"                : this.reg_email,
                 "password"             : this.reg_password,
                 "password_confirmation": this.reg_password_confirm,
+            }).then (res => {
+                router.push("/");
+            }).catch (res => {
+                this.$swal.fire({ title: "Ошибка!", text: res.message });
             });
-            /*if (!await result.status) {
-                this.reg_errors = result.errors
-            }*/
         },
         async login() {
             await this.$store.dispatch("Login", {
                 "email"   : this.email,
                 "password": this.password,
-            })
+            }).then (res => {
+                router.push("/");
+            }).catch (res => {
+                this.$swal.fire({ title: "Ошибка!", text: res.message });
+            });
         }
     },
 	components: {AppHeader, LogoIcon, Icon, ActionMenu}
