@@ -1,6 +1,8 @@
 import Db from "../components/Db.js";
 import Server from "../components/Server.js";
 import moment from "moment";
+import Conversation from "../models/Conversation.js";
+import Message from "../models/Message.js";
 
 
 export default class Controller {
@@ -41,53 +43,41 @@ export default class Controller {
         if (!Server.users[uuid]) {
             return socket.close(1003, "Не найден пользователь!");
         }
-        let fromId = Server.users[uuid].data.id;
-        let toId = data.to_user;
 
-        const [rows, fields] = await Db.execute('SELECT * FROM `conversations` WHERE (`user1_id` = ? AND `user2_id` = ?) OR (`user2_id` = ? AND `user1_id` = ?) LIMIT 1',
-            [fromId, toId, fromId, toId]
-        );
+        const fromId = Server.users[uuid].data.id;
+        const toId = data.to_user;
+        const message_uuid = data.uuid;
 
-        let conversation_id = 0;
-        if (rows.length === 0) {
-            const [result] = await Db.execute(
-                'INSERT INTO `conversations` (user1_id, user2_id) VALUES (?, ?)',
-                [fromId, toId]
-            );
-            conversation_id = result.insertId;
-        } else {
-            conversation_id = rows[0].id;
-        }
+        const conversation_id = await Conversation.getIdOrCreate(fromId, toId);
 
-        let created_at = moment().format('YYYY-MM-DD HH:mm:ss');
-
-        const [message_result] = await Db.execute(
-            'INSERT INTO `messages` (`body`, `user_id`, `read`, `conversation_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)',
-            [data.text, fromId, 0, conversation_id, created_at, created_at]
-        );
+        const message = await Message.create({
+            "text" : data.text,
+            "from" : fromId,
+            "conversation_id" : conversation_id
+        })
 
         socket.send(JSON.stringify({
             "action": "message_sent",
             "data"  : {
-                "message_id": message_result.insertId,
-                "id"        : message_result.insertId,
-                "body"      : data.text,
-                "to_user"   : data.to_user,
-                "created_at": created_at,
-                "uuid"      : data.uuid,
+                "message_id": message.id,
+                "id"        : message.id,
+                "body"      : message.text,
+                "to_user"   : toId,
+                "created_at": message.created_at,
+                "uuid"      : message_uuid,
             }
         }));
 
         Server.sendMessageToUserId(data.to_user, {
             "action": "new_message",
             "data"  : {
-                "id"             : message_result.insertId,
-                "body"           : data.text,
+                "id"             : message.id,
+                "body"           : message.text,
                 "user_id"        : fromId,
-                "created_at"     : created_at,
-                "updated_at"     : created_at,
+                "created_at"     : message.created_at,
+                "updated_at"     : message.created_at,
                 "read"           : 0,
-                "conversation_id": conversation_id,
+                "conversation_id": message.conversation_id,
             }
         });
     }
