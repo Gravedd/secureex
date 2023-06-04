@@ -1,5 +1,6 @@
 import Controller from "../controllers/Controller.js";
 import Server from "./Server.js";
+import Log from "./Log";
 
 
 export default class RequestHandler {
@@ -25,15 +26,19 @@ export default class RequestHandler {
     requestHandler() {
         let route = this.routes[this.message.action];
         if (!route) {
-            return console.log("Роута не существует", this.message.action);
+            return console.log("Роута не существует `route`", this.message.action);
         }
 
         let methodExists = route in this.controller;
         if (!methodExists) {
-            return console.log("Метода не существует");
+            return console.log("Метода `route` не существует");
         }
-        //console.log("Роут " + route + " " + this.uuid);
-        return this.controller[route](this.socket, this.message.data, this.uuid);
+        try {
+            this.controller[route](this.socket, this.message.data, this.uuid);
+        } catch (Err) {
+            Log.error(Err.message, Err);
+        }
+
     }
 
     getType(message) {
