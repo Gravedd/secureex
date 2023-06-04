@@ -86,7 +86,10 @@ export default class Controller {
         let fromId = Server.getUser(uuid).data.id;
         let toId = data.dialogWith;
 
-        const conversation_id = await Conversation.getIdOrCreate(fromId, toId);
+        const conversation_id = await Conversation.findIdByUsers(fromId, toId);
+        if (!conversation_id) {
+            return ;
+        }
 
         await Db.execute('UPDATE `messages` SET `read` = 1 WHERE `read` = 0 AND `conversation_id` = ? AND `id` <= ? AND `user_id` != ?',
             [conversation_id, data.lastMessageId, fromId]
@@ -107,6 +110,10 @@ export default class Controller {
             return ;
         }
         let toId = data.to_user;
+        const conversation_id = await Conversation.findIdByUsers(fromId, toId);
+        if (!conversation_id) {
+            return ;
+        }
 
         Server.sendMessageToUserId(toId, {
             "action": "user_typing",

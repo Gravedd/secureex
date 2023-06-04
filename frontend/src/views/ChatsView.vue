@@ -22,7 +22,7 @@
 
             </div>
 
-            <div class="dialogs-empty-message" v-if="!dialogues">
+            <div class="dialogs-empty-message" v-if="!dialogues || dialogues.length === 0">
                 <p>Нет диалогов с другими пользователями(</p>
                 <p>
                     <router-link to="/search" class="colored_text">Поиск пользователей</router-link>

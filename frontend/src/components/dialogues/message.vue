@@ -48,6 +48,7 @@ export default {
 .message-time {
     margin-right: 4px;
     opacity: 0.8;
+    user-select: none;
 }
 
 .message-read {
@@ -56,6 +57,7 @@ export default {
     padding-right: 4px;
     opacity: 0.6;
     font-weight: bold;
+    user-select: none;
 }
 
 .message-sent {
