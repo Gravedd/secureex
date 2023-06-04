@@ -40,7 +40,6 @@ export default {
 
             let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);
             if (!dialog) {
-                console.log("TODO: Создать чат!");//TODO: Создать чат
                 store.dispatch("createLocalChat", {
                     "with_user": data.to_user,
                     "message": data,
