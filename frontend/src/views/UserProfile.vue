@@ -63,7 +63,7 @@ export default {
         }
     },
     async mounted() {
-	    this.$showLoader();
+        this.$showLoader();
 
         this.user = await Users.getUser(this.$route.params.id);
 
@@ -93,60 +93,59 @@ export default {
 </script>
 
 <style>
-.profile-wrapper {
-    width: 100%;
-}
-.profile_header {
-    background-color: var(--main);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2px;
-}
-.profile_header .profile_avatar {
-    width: 120px;
-    height: 120px;
-    background-color: var(--gray4);
-    border-radius: 100px;
-}
-.profile_header .profile_name {
-    line-height: 40px;
-}
+    .profile-wrapper {
+        width: 100%;
+    }
+    .profile_header {
+        background-color: var(--main);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2px;
+    }
+    .profile_header .profile_avatar {
+        width: 120px;
+        height: 120px;
+        background-color: var(--gray4);
+        border-radius: 100px;
+    }
+    .profile_header .profile_name {
+        line-height: 40px;
+    }
 
-.profile_info_wrapper {
-    font-size: 12px;
-    background-color: var(--bg2);
-    min-height: 100px;
-    padding: 8px 16px;
-}
-.profile_info {
-    margin-top: 8px;
-}
-.profile_info_item {
-    padding: 2px 0;
-}
-.profile_info_item .value {
-    font-size: 14px;
-}
-.profile_info_item .title {
-    color: var(--bg4);
-}
+    .profile_info_wrapper {
+        font-size: 12px;
+        background-color: var(--bg2);
+        min-height: 100px;
+        padding: 8px 16px;
+    }
+    .profile_info {
+        margin-top: 8px;
+    }
+    .profile_info_item {
+        padding: 2px 0;
+    }
+    .profile_info_item .value {
+        font-size: 14px;
+    }
+    .profile_info_item .title {
+        color: var(--bg4);
+    }
 
-.profile_buttons {
-    width: 100%;
-    padding: 16px;
-}
-.profile_buttons .btn {
-    display: flex;
-    height: 40px;
-    background-color: var(--main2);
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-}
-.btn span {
-    margin-left: 4px;
-}
-
+    .profile_buttons {
+        width: 100%;
+        padding: 16px;
+    }
+    .profile_buttons .btn {
+        display: flex;
+        height: 40px;
+        background-color: var(--main2);
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn span {
+        margin-left: 4px;
+    }
 </style>

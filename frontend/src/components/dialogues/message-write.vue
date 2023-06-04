@@ -3,7 +3,6 @@
         <icon class="attach-btn">
             <attach-icon/>
         </icon>
-
         <textarea
             id="message-input"
             class="nice-scrollbar"
@@ -13,34 +12,32 @@
             v-model="inputText"
             :style="{'height': `${inputHeight}px`}"
         />
-
         <icon class="sent-btn" @click="sendMessage">
             <send-icon/>
         </icon>
     </div>
 </template>
 <script>
-
 import SendIcon from "@/components/icons/sendIcon";
 import AttachIcon from "@/components/icons/attachIcon";
 import Icon from "@/components/icons/icon";
 import Uuid from "@/utils/uuid";
 
 export default {
-    name: "message-write",
+    name      : "message-write",
     components: {SendIcon, AttachIcon, Icon},
-    props: ["with_user"],
+    props     : ["with_user"],
     data() {
         return {
-            inputHeight: 19,//base - 19px
-            inputText: "",
-            maxInputHeight: 120,
+            inputHeight     : 19,//base - 19px
+            inputText       : "",
+            maxInputHeight  : 120,
             inputBlockHeight: 40,
-            typingTimeout: null,
+            typingTimeout   : null,
         }
     },
     methods: {
-        messageInput(e) {
+        messageInput() {
             this.changeInputSize();
             this.typing();
         },
@@ -57,7 +54,7 @@ export default {
             this.typingTimeout = setTimeout(() => {
                 this.$store.dispatch("sendWs", {
                     "action": "typing",
-                    "data": {
+                    "data"  : {
                         "to_user": this.with_user,
                     }
                 });
@@ -65,28 +62,28 @@ export default {
         },
         sendMessage() {
             if (this.inputText.length <= 1) {
-                return ;
+                return;
             }
 
             let uuid = Uuid.generateUUID();
             this.$store.commit("addMessage", {
                 "user_id": this.with_user,
                 "message": {
-                    "id": null,
-                    "body": this.inputText,
-                    "user_id": this.$store.getters.user_id,
+                    "id"        : null,
+                    "body"      : this.inputText,
+                    "user_id"   : this.$store.getters.user_id,
                     "created_at": Date.now(),
                     "updated_at": Date.now(),
-                    "read": 0,
-                    "uuid": uuid,
+                    "read"      : 0,
+                    "uuid"      : uuid,
                 }
             });
             this.$store.dispatch("sendWs", {
                 "action": "message",
-                "data": {
-                    "text": this.inputText,
+                "data"  : {
+                    "text"   : this.inputText,
                     "to_user": this.with_user,
-                    "uuid" : uuid,
+                    "uuid"   : uuid,
                 }
             });
             this.inputText = "";
@@ -118,10 +115,12 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .attach-btn {
     margin-right: 19px;
     line-height: 19px;
 }
+
 #message-input {
     width: 100%;
     margin-right: 19px;
@@ -133,9 +132,11 @@ export default {
     line-height: 19px;
     height: 19px;
 }
+
 #message-input:focus {
     outline: none;
 }
+
 .sent-btn {
 
 }

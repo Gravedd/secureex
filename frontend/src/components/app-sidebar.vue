@@ -5,7 +5,7 @@
             <div class="sidebarWrapper" @click="clickOnSidebar">
                 <div class="sidebarHeader">
                     <div class="avatar-wrapper">
-                        <user-avatar class="avatar" :username="$store.getters.user_name" :avatar-src="$store.getters.user_avatar"/>
+                        <user-avatar class="avatar" :username="this.$store.getters.user_name" :avatar-src="this.$store.getters.user_avatar"/>
                     </div>
                     <div class="userdata">
                         <div class="userdata-name">{{ $store.getters.user_name }}</div>
@@ -13,20 +13,12 @@
                     </div>
                 </div>
                 <div class="sidebarMenu">
-
                     <router-link to="/settings" class="item" @click="closeSidebar">
                         <icon color="#5C04BB">
                             <settings-icon/>
                         </icon>
                         <span class="item-text">Настройки</span>
                     </router-link>
-
-<!--                    <div class="item">
-                        <icon color="#5C04BB">
-                            <key-icon/>
-                        </icon>
-                        <span class="item-text">Ключи</span>
-                    </div>-->
                     <div class="item" @click="getSelfLink">
                         <icon color="#5C04BB">
                             <people-icon/>
@@ -55,8 +47,10 @@ export default {
         },
     },
     methods: {
-        clickOnSidebar(event) { event.stopPropagation(); },//Клик на сайдбар
-        closeSidebar(event) {
+        clickOnSidebar(event) {
+            event.stopPropagation();
+        },
+        closeSidebar() {
             return this.$store.commit("closeSidebar");
         },
         getSelfLink() {
@@ -75,7 +69,6 @@ export default {
 	components: {UserAvatar, PeopleIcon, KeyIcon, Icon, SettingsIcon},
 }
 </script>
-
 <style scoped>
     .background {
         position: fixed;
@@ -84,61 +77,64 @@ export default {
         width: 100%;
         height: 100%;
     }
+
     .sidebarContainer {
         position: fixed;
         top: 0;
         width: 100%;
         height: 100%;
     }
+
     .sidebarWrapper {
         background-color: var(--bg2);
         width: 77%;
         height: 100%;
     }
+
     .sidebarHeader {
         background-color: var(--gray5);
         height: 150px;
         padding: 0 16px;
     }
+
     .avatar-wrapper {
         padding-top: 33px;
     }
+
     .avatar {
         width: 57px;
         height: 57px;
         background-color: var(--gray4);
         border-radius: 100px;
     }
+
     .userdata {
         padding-top: 16px;
     }
-    .userdata-name {
-
-    }
-    .userdata-nickname {
-
-    }
 
     .sidebarMenu {
-        padding: 20px 0px;
+        padding: 20px 0;
     }
+
     .sidebarMenu .item {
         display: flex;
         align-items: center;
         padding: 10px 16px;
         cursor: pointer;
-        /*margin-bottom: 20px;*/
     }
-    .sidebarMenu .item:hover,.sidebarMenu .item:focus {
+
+    .sidebarMenu .item:hover, .sidebarMenu .item:focus {
         backdrop-filter: brightness(1.15);
     }
+
     .item-text {
         margin-left: 15px;
     }
 
-    .slide-leave-active, .slide-enter-active  {
+    .slide-leave-active, .slide-enter-active {
         transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
     }
+
     .slide-enter-from, .slide-leave-to {
         transform: translateX(-400px);
         opacity: 0;
@@ -151,9 +147,8 @@ export default {
     }
 
     @media (min-width: 1000px) {
-      .sidebarWrapper {
-        max-width: 390px;
-      }
+        .sidebarWrapper {
+            max-width: 390px;
+        }
     }
-
 </style>

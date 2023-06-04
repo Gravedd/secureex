@@ -6,13 +6,14 @@
 
 <script>
 import UserItem from "@/components/users/user-item";
+
 export default {
-    name: "user-list",
+    name      : "user-list",
     components: {UserItem},
-    props: {
+    props     : {
         users: {
             default: [],
-            type: Array,
+            type   : Array,
         },
     }
 }

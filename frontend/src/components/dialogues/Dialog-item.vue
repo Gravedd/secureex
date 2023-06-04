@@ -3,17 +3,25 @@
         <div class="dialog-avatar-wrapper">
             <user-avatar :avatar-src="user_avatar" :username="username"/>
         </div>
+
         <div class="dialog-data">
             <div class="dialog-name-time-wrapper">
                 <div class="dialog-name">{{ username }}</div>
                 <div class="dialog-time">{{ lastTime }}</div>
             </div>
             <div class="dialog-name-time-wrapper">
-                <div class="dialog-message typed-text" v-if='typing["user_" + user_id]'>{{ "Печатает..." }}</div>
-                <div class="dialog-message" v-if='!typing["user_" + user_id]'>{{ lastMessage.length > 50 ? lastMessage.substr(0, 50) + "..." : lastMessage }}</div>
+                <div class="dialog-message typed-text" v-if='typing["user_" + user_id]'>
+                    {{ "Печатает..." }}
+                </div>
+
+                <div class="dialog-message" v-if='!typing["user_" + user_id]'>
+                    {{ lastMessage.length > 50 ? lastMessage.substr(0, 50) + "..." : lastMessage }}
+                </div>
 
                 <div class="dialog-unread-wrapper">
-                    <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">{{ unread_count }}</div>
+                    <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">
+                        {{ unread_count }}
+                    </div>
                 </div>
             </div>
         </div>

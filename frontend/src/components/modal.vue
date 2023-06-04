@@ -14,15 +14,15 @@
 </template>
 <script>
 export default {
-    name: "modal",
-    props: {
+    name   : "modal",
+    props  : {
         header: {
             default: "",
-            type: String,
+            type   : String,
         },
-        show: {
+        show  : {
             default: false,
-            type: Boolean
+            type   : Boolean
         }
     },
     methods: {
@@ -30,7 +30,7 @@ export default {
             event.stopPropagation();
         }
     },
-    emits: ["closeModal"]
+    emits  : ["closeModal"]
 }
 </script>
 <style scoped>
@@ -42,6 +42,7 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 .modal-full-wrapper {
     width: 100%;
     height: 100%;
@@ -50,20 +51,24 @@ export default {
     justify-content: center;
     padding: 16px;
 }
+
 .modal-wrapper {
     background-color: var(--bg3);
     padding: 16px;
     width: 100%;
 }
+
 .modal-header {
     margin-bottom: 16px;
     font-size: 18px;
 }
+
 @media (min-width: 1000px) {
     .modal-full-wrapper {
         padding: 0 116px;
     }
 }
+
 @media (min-width: 1500px) {
     .modal-full-wrapper {
         padding: 0 416px;

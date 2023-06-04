@@ -1,5 +1,7 @@
 <template>
-    <div class="message-wrapper" :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}">
+    <div class="message-wrapper"
+         :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}"
+    >
         <div class="message-text">{{ message.body }}</div>
         <div class="message-time-wrapper" :title="message.id">
             <div class="message-time">{{ message.created_at }}</div>
@@ -8,12 +10,11 @@
                 <span v-if="message.read === 1">✓</span>
             </div>
         </div>
-
     </div>
 </template>
 <script>
 export default {
-    name: "message",
+    name : "message",
     props: ["message"],
 }
 </script>
@@ -26,6 +27,7 @@ export default {
     margin-bottom: 4px;
     transition: 0.25s;
 }
+
 .message-wrapper:hover {
     transform: scale(1.01);
 }
@@ -33,6 +35,7 @@ export default {
 .message-text {
     width: 100%;
 }
+
 .message-time-wrapper {
     width: 100%;
     text-align: right;
@@ -41,10 +44,12 @@ export default {
     justify-content: flex-end;
     align-items: center;
 }
+
 .message-time {
     margin-right: 4px;
     opacity: 0.8;
 }
+
 .message-read {
     font-size: 12px;
     letter-spacing: -4.5px;
@@ -52,6 +57,7 @@ export default {
     opacity: 0.6;
     font-weight: bold;
 }
+
 .message-sent {
     margin-left: auto;
     background: linear-gradient(97.99deg, var(--main) -11.81%, var(--main2) 130.29%);
@@ -59,6 +65,7 @@ export default {
     min-width: 40%;
     max-width: 60%;
 }
+
 .message-received {
     background-color: var(--bg3);
     margin-right: auto;
@@ -66,6 +73,7 @@ export default {
     min-width: 20%;
     max-width: 50%;
 }
+
 @media (max-width: 400px) {
     .message-read {
         font-size: 10px;
@@ -73,6 +81,7 @@ export default {
         letter-spacing: -5px;
         font-weight: normal;
     }
+
     .message-time {
         opacity: 0.75;
     }

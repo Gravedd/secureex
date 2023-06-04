@@ -8,9 +8,9 @@
 
             <div class="settingsContainer">
                 <div class="profileInfoWrapper flex col-1-1" @click="openModal">
-                <!--TODO: сделать фон блюром аватарки-->
+                    <!--TODO: сделать фон блюром аватарки-->
                     <div class="profileInfoAvatar">
-                        <user-avatar class="avatar" :username="username" :avatar-src="$store.getters.user_avatar"  />
+                        <user-avatar class="avatar" :username="username" :avatar-src="this.$store.getters.user_avatar"/>
                     </div>
                     <div class="profileInfo">
                         <div class="username">{{ username }}</div>
@@ -59,7 +59,6 @@ import Modal from "@/components/modal";
 import InputFile from "@/components/ui/input-file";
 import config from "@/config";
 import UserAvatar from "@/components/users/user-avatar";
-import store from "@/store";
 
 export default {
 	name: 'SettingsView',
@@ -94,8 +93,8 @@ export default {
 
             let form = new FormData(document.getElementById("avatar-form"));
             const response = await fetch(config.api + "user/himself/avatar", {
-                method: "POST",
-                body: form,
+                method : "POST",
+                body   : form,
                 headers: {"Authorization": "Bearer " + this.$store.getters.user_token, "Accept": "application/json"},
             });
 
@@ -106,7 +105,7 @@ export default {
             if (response.status !== 201) {
                 return await this.$swal.fire({
                     "title": "Ошибка!",
-                    "text": uploadResult.message,
+                    "text" : uploadResult.message,
                 })
             }
             await this.setNewAvatar(uploadResult);
@@ -119,7 +118,7 @@ export default {
 
         async saveSettings() {
             const response = await this.$request.put(config.api + "user/himself", {
-                name: this.newUserName,
+                name    : this.newUserName,
                 nickname: this.newUserNickname,
             })
 
@@ -127,7 +126,7 @@ export default {
             if (!response.ok) {
                 this.$swal.fire({
                     "title": "Ошибка!",
-                    "text": result.message,
+                    "text" : result.message,
                 })
             }
             this.$store.commit("successAuth", result.user);

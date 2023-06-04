@@ -1,14 +1,20 @@
 <template>
     <div class="appWrapper">
-
-        <chat-header :username="user.name" :is-user-typing="typing['user_' + with_user]" user-online-data="Онлайн" :avatar-src="user.avatar" :user_id="with_user"></chat-header>
+        <chat-header
+            :username="user.name"
+            :is-user-typing="typing['user_' + with_user]"
+            user-online-data="Онлайн"
+            :avatar-src="user.avatar"
+            :user_id="with_user"
+        />
 
         <div class="componentWrapper">
             <dialog-component :with_user="with_user" ref="dialogComponent"></dialog-component>
-
             <action-menu>
-                <div><router-link :to="{ name: 'user.profile', params: {id: with_user} }">Перейти в профиль</router-link></div>
-<!-- TODO:  <div class="red-text">Удалить переписку</div>-->
+                <div>
+                    <router-link :to="{ name: 'user.profile', params: {id: with_user} }">Перейти в профиль</router-link>
+                </div>
+                <!-- TODO:  <div class="red-text">Удалить переписку</div>-->
             </action-menu>
         </div>
     </div>
@@ -60,8 +66,8 @@ export default {
         }
     },
     beforeMount() {
-	    this.$showLoader();
-	    this.getUser();
+        this.$showLoader();
+        this.getUser();
         store.dispatch("getMessages", this.with_user).then(() => this.onGetMessages());
     },
     mounted() {

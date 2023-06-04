@@ -1,8 +1,6 @@
 <template>
-
     <div class="appWrapper">
-
-        <app-header :input-instead-of-text="true" :show-action-menu="false"></app-header>
+        <app-header :input-instead-of-text="true" :show-action-menu="false"/>
 
         <div class="componentWrapper">
             <user-list :users="searchResult"></user-list>
@@ -13,7 +11,9 @@
         </div>
     </div>
 </template>
+
 <script>
+
 import ActionMenu from "@/components/action-menu";
 import DialogItem from "@/components/dialogues/Dialog-item";
 import AppHeader from "@/components/headers/app-header";
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 <style>
-.users-empty-message {
-    padding: 16px 0;
-}
+    .users-empty-message {
+        padding: 16px 0;
+    }
 </style>

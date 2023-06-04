@@ -1,7 +1,6 @@
 <template>
     <div class="appWrapper">
         <app-header>Страница</app-header>
-
         <div class="componentWrapper">
             <action-menu>
                 <div>
@@ -12,6 +11,7 @@
         </div>
     </div>
 </template>
+
 <script>
 
 import ActionMenu from "@/components/action-menu";

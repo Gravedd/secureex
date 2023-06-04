@@ -72,7 +72,7 @@ export default {
     methods: {
 	    toggleLoginOrRegister() { this.loginOrRegister = !this.loginOrRegister },
         async register() {
-            let result = await this.$store.dispatch("Register", {
+            await this.$store.dispatch("Register", {
                 "name"                 : this.reg_name,
                 "nickname"             : this.reg_nickname,
                 "email"                : this.reg_email,
@@ -84,7 +84,7 @@ export default {
             }*/
         },
         async login() {
-            let result = await this.$store.dispatch("Login", {
+            await this.$store.dispatch("Login", {
                 "email"   : this.email,
                 "password": this.password,
             })
@@ -96,65 +96,76 @@ export default {
 </script>
 
 <style>
-.authwrapper {
-    display: flex;
-    padding-top: 40px;
-    flex-direction: column;
-    align-items: center;
-}
-.authLogo {
-    margin-bottom: 40px;
-}
-.authHeader {
-    height: 30px;
-    line-height: 30px;
-    font-weight: lighter;
-    margin-bottom: 12px;
-}
-.authinputswrap {
-    width: 70%;
-    text-align: center;
-}
-.authinputswrap input {
-    width: 100%;
-    height: 30px;
-    margin-bottom: 11px;
-    border-radius: 8px;
-    padding: 0 8px;
-    border: none;
-    background-color: var(--bg2);
-    color: var(--text);
-}
-.authinputswrap input[type="submit"] {
-    width: auto;
-    color: var(--text);
-}
-.authinputswrap input:focus {
-    outline: none;
-}
-.resetpassbtn {
-    width: 100%;
-    display: block;
-    font-size: 10px;
-    text-align: right;
-}
-.auth_regBtn_wrapper {
-    margin-top: 73px;
-    font-size: 11px;
-    text-align: center;
-}
-.auth_regBtn_wrapper.small {
-    margin-top: 16px;
-}
-.auth_regBtn_wrapper .regbtn {
-    border: 2px solid var(--main);
-    border-radius: 8px;
-    padding: 8px 16px;
-    margin-top: 9px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-.regbtn:hover {
-    background-color: var(--main);
-}
+    .authwrapper {
+        display: flex;
+        padding-top: 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .authLogo {
+        margin-bottom: 40px;
+    }
+
+    .authHeader {
+        height: 30px;
+        line-height: 30px;
+        font-weight: lighter;
+        margin-bottom: 12px;
+    }
+
+    .authinputswrap {
+        width: 70%;
+        text-align: center;
+    }
+
+    .authinputswrap input {
+        width: 100%;
+        height: 30px;
+        margin-bottom: 11px;
+        border-radius: 8px;
+        padding: 0 8px;
+        border: none;
+        background-color: var(--bg2);
+        color: var(--text);
+    }
+
+    .authinputswrap input[type="submit"] {
+        width: auto;
+        color: var(--text);
+    }
+
+    .authinputswrap input:focus {
+        outline: none;
+    }
+
+    .resetpassbtn {
+        width: 100%;
+        display: block;
+        font-size: 10px;
+        text-align: right;
+    }
+
+    .auth_regBtn_wrapper {
+        margin-top: 73px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .auth_regBtn_wrapper.small {
+        margin-top: 16px;
+    }
+
+    .auth_regBtn_wrapper .regbtn {
+        border: 2px solid var(--main);
+        border-radius: 8px;
+        padding: 8px 16px;
+        margin-top: 9px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .regbtn:hover {
+        background-color: var(--main);
+    }
 </style>

@@ -1,16 +1,14 @@
 <template>
-    <div class="chat-wrapper"
-         :style="{
-                    'height': `${clientHeight - 40}px`
-             }"
-    >
+    <div class="chat-wrapper" :style="{'height': `${clientHeight - 40}px`}">
         <dialog-messages :with_user="with_user" ref="dialogMessages"/>
         <message-write :with_user="with_user"/>
     </div>
 </template>
+
 <script>
 import MessageWrite from "@/components/dialogues/message-write";
 import DialogMessages from "@/components/dialogues/Dialog-messages";
+
 export default {
     name: "Dialog-component",
     components: {DialogMessages, MessageWrite},

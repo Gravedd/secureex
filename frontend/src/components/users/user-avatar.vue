@@ -1,8 +1,7 @@
 <template>
-    <div
-        class="user-avatar"
-        :style="avatarStyle"
-    >{{ usernameFirstLetter }}</div>
+    <div class="user-avatar" :style="avatarStyle">
+        {{ usernameFirstLetter }}
+    </div>
 </template>
 <script>
 import config from "@/config";
@@ -27,6 +26,7 @@ export default {
     methods: {
         getColorFromString(str) {
             const colors = ["#a84242", "#d49030", "#a88f11", "#2c6bd7", "#0c8270", "#b60c0c", "#7a0cb6", "#8b0b51"];
+
             function hashCode(str) {
                 let hash = 0;
                 if (!str) {
@@ -38,16 +38,17 @@ export default {
                 }
                 return hash;
             }
+
             const index = Math.floor(Math.abs(hashCode(str)) % colors.length);
             return colors[index];
         }
     },
     computed: {
-        avatarStyle () {
+        avatarStyle() {
             if (this.avatarSrc != null) {
                 return {
-                    'background-image': 'url(' + config.img + this.avatarSrc +')',
-                    'font-size': "0px"
+                    'background-image': 'url(' + config.img + this.avatarSrc + ')',
+                    'font-size'       : "0px"
                 }
             }
 

@@ -2,7 +2,8 @@
     <div class="input-file">
         <label class="custom-file-upload">
             Выбрать файл
-            <input :name="name" type="file" class="custom-file-upload" ref="fileInput" @change="handleFileChange" accept="image/*"/>
+            <input :name="name" type="file" class="custom-file-upload" ref="fileInput" @change="handleFileChange"
+                   accept="image/*"/>
         </label>
         <div v-if="file" class="file-msg">
             <p>Выбранный файл: {{ file.name }}</p>
@@ -12,16 +13,15 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
         return {
-            file: null,
+            file   : null,
             isValid: true,
         };
     },
-    props: {
+    props  : {
         name
     },
     methods: {
@@ -59,6 +59,7 @@ export default {
     margin-bottom: 8px;
     align-items: center;
 }
+
 label.custom-file-upload {
     border: 1px solid var(--main);
     border-radius: 4px;

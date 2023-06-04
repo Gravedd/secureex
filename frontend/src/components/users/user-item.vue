@@ -11,31 +11,38 @@
         </div>
     </router-link>
 </template>
+
 <script>
 import UserAvatar from "@/components/users/user-avatar";
+
 export default {
-    name: "user-item",
+    name      : "user-item",
     components: {UserAvatar},
-    props: ["id", "avatar", "name", "text"]
+    props     : ["id", "avatar", "name", "text"]
 }
 </script>
+
 <style scoped>
 .user-list-item-wrapper {
     display: flex;
     padding: 5px 16px;
     margin-bottom: 5px;
 }
+
 .user-avatar-wrapper {
     margin-right: 18px;
 }
+
 .user-data-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .user-text {
     font-size: 12px;
 }
+
 .avatar {
     width: 39px;
     height: 39px;

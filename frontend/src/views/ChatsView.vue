@@ -1,9 +1,16 @@
 <template>
     <div class="appWrapper">
-        <app-header :show-back-btn="false" :show-sidebar-btn="true" :show-search-icon="true" :show-action-menu="false" @clickOnHeaderSearch="clickOnHeaderSearch">Диалоги</app-header>
+        <app-header
+            :show-back-btn="false"
+            :show-sidebar-btn="true"
+            :show-search-icon="true"
+            :show-action-menu="false"
+            @clickOnHeaderSearch="clickOnHeaderSearch"
+        >Диалоги</app-header>
 
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
+
                 <dialog-item
                     :user_id="dialogue.user.id"
                     :user_avatar="dialogue.user.avatar"
@@ -12,10 +19,14 @@
                     :last-time="dialogue.messages[0].created_at"
                     :unread_count="dialogue.unread_count"
                 />
+
             </div>
+
             <div class="dialogs-empty-message" v-if="!dialogues">
                 <p>Нет диалогов с другими пользователями(</p>
-                <p><router-link to="/search" class="colored_text">Поиск пользователей</router-link></p>
+                <p>
+                    <router-link to="/search" class="colored_text">Поиск пользователей</router-link>
+                </p>
             </div>
 
             <action-menu/>
@@ -39,9 +50,6 @@ export default {
     methods: {
         clickOnHeaderSearch() {
             this.$router.push("/search");
-        },
-        isMe(user_id) {
-            return this.$store.getters.user_id === user_id;
         }
     },
     beforeCreate() {

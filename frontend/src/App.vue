@@ -19,20 +19,16 @@ import Loader from "@/components/loader";
 export default {
     components: {Loader, ActionMenu, AppSidebar},
     data() {
-        return {
-
-        }
+        return {}
     },
-    methods: {
-
-    },
+    methods: {},
     beforeCreate() {
         this.$showLoader();
     },
     created() {
         store.dispatch("updateColors");
 
-        window.addEventListener('resize',function() {
+        window.addEventListener('resize', function () {
             store.dispatch("updateDeviceData");
         });
         store.dispatch("updateDeviceData");
@@ -46,9 +42,7 @@ export default {
             this.$hideLoader();
         });
     },
-    mounted() {
-
-    }
+    mounted() {}
 }
 </script>
 

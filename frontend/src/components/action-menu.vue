@@ -1,7 +1,7 @@
 <template>
     <transition name="slide">
-        <div class="menuwrapper-flex" v-if="opened" @click="closeMenu">
-            <div class="menuwrapper" @click="clickOnMenu">
+        <div class="menu-wrapper-flex" v-if="opened" @click="closeMenu">
+            <div class="menu-wrapper" @click="clickOnMenu">
                 <slot/>
             </div>
         </div>
@@ -26,15 +26,7 @@ export default {
 </script>
 
 <style>
-    .menu-background {
-        position: fixed;
-        backdrop-filter: brightness(0.9);
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .menuwrapper-flex {
+    .menu-wrapper-flex {
         position: fixed;
         top: 0;
         left: 0;
@@ -45,17 +37,17 @@ export default {
         align-items: flex-start;
         padding: 8px;
     }
-    .menuwrapper {
+    .menu-wrapper {
         background-color: var(--gray5);
         width: 150px;
     }
-    .menuwrapper div {
+    .menu-wrapper div {
         width: 100%;
         height: 40px;
         padding: 0 8px;
         line-height: 40px;
     }
-    .menuwrapper div:hover, .menuwrapper div:active {
+    .menu-wrapper div:hover, .menu-wrapper div:active {
         backdrop-filter: brightness(0.95);
     }
     .slide-leave-active, .slide-enter-active  {
@@ -66,7 +58,7 @@ export default {
         opacity: 0;
     }
     @media (min-width: 1000px) {
-        .menuwrapper-flex {
+        .menu-wrapper-flex {
             padding: 8px 400px;
         }
     }
