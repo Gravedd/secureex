@@ -157,3 +157,12 @@ p {
 .red-text {
     color: #ff4848;
 }
+.colored_text1 {
+    color: var(--main);
+}
+.colored_text2 {
+    color: var(--main2);
+}
+.bold {
+    font-weight: bold;
+}

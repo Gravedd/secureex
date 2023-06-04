@@ -25,6 +25,12 @@
                         </icon>
                         <span class="item-text">Пригласить друзей</span>
                     </div>
+                    <div class="item" @click="logout">
+                        <icon color="#5C04BB">
+                            <logout-icon/>
+                        </icon>
+                        <span class="item-text colored_text2 bold">Выйти</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,6 +44,7 @@ import Icon from "@/components/icons/icon";
 import KeyIcon from "@/components/icons/keyIcon";
 import PeopleIcon from "@/components/icons/peopleIcon";
 import UserAvatar from "@/components/users/user-avatar";
+import LogoutIcon from "@/components/icons/logoutIcon";
 
 export default {
 	name: "app-sidebar",
@@ -64,9 +71,15 @@ export default {
             document.body.removeChild(inp);
             this.$store.commit("closeSidebar");
             this.$swal("Ссылка скопирована!");
+        },
+        logout() {
+            this.$store.commit("closeSidebar");
+            this.$store.dispatch("Logout").then(() => {
+                this.$swal.fire({ title: "Успешно!", text: "Вы вышли из аккаунта!"});
+            })
         }
     },
-	components: {UserAvatar, PeopleIcon, KeyIcon, Icon, SettingsIcon},
+	components: {LogoutIcon, UserAvatar, PeopleIcon, KeyIcon, Icon, SettingsIcon},
 }
 </script>
 <style scoped>
