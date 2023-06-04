@@ -1,6 +1,6 @@
 import Controller from "../controllers/Controller.js";
 import Server from "./Server.js";
-import Log from "./Log";
+import Log from "./Log.js";
 
 
 export default class RequestHandler {
