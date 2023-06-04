@@ -1,4 +1,4 @@
-import Db from "../Db.js";
+import Db from "../components/Db.js";
 
 export default class Conversation {
 

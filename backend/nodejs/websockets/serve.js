@@ -1,5 +1,5 @@
-import Server from "./src/server.js";
-import Log from "./src/Log.js";
+import Server from "./src/components/Server.js";
+import Log from "./src/components/Log.js";
 
 Log.info("Сервер запускается");
 

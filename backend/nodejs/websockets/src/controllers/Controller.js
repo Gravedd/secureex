@@ -1,5 +1,5 @@
-import Db from "./Db.js";
-import Server from "./Server.js";
+import Db from "../components/Db.js";
+import Server from "../components/Server.js";
 import moment from "moment";
 
 
