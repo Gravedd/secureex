@@ -16,7 +16,7 @@ export default class Controller {
         let response = await fetch(this.api + "/user", {
             headers: {
                 "Authorization": 'Bearer ' + token,
-                "Accept": "application/json",
+                "Accept"       : "application/json",
             }
         });
 
@@ -68,20 +68,20 @@ export default class Controller {
 
         socket.send(JSON.stringify({
             "action": "message_sent",
-            "data": {
+            "data"  : {
                 "message_id": message_result.insertId,
-                "id": message_result.insertId,
-                "body": data.text,
-                "to_user": data.to_user,
+                "id"        : message_result.insertId,
+                "body"      : data.text,
+                "to_user"   : data.to_user,
                 "created_at": created_at,
-                "uuid" : data.uuid,
+                "uuid"      : data.uuid,
             }
         }));
 
         Server.sendMessageToUserId(data.to_user, {
             "action": "new_message",
             "data"  : {
-                "id"     : message_result.insertId,
+                "id"             : message_result.insertId,
                 "body"           : data.text,
                 "user_id"        : fromId,
                 "created_at"     : created_at,
@@ -103,7 +103,7 @@ export default class Controller {
         let conversation_id = 0;
         if (rows.length === 0) {
             console.log("Беседа не найдена: ", rows);
-            return ;
+            return;
         }
         conversation_id = rows[0].id;
         const [read_result] = await Db.execute(
@@ -113,8 +113,8 @@ export default class Controller {
 
         Server.sendMessageToUserId(toId, {
             "action": "messages_read",
-            "data": {
-                "from_id": fromId,
+            "data"  : {
+                "from_id"      : fromId,
                 "lastMessageId": data.lastMessageId,
             }
         })
@@ -127,7 +127,7 @@ export default class Controller {
 
         Server.sendMessageToUserId(toId, {
             "action": "user_typing",
-            "data": {
+            "data"  : {
                 "user_id": fromId,
             }
         });

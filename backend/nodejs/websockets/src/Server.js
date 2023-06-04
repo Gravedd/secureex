@@ -1,4 +1,4 @@
-import WebSocket, { WebSocketServer } from 'ws';
+import WebSocket, {WebSocketServer} from 'ws';
 import RequestHandler from "./RequestHandler.js";
 import Log from "./Log.js";
 
@@ -8,7 +8,7 @@ export default class Server {
     static users = {};
 
     start() {
-        this.server = new WebSocketServer({ port: 8080 });
+        this.server = new WebSocketServer({port: 8080});
 
         this.server.on('connection', (socket) => this.onConnection(socket, Server.generateUUID()));
     }
@@ -42,15 +42,15 @@ export default class Server {
 
     static onUserSuccessAuthorized(user, socket, uuid) {
         Server.users[uuid] = {
-            "ws" : socket,
-            "data" : user,
-            "ping_count" : 0,
-            "pong_count" : 0,
+            "ws"        : socket,
+            "data"      : user,
+            "ping_count": 0,
+            "pong_count": 0,
         };
 
         socket.send(JSON.stringify({
             "action": "auth_success",
-            "data": {}
+            "data"  : {}
         }))
     }
 

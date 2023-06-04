@@ -6,13 +6,13 @@ export default new class Db {
     constructor() {
         //todo: брать из .env
         this.pool = mysql.createPool({
-            host: 'localhost',
-            user: 'root',
-            database: 'secureex',
-            password: '',
+            host              : 'localhost',
+            user              : 'root',
+            database          : 'secureex',
+            password          : '',
             waitForConnections: true,
-            connectionLimit: 10,
-            queueLimit: 0
+            connectionLimit   : 10,
+            queueLimit        : 0
         });
     }
 

@@ -5,11 +5,11 @@ import Server from "./Server.js";
 export default class RequestHandler {
 
     routes = {
-        "auth" : "auth",
-        "pong" : "pong",
-        "message": "newMessage",
+        "auth"           : "auth",
+        "pong"           : "pong",
+        "message"        : "newMessage",
         "allMessagesRead": "allMessagesRead",
-        "typing": "typing",
+        "typing"         : "typing",
     }
 
     constructor(socket, message, uuid) {
@@ -42,21 +42,21 @@ export default class RequestHandler {
 
     send(action, data) {
         return this.socket.send(JSON.stringify({
-            "action" : action,
-            "data"   : data,
+            "action": action,
+            "data"  : data,
         }))
     }
 
     static requestAuth(socket) {
         return socket.send(JSON.stringify({
-            "action" : "auth",
-            "data"   : "Авторизуйтесь!",
+            "action": "auth",
+            "data"  : "Авторизуйтесь!",
         }))
     }
 
     static sendPing(socket, uuid) {
         if (!Server.users[uuid]) {
-            return ;
+            return;
         }
 
         Server.users[uuid]["ping_count"]++;
@@ -70,7 +70,7 @@ export default class RequestHandler {
         }
 
         return socket.send(JSON.stringify({
-            "action" : "ping"
+            "action": "ping"
         }))
     }
 }
