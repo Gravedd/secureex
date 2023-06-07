@@ -51,6 +51,7 @@ import Icon from "@/components/icons/icon";
 import LogoIcon from "@/components/icons/LogoIcon";
 import AppHeader from "@/components/headers/app-header";
 import router from "@/router";
+import store from "@/store";
 
 export default {
 	name: 'AuthView',
@@ -83,6 +84,7 @@ export default {
                 "password_confirmation": this.reg_password_confirm,
             }).then (res => {
                 router.push("/");
+                store.dispatch("getConversations");
             }).catch (res => {
                 this.$swal.fire({ title: "Ошибка!", text: res.message });
             });
@@ -93,6 +95,7 @@ export default {
                 "password": this.password,
             }).then (res => {
                 router.push("/");
+                store.dispatch("getConversations");
             }).catch (res => {
                 this.$swal.fire({ title: "Ошибка!", text: res.message });
             });
