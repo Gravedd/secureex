@@ -19,7 +19,9 @@ import Loader from "@/components/loader";
 export default {
     components: {Loader, ActionMenu, AppSidebar},
     data() {
-        return {}
+        return {
+            url: process.env.VUE_APP_APIURL,
+        }
     },
     methods: {},
     beforeCreate() {
