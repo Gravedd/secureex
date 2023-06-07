@@ -35,7 +35,7 @@ export default {
             let message = state.messagesDialogs[key].find(message => message.uuid === data.uuid);
             message.id = data.message_id;
             message.body = data.body;
-            message.created_at = data.created_at;
+            message.created_at = data.created_at ?? 0;
             delete message.uuid;
 
             let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);
