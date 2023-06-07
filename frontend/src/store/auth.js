@@ -77,6 +77,7 @@ export default {
                     throw new Error(data.message);
                 }
 
+                data.user.token = data.token;
                 await dispatch("userSuccessAuthorized", data.user);
                 return true;
             } finally {
