@@ -30,6 +30,7 @@ class UsersTest extends TestCase {
         }
         $userData = [
             "name" => "user_".\Str::random(10),
+            "nickname" => "user_".\Str::random(10),
             'email' => "user_".\Str::random(10)."@gmail.com",
             'password' => Hash::make($this->validPassword),
         ];
@@ -76,7 +77,7 @@ class UsersTest extends TestCase {
     public function test_can_get_user_by_name_with_auth() {
         $user = User::first();
 
-        $response = $this->get(route($this->getUserRoute, $user['name']), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
+        $response = $this->get(route($this->getUserRoute, $user['nickname']), array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));
 
         $response->assertStatus(200);
         $this->assertUserJson($response);
@@ -96,6 +97,7 @@ class UsersTest extends TestCase {
     public function test_can_user_edit_himself() {
         $response = $this->put(route($this->editHimselfRoute), [
             "name" => "useredit_".\Str::random(10),
+            "nickname" => "useredit_".\Str::random(10),
             'email' => "useredit_".\Str::random(10)."@gmail.com",
             "password" => $this->validPassword,
         ],array_merge($this->headers, ["Authorization" => "Bearer ".$this->getAuthToken()]));

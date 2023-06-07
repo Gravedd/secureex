@@ -18,7 +18,8 @@ class CheckUserTest extends TestCase
 
     public function test_can_success_check_user() {
         $userData = [
-            "name" => "user_".\Str::random(10),
+            "name" => $name = "user_".\Str::random(10),
+            "nickname" => $name,
             'email' => "user_".\Str::random(10)."@gmail.com",
             'password' => Hash::make($this->validPassword),
         ];

@@ -37,6 +37,7 @@ class RegisterTest extends TestCase
     public function test_can_register() {
         $response = $this->postJson($this->getRoute(), array_merge([
             'name' => "test".time(),
+            "nickname" => "user_".\Str::random(10),
             'email' => "test".time()."@gmail.com",
             'password' => $this->validPassword,
             'password_confirmation' => $this->validPassword,

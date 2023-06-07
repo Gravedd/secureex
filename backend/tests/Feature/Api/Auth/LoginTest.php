@@ -23,6 +23,7 @@ class LoginTest extends TestCase
     public function test_can_success_login() {
         $userData = [
             "name" => "user_".\Str::random(10),
+            "nickname" => "user_".\Str::random(10),
             'email' => "user_".\Str::random(10)."@gmail.com",
             'password' => Hash::make($this->validPassword),
         ];
@@ -37,7 +38,6 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
         $this->assertAuthenticated();
     }
-
 
     public function test_cannot_success_login_with_bad_conditionals() {
         $response = $this->postJson($this->getRoute(), array_merge([

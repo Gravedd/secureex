@@ -23,6 +23,7 @@ class LogoutTest extends TestCase
     public function test_can_logout() {
         $userData = [
             "name" => "user_".\Str::random(10),
+            "nickname" => "user_".\Str::random(10),
             'email' => "user_".\Str::random(10)."@gmail.com",
             'password' => Hash::make($this->validPassword),
         ];
