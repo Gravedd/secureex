@@ -1,15 +1,16 @@
 import mysql from "mysql2/promise";
-
+import dotenv from "dotenv";
 
 export default new class Db {
 
     constructor() {
-        //todo: брать из .env
+        global.env_vars = dotenv.config({path: '../../.env'}).parsed;
+
         this.pool = mysql.createPool({
-            host              : 'localhost',
-            user              : 'root',
-            database          : 'secureex',
-            password          : '',
+            host              : global.env_vars.DB_HOST,
+            user              : global.env_vars.DB_USERNAME,
+            database          : global.env_vars.DB_DATABASE,
+            password          : global.env_vars.DB_PASSWORD,
             waitForConnections: true,
             connectionLimit   : 10,
             queueLimit        : 0
