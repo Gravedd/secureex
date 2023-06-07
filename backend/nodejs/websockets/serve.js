@@ -1,5 +1,10 @@
+import dotenv from "dotenv";
+global.env_vars = dotenv.config({path: '../../.env'}).parsed;
+
 import Server from "./src/components/Server.js";
 import Log from "./src/components/Log.js";
+
+
 
 Log.info("Сервер запускается");
 try {

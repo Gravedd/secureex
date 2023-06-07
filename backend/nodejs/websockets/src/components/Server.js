@@ -7,8 +7,11 @@ export default class Server {
 
     static users = {};
 
+    static ws_key;
+
     start() {
         this.server = new WebSocketServer({port: 8080});
+        Server.ws_key = global.env_vars.WS_KEY;
 
         this.server.on('connection', (socket) => this.onConnection(socket, Server.generateUUID()));
     }
