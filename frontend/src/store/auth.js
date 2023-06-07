@@ -50,6 +50,7 @@ export default {
             state.user_token = null;
             state.user_avatar = null;
             localStorage.removeItem("token");
+            localStorage.removeItem("dialogues");
         },
     },
     actions: {
@@ -76,12 +77,7 @@ export default {
                     throw new Error(data.message);
                 }
 
-                await dispatch("userSuccessAuthorized", {
-                    "id"   : data.user.id,
-                    "name" : data.user.name,
-                    "email": data.user.email,
-                    "token": data.token,
-                });
+                await dispatch("userSuccessAuthorized", data.user);
                 return true;
             } finally {
                 commit("hideLoader");
@@ -120,7 +116,7 @@ export default {
                 return await context.dispatch("userIsNotAuthorized");
             }
 
-            let response = await requests.get(config.api + "logout", {
+            let response = await requests.post(config.api + "logout", {},{
                 "Authorization": "Bearer " + context.getters.user_token
             });
 
