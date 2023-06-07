@@ -118,6 +118,9 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/backend/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/_laravel_idea" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phrity/util-errorhandler" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phrity/net-uri" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/textalk/websocket" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

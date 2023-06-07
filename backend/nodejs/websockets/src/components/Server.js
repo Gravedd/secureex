@@ -10,10 +10,11 @@ export default class Server {
     start() {
         this.server = new WebSocketServer({port: 8080});
 
-        this.server.on('connection', (socket) => this.onConnection(socket, Server.generateUUID()));
+        this.server.on('connection', (socket, req) => this.onConnection(socket, Server.generateUUID(), req));
     }
 
-    onConnection(socket, uuid) {
+    onConnection(socket, uuid, req) {
+        console.log(req.socket.remoteAddress);
         RequestHandler.requestAuth(socket);
 
         let intervalId = setInterval(() => {

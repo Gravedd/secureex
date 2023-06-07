@@ -110,6 +110,9 @@
       <path value="$PROJECT_DIR$/backend/vendor/psr/container" />
       <path value="$PROJECT_DIR$/backend/vendor/composer" />
       <path value="$PROJECT_DIR$/backend/vendor/_laravel_idea" />
+      <path value="$PROJECT_DIR$/backend/vendor/phrity/util-errorhandler" />
+      <path value="$PROJECT_DIR$/backend/vendor/phrity/net-uri" />
+      <path value="$PROJECT_DIR$/backend/vendor/textalk/websocket" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
