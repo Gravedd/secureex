@@ -14,8 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $client = new WebSocket\Client("ws://192.168.0.105:8080/");
-    $client->text("dsds");
-    dd($client);
-
+    event(new \App\Events\UserRegistered(\App\Models\User::first()));
 });
