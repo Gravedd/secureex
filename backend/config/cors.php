@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'api'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', "POST", "PUT", "PATCH", "DELETE"],
 
-    'allowed_origins' => ['http://localhost:8081', 'https://api.shadownet.ysenin.org.ru/'],
+    'allowed_origins' => ['http://localhost:8081', 'https://api.shadownet.ysenin.org.ru/', 'https://shadownet.ysenin.org.ru/', 'https://shadownet.ysenin.org.ru'],
 
     'allowed_origins_patterns' => [],
 
