@@ -9,6 +9,6 @@ class UserRegisteredListener
 {
 
     public function handle(UserRegistered $event): void {
-        Websocket::get()->send(["action" => "user.registered", "data" => $event->user]);
+        Websocket::get()->send(["action" => "server.user.registered", "data" => $event->user]);
     }
 }

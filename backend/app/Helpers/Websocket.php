@@ -50,6 +50,7 @@ class Websocket {
      * @throws \WebSocket\BadOpcodeException
      */
     public function send($data) {
+        $data = array_merge($data, ["ws_key" => $this->ws_key]);
         $data = json_encode($data);
         $this->client->send($data);
     }
