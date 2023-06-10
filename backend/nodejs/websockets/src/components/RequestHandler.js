@@ -6,7 +6,6 @@ import Log from "./Log.js";
 export default class RequestHandler {
 
     routes = {
-        "auth"           : "auth",
         "pong"           : "pong",
         "message"        : "newMessage",
         "allMessagesRead": "allMessagesRead",
