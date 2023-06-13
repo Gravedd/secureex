@@ -6,6 +6,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\UserRegistered;
+use App\Helpers\Websocket;
+use App\Events\UserUpdateProfile;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,17 +21,15 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        "App\Events\UserRegistered" => [
-            'App\Listeners\UserRegisteredListener'
-        ]
     ];
 
     /**
      * Register any events for your application.
      */
-    public function boot(): void
-    {
-        //
+    public function boot(): void {
+        Event::listen(UserRegistered::class, fn($event) => $this->sendEventToWebsocket("server.user.registered", $event->user));
+
+        Event::listen(UserUpdateProfile::class, fn($event) => $this->sendEventToWebsocket("server.user.update", $event->user));
     }
 
     /**
@@ -37,5 +38,15 @@ class EventServiceProvider extends ServiceProvider
     public function shouldDiscoverEvents(): bool
     {
         return false;
+    }
+
+    /**
+     * Send event data to websocket server
+     * @param $action
+     * @param $data
+     * @throws \WebSocket\BadOpcodeException
+     */
+    private function sendEventToWebsocket($action, $data) {
+        Websocket::get()->send(["action" => $action, "data" => $data]);
     }
 }

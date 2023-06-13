@@ -39,7 +39,6 @@ class ConversationsController extends Controller {
         return response()->json(["conversations" => $conversations]);
     }
 
-
     public function getMessages(Request $request, $with_user) {
         $user_id = $request->user()['id'];
 
