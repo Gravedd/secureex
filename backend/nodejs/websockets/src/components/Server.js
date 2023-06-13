@@ -24,7 +24,7 @@ export default class Server {
         this.connectionAuthorization(socket, uuid, req).then(authorized => {
 
             let intervalId = setInterval(() => {
-                RequestHandler.sendPing(socket, uuid);
+                RequestHandler.sendPing(socket, uuid, intervalId);
             }, 5000);
 
             socket.on('message', (message) => this.onMessage(socket, message, uuid));

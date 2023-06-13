@@ -110,8 +110,9 @@ export default class RequestHandler {
         }))
     }
 
-    static sendPing(socket, uuid) {
+    static sendPing(socket, uuid, intervalId) {
         if (!Server.users[uuid]) {
+            clearInterval(intervalId);
             return;
         }
 
@@ -120,8 +121,10 @@ export default class RequestHandler {
         let ping = Server.users[uuid]["ping_count"];
         let pong = Server.users[uuid]["pong_count"];
 
-        if (pong > ping - 1) {
+        if (pong < ping - 3) {
             console.log("Кик!");
+            clearInterval(intervalId);
+            delete Server.users[uuid];
             socket.close();
         }
 
