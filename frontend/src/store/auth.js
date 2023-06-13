@@ -52,6 +52,13 @@ export default {
             localStorage.removeItem("token");
             localStorage.removeItem("dialogues");
         },
+        updateUserData(state, user) {
+            state.user_id = user.id;
+            state.user_name =  user.name;
+            state.user_nickname =  user.nickname;
+            state.user_email =  user.email;
+            state.user_avatar = user.avatar;
+        }
     },
     actions: {
         async Register({ commit, dispatch }, credentials) {

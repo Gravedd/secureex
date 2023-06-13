@@ -45,7 +45,6 @@ class UsersController extends Controller {
         }
         $user->save();
 
-        /** @var $user \App\Models\User */
         event(new UserUpdateProfile($user));
 
         return response()->json(["status" => true, "user" => $user]);
@@ -62,6 +61,8 @@ class UsersController extends Controller {
         $user = $request->user();
         $user->avatar = $filename;
         $user->save();
+
+        event(new UserUpdateProfile($user));
 
         return response()->json(['path' => $filename], 201);
     }

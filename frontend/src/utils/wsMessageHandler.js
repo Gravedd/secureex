@@ -62,4 +62,8 @@ export default class {
     onUser_typing() {
         store.commit("userTyping", this.message.data);
     }
+
+    onSelf_profile_update() {
+        store.commit("updateUserData", this.message.data);
+    }
 }
