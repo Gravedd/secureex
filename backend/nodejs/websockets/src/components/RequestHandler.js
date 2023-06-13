@@ -50,8 +50,7 @@ export default class RequestHandler {
 
     getRouteData(route) {
         let routeData = this.routes[route];
-        if (!route) {
-            console.log("Роута не существует `route`", route);
+        if (!routeData) {
             return false;
         }
 
