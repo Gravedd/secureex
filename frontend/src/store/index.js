@@ -100,9 +100,9 @@ export default createStore({
 		},
 		updateDeviceData(context) {
 			context.commit("updateClientData", {
-				"width" : document.documentElement.clientWidth,
-				"height": document.documentElement.clientHeight,
-				"innerHeight": window.innerHeight,
+				"width" : window.visualViewport.width,
+				"height": window.visualViewport.height,
+				"innerHeight": window.visualViewport.height,
 			})
 		}
 

@@ -27,9 +27,6 @@ export default {
         messages() {
             return store.getters.getDialogById;
         },
-        blockHeight() {
-
-        }
     },
     methods: {
         newMessageEvent(message) {
@@ -86,6 +83,8 @@ export default {
     padding-top: 4px;
     padding-bottom: 4px;
     overflow-y: scroll;
+    flex-shrink: 1;
+    height: 100%;
 }
 .messages-wrapper::-webkit-scrollbar {
     width: 2px;

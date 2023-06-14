@@ -26,7 +26,6 @@ export default {
     },
     methods: {
         onGetMessages() {
-            console.log()
             this.$refs.dialogMessages.scrollBlockDown("instant");
         }
     },
