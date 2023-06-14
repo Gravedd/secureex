@@ -79,7 +79,9 @@ export default {
         readAllDialogMessagesLocal(state, with_user) {
             with_user = parseInt(with_user);
             state.messagesDialogs['dialogWithUser' + with_user].forEach(elem => {
-                elem.read = 1;
+                if (elem.user_id !== store.getters.user_id) {
+                    elem.read = 1;
+                }
             });
             let dialog = state.dialogues.find(dialogue => dialogue.user.id === with_user);
             if (dialog) {
@@ -92,7 +94,7 @@ export default {
             }
 
             state.messagesDialogs['dialogWithUser' + data.from_id].forEach(message => {
-                if (message.id <= (data.lastMessageId + 1)) {
+                if ((message.id <= (data.lastMessageId + 1)) && (message.user_id !== state.user_id)) {
                     message.read = 1;
                 }
             });
