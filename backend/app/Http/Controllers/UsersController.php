@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Models\Conversation;
+use App\Events\UserUpdateProfile;
 
 class UsersController extends Controller {
 
@@ -28,7 +29,6 @@ class UsersController extends Controller {
         return response($result);
     }
 
-
     public function selfEditUser(Request $request){
         $user = $request->user();
 
@@ -45,6 +45,8 @@ class UsersController extends Controller {
         }
         $user->save();
 
+        event(new UserUpdateProfile($user));
+
         return response()->json(["status" => true, "user" => $user]);
     }
 
@@ -60,9 +62,10 @@ class UsersController extends Controller {
         $user->avatar = $filename;
         $user->save();
 
+        event(new UserUpdateProfile($user));
+
         return response()->json(['path' => $filename], 201);
     }
-
 
     public function test(Request $request) {
         $user = User::find($request->user()['id']);

@@ -129,7 +129,7 @@ export default {
                     "text" : result.message,
                 })
             }
-            this.$store.commit("successAuth", result.user);
+            this.$store.commit("updateUserData", result.user);
             this.$swal.fire("Успешно!", "Настройки сохранены", "success");
         },
     },

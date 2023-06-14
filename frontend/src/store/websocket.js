@@ -31,7 +31,7 @@ export default {
     },
     actions: {
         connect(context, user) {
-            context.state.ws = new WebSocket(config.ws);
+            context.state.ws = new WebSocket(config.ws + "?token=" + context.getters.user_token);
 
             /*context.state.ws.onerror = function (error) {
                 location.reload()
