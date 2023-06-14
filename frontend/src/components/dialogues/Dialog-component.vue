@@ -26,9 +26,10 @@ export default {
     },
     methods: {
         onGetMessages() {
+            console.log()
             this.$refs.dialogMessages.scrollBlockDown("instant");
         }
-    }
+    },
 }
 </script>
 <style scoped>
@@ -36,6 +37,5 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: 528px;
 }
 </style>
