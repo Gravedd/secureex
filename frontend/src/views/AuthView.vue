@@ -13,7 +13,7 @@
                         <input type="text" placeholder="Почта" autocomplete="off" v-model="email">
                         <input type="password" placeholder="Пароль" v-model="password">
                         <input class="colored_gradient" type="submit" value="Войти" @click="login">
-                        <a class="resetpassbtn">Забыли пароль?</a>
+<!--                        <a class="resetpassbtn">Забыли пароль?</a>-->
                     </div>
                     <div v-if="!loginOrRegister">
                         <input type="text" placeholder="Ваше имя" autocomplete="off" v-model="reg_name">
@@ -109,13 +109,12 @@ export default {
 <style>
     .authwrapper {
         display: flex;
-        padding-top: 40px;
         flex-direction: column;
         align-items: center;
     }
 
     .authLogo {
-        margin-bottom: 40px;
+
     }
 
     .authHeader {
@@ -132,6 +131,7 @@ export default {
 
     .authinputswrap input {
         width: 100%;
+        min-width: 120px;
         height: 30px;
         margin-bottom: 11px;
         border-radius: 8px;
