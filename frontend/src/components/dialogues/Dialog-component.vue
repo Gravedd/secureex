@@ -20,6 +20,9 @@ export default {
         clientHeight() {
             return this.$store.getters.clientHeight;
         },
+        innerHeight() {
+            return this.$store.getters.innerHeight;
+        }
     },
     methods: {
         onGetMessages() {

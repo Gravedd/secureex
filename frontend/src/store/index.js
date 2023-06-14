@@ -32,6 +32,7 @@ export default createStore({
 		showLoader: false,
 		clientWidth: 0,
 		clientHeight: 0,
+		clientInnerHeight: 0,
 
 		//header
 		headerInput: "",
@@ -59,6 +60,9 @@ export default createStore({
 		headerInput: (state) => {
 			return state.headerInput;
 		},
+		clientInnerHeight: (state) => {
+			return state.clientInnerHeight;
+		},
 	},
     mutations: {
 		actionMenuStatus (state, status) {
@@ -73,6 +77,7 @@ export default createStore({
 		updateClientData(state, data) {
 			state.clientWidth = data.width
 			state.clientHeight = data.height
+			state.clientInnerHeight = data.innerHeight;
 		},
 		showSidebar (state) {
 			state.showSidebar = true;
@@ -97,6 +102,7 @@ export default createStore({
 			context.commit("updateClientData", {
 				"width" : document.documentElement.clientWidth,
 				"height": document.documentElement.clientHeight,
+				"innerHeight": window.innerHeight,
 			})
 		}
 
