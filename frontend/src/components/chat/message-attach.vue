@@ -2,7 +2,7 @@
     <div class="attach-wrapper">
 
         <div class="attach-image-wrapper" v-if="filetype === 'img'">
-            <img :src="link" alt="Вложение">
+            <img :src="link" alt="Вложение" @click="showImage">
         </div>
 
         <div class="attach-file" @click="download" v-if="filetype === 'file'">
@@ -36,6 +36,12 @@ export default {
     methods: {
         download() {
             window.open(this.link);
+        },
+        showImage() {
+            this.$store.commit("showImageModal", {
+                "src": this.link,
+                "alt": "Вложение",
+            })
         }
     },
     computed: {

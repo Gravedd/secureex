@@ -30,6 +30,14 @@ export default createStore({
 		showSidebar: false,
 		//Load indicator
 		showLoader: false,
+
+		//image-modal
+		showImageModal: false,
+		modalImageData: {
+    		"src": "http://api.shadownet.loc/storage/files/vou52dL82fltms0rq4O1ns95sxp2FjFCGSxSqBjg.jpg",
+			"alt": "Изображение",
+		},
+
 		clientWidth: 0,
 		clientHeight: 0,
 		clientInnerHeight: 0,
@@ -63,28 +71,48 @@ export default createStore({
 		clientInnerHeight: (state) => {
 			return state.clientInnerHeight;
 		},
+		showImageModal: (state) => {
+			return state.showImageModal;
+		},
+		modalImageData: (state) => {
+			return state.modalImageData;
+		},
 	},
     mutations: {
 		actionMenuStatus (state, status) {
 			state.isActionMenuOpened = status
 		},
+
 		showLoader (state) {
 			state.showLoader = true;
 		},
 		hideLoader (state) {
 			state.showLoader = false;
 		},
+
+		showImageModal (state, image = {"src": "/", "alt": "Изображение"}) {
+			state.modalImageData = image;
+			state.showImageModal = true;
+		},
+		hideImageModal (state) {
+			state.modalImageData = {"src": "/", "alt": "Изображение"};
+			state.showImageModal = false;
+		},
+
+
 		updateClientData(state, data) {
 			state.clientWidth = data.width
 			state.clientHeight = data.height
 			state.clientInnerHeight = data.innerHeight;
 		},
+
 		showSidebar (state) {
 			state.showSidebar = true;
 		},
 		closeSidebar (state) {
 			state.showSidebar = false;
 		},
+
 		headerInput (state, value) {
 			state.headerInput = value;
 		}

@@ -1,7 +1,7 @@
 <template>
     <div class="modal-container" @click="$emit('closeModal')" v-show="show">
-        <div class="modal-full-wrapper">
-            <div class="modal-wrapper" @click="clickOnModal">
+        <div class="modal-full-wrapper" :class="{'modal-padding': padding }">
+            <div class="modal-wrapper" @click="clickOnModal" :class="{'bg': !transparentBg}">
                 <div class="modal-header">
                     {{ header }}
                 </div>
@@ -23,11 +23,25 @@ export default {
         show  : {
             default: false,
             type   : Boolean
+        },
+        stopPropagation: {
+            default: true,
+            type   : Boolean
+        },
+        padding: {
+            default: true,
+            type   : Boolean
+        },
+        transparentBg: {
+            default: false,
+            type   : Boolean
         }
     },
     methods: {
         clickOnModal(event) {
-            event.stopPropagation();
+            if (this.stopPropagation) {
+                event.stopPropagation();
+            }
         }
     },
     emits  : ["closeModal"]
@@ -53,7 +67,6 @@ export default {
 }
 
 .modal-wrapper {
-    background-color: var(--bg3);
     padding: 16px;
     width: 100%;
 }
@@ -62,15 +75,18 @@ export default {
     margin-bottom: 16px;
     font-size: 18px;
 }
+.bg {
+    background-color: var(--bg3);
+}
 
 @media (min-width: 1000px) {
-    .modal-full-wrapper {
+    .modal-padding {
         padding: 0 116px;
     }
 }
 
 @media (min-width: 1500px) {
-    .modal-full-wrapper {
+    .modal-padding {
         padding: 0 416px;
     }
 }

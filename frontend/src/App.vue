@@ -8,6 +8,8 @@
     <app-sidebar/>
 
     <loader></loader>
+
+    <image-modal/>
 </template>
 
 <script>
@@ -15,9 +17,10 @@ import AppSidebar from "@/components/ui/app-sidebar";
 import store from "@/store";
 import ActionMenu from "@/components/ui/action-menu";
 import Loader from "@/components/ui/loader";
+import ImageModal from "@/components/modals/image-modal";
 
 export default {
-    components: {Loader, ActionMenu, AppSidebar},
+    components: {ImageModal, Loader, ActionMenu, AppSidebar},
     data() {
         return {
             url: process.env.VUE_APP_APIURL,
