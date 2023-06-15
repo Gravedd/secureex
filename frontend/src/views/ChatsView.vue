@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import ActionMenu from "@/components/action-menu";
-import DialogItem from "@/components/dialogues/Dialog-item";
+import ActionMenu from "@/components/ui/action-menu";
+import DialogItem from "@/components/chats/Dialog-item";
 import AppHeader from "@/components/headers/app-header";
 
 export default {

@@ -14,7 +14,7 @@
 
 <script>
 
-import ActionMenu from "@/components/action-menu";
+import ActionMenu from "@/components/ui/action-menu";
 import AppHeader from "@/components/headers/app-header";
 
 export default {

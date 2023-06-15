@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import MessageAttach from "@/components/dialogues/message-attach";
+import MessageAttach from "@/components/chat/message-attach";
 export default {
     name : "message",
     props: ["message"],

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import MessageWrite from "@/components/dialogues/message-write";
-import DialogMessages from "@/components/dialogues/Dialog-messages";
+import MessageWrite from "@/components/chat/message-write";
+import DialogMessages from "@/components/chat/Dialog-messages";
 
 export default {
     name: "Dialog-component",

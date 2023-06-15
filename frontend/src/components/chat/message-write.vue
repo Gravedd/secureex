@@ -23,7 +23,7 @@ import SendIcon from "@/components/icons/sendIcon";
 import AttachIcon from "@/components/icons/attachIcon";
 import Icon from "@/components/icons/icon";
 import Uuid from "@/utils/uuid";
-import AttachMessageModal from "@/components/dialogues/attach-message-modal";
+import AttachMessageModal from "@/components/chat/attach-message-modal";
 
 export default {
     name      : "message-write",

@@ -11,7 +11,7 @@
 import store from "@/store";
 import Icon from "@/components/icons/icon";
 import DownIcon from "@/components/icons/downIcon";
-import Message from "@/components/dialogues/message";
+import Message from "@/components/chat/message";
 
 export default {
     name: "Dialog-messages",

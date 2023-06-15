@@ -12,7 +12,7 @@
     </modal>
 </template>
 <script>
-import Modal from "@/components/modal";
+import Modal from "@/components/modals/modal";
 import InputFile from "@/components/ui/input-file";
 import config from "@/config";
 import Uuid from "@/utils/uuid";

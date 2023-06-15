@@ -52,10 +52,10 @@
 </template>
 <script>
 
-import ActionMenu from "@/components/action-menu";
-import AppSidebar from "@/components/app-sidebar";
+import ActionMenu from "@/components/ui/action-menu";
+import AppSidebar from "@/components/ui/app-sidebar";
 import AppHeader from "@/components/headers/app-header";
-import Modal from "@/components/modal";
+import Modal from "@/components/modals/modal";
 import InputFile from "@/components/ui/input-file";
 import config from "@/config";
 import UserAvatar from "@/components/users/user-avatar";

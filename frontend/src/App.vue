@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import AppSidebar from "@/components/app-sidebar";
+import AppSidebar from "@/components/ui/app-sidebar";
 import store from "@/store";
-import ActionMenu from "@/components/action-menu";
-import Loader from "@/components/loader";
+import ActionMenu from "@/components/ui/action-menu";
+import Loader from "@/components/ui/loader";
 
 export default {
     components: {Loader, ActionMenu, AppSidebar},
