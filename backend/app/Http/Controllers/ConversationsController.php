@@ -86,6 +86,7 @@ class ConversationsController extends Controller {
             "path" => $filename,
             "filename" => $file->getClientOriginalName(),
             "filetype" => $file->getMimeType(),
+            "size" => $file->getSize(),
         ];
         $message->save();
 
