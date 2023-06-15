@@ -16,7 +16,7 @@
             <send-icon/>
         </icon>
     </div>
-    <attach-message-modal :show="showAttachModal" :to_user="with_user"></attach-message-modal>
+    <attach-message-modal :show="showAttachModal" :to_user="with_user" @close_attach="close_attach_modal"></attach-message-modal>
 </template>
 <script>
 import SendIcon from "@/components/icons/sendIcon";
@@ -72,13 +72,15 @@ export default {
             this.$store.commit("addMessage", {
                 "user_id": this.with_user,
                 "message": {
-                    "id"        : null,
-                    "body"      : this.inputText,
-                    "user_id"   : this.$store.getters.user_id,
-                    "created_at": Date.now(),
-                    "updated_at": Date.now(),
-                    "read"      : 0,
-                    "uuid"      : uuid,
+                    "id"         : null,
+                    "body"       : this.inputText,
+                    "user_id"    : this.$store.getters.user_id,
+                    "created_at" : Date.now(),
+                    "updated_at" : Date.now(),
+                    "read"       : 0,
+                    "uuid"       : uuid,
+                    "type"       : "msg",
+                    "attach_data": null,
                 }
             });
             this.$store.dispatch("sendWs", {
@@ -106,6 +108,9 @@ export default {
 
         addAttachment() {
             this.showAttachModal = true;
+        },
+        close_attach_modal() {
+            this.showAttachModal = false;
         }
     },
 

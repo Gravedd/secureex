@@ -3,7 +3,7 @@
          :class="{'message-sent' : message.user_id === this.$store.getters.user_id, 'message-received' : message.user_id !== this.$store.getters.user_id}"
     >
 
-        <message-attach :message_type="message.type" :attach_data="message.attach_data"/>
+        <message-attach v-if="message.type !== 'msg'" :message_type="message.type" :attach_data="message.attach_data"/>
 
         <div class="message-text">{{ message.body }}</div>
         <div class="message-time-wrapper" :title="message.id">
@@ -25,7 +25,6 @@ export default {
 </script>
 <style scoped>
 .message-wrapper {
-    min-width: 20%;
     font-size: 12px;
     padding: 4px;
     border-radius: 8px;

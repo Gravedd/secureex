@@ -1,5 +1,5 @@
 <template>
-    <modal :show="show" header="Отправить вложение">
+    <modal :show="show" header="Отправить вложение" @click="$emit('close_attach')">
         <form method="post" enctype="multipart/form-data" id="sendfile-form" @submit="sendFile">
 
             <input-file name="file" :check-type-validity="false"></input-file>
@@ -21,15 +21,18 @@ export default {
     name: "attach-message-modal",
     components: {Modal, InputFile},
     props : ["show", "to_user"],
+    emits: ["close_attach"],
     methods: {
         async sendFile(event) {
             event.preventDefault();
+
+            let uuid = Uuid.generateUUID();
+            this.$emit("close_attach");
 
             this.$showLoader();
 
             let form = new FormData(document.getElementById("sendfile-form"));
 
-            let uuid = Uuid.generateUUID();
             form.append("uuid", uuid);
 
             const response = await fetch(config.api + "conversations/sendfile", {
