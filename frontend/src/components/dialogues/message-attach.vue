@@ -2,7 +2,7 @@
     <div class="attach-wrapper">
 
         <div class="attach-image-wrapper" v-if="filetype === 'img'">
-            <img :src="link">
+            <img :src="link" alt="Вложение">
         </div>
 
         <div class="attach-file" @click="download" v-if="filetype === 'file'">
@@ -42,7 +42,9 @@ export default {
         filesize() {
             let filesize = this.attach_data.size ?? 0;
             filesize = filesize === 0 ? 0 : filesize / 1024 / 1024;
-            return filesize.toFixed(1) + " MB";
+            filesize = parseFloat(filesize.toFixed(1));
+            filesize = filesize + 0.01;
+            return filesize + " MB";
         },
         filetype() {
             return FileTypes.getType(this.attach_data.filetype);

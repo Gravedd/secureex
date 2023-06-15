@@ -17,6 +17,7 @@ export default class ServerUserController {
 
     async sendFile(socket, message, uuid) {
         const to_user_id = await Conversation.getUserIdByConversationId(message.conversation_id, message.user_id);
+
         if (!to_user_id) {
             return console.log("Не удалось найти беседу");
         }
@@ -24,6 +25,13 @@ export default class ServerUserController {
         Server.sendMessageToUserId(to_user_id,{
             "action": "new_message",
             "data"  : message,
+        });
+
+        message.to_user = to_user_id;
+        message.message_id = message.id;
+        Server.sendMessageToUserId(message.user_id,{
+            "action": "message_sent",
+            "data"  : message
         });
     }
 }

@@ -2,7 +2,7 @@
     <modal :show="show" header="Отправить вложение" @click="$emit('close_attach')">
         <form method="post" enctype="multipart/form-data" id="sendfile-form" @submit="sendFile">
 
-            <input-file name="file" :check-type-validity="false"></input-file>
+            <input-file name="file" :check-type-validity="false" :required="true" accept="*"></input-file>
 
             <div class="center-input margin-top-16">
                 <input type="submit" class="submit-btn" value="Подтвердить">
@@ -27,9 +27,24 @@ export default {
             event.preventDefault();
 
             let uuid = Uuid.generateUUID();
-            this.$emit("close_attach");
 
-            this.$showLoader();
+            this.$store.commit("addMessage", {
+                "user_id": this.to_user,
+                "message": {
+                    "id"         : null,
+                    "body"       : this.inputText,
+                    "user_id"    : this.$store.getters.user_id,
+                    "created_at" : Date.now(),
+                    "updated_at" : Date.now(),
+                    "read"       : 0,
+                    "uuid"       : uuid,
+                    "type"       : "msg",
+                    "upload"     : true,
+                    "attach_data": null,
+                }
+            });
+
+            this.$emit("close_attach");
 
             let form = new FormData(document.getElementById("sendfile-form"));
 
@@ -41,11 +56,10 @@ export default {
                 headers: {"Authorization": "Bearer " + this.$store.getters.user_token, "Accept": "application/json"},
             });
 
-            this.$hideLoader();
-
             let uploadResult = await response.json();
 
             if (response.status !== 201) {
+                this.$store.commit("deleteMessageByUuid", {with_user: this.to_user, uuid: uuid});
                 return await this.$swal.fire({
                     "title": "Ошибка!",
                     "text" : uploadResult.message,

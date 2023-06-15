@@ -23,6 +23,10 @@ export default {
             let uid = data.user_id;
             state.messagesDialogs['dialogWithUser' + uid].push(data.message);
         },
+        deleteMessageByUuid(state, data) {
+            let index = state.messagesDialogs['dialogWithUser' + data.with_user].findIndex(message => message.uuid === data.uuid);
+            state.messagesDialogs['dialogWithUser' + data.with_user].splice(index, 1);
+        },
         setDialogues(state, dialogues) {
             state.dialogues = dialogues;
             Cache.set("dialogues", dialogues);
@@ -33,9 +37,15 @@ export default {
         updateMessageIfSent(state, data) {
             let key = "dialogWithUser" + data.to_user;
             let message = state.messagesDialogs[key].find(message => message.uuid === data.uuid);
+
             message.id = data.message_id;
             message.body = data.body;
             message.created_at = data.created_at ?? 0;
+            message.type = data.type ?? "msg";
+            message.attach_data = data.attach_data;
+            if (message.upload) {
+                message.upload = false;
+            }
             delete message.uuid;
 
             let dialog = state.dialogues.find(dialogue => dialogue.user.id == data.to_user);

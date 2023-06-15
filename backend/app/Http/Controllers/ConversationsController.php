@@ -90,6 +90,7 @@ class ConversationsController extends Controller {
         ];
         $message->save();
 
+        $message->uuid = $uuid;
         event(new UserSendFile($message));
 
         return response()->json(['filename' => $filename, "uuid" => $uuid, "message" => $message], 201);

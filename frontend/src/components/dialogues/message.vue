@@ -4,7 +4,7 @@
     >
 
         <message-attach v-if="message.type !== 'msg'" :message_type="message.type" :attach_data="message.attach_data"/>
-
+        <div v-if="message.upload">Загрузка</div>
         <div class="message-text">{{ message.body }}</div>
         <div class="message-time-wrapper" :title="message.id">
             <div class="message-time">{{ message.created_at }}</div>

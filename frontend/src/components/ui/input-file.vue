@@ -2,8 +2,15 @@
     <div class="input-file">
         <label class="custom-file-upload">
             Выбрать файл
-            <input :name="name" type="file" class="custom-file-upload" ref="fileInput" @change="handleFileChange"
-                   accept="image/*"/>
+            <input
+                class="custom-file-upload"
+                type="file"
+                ref="fileInput"
+                @change="handleFileChange"
+                :name="name"
+                :required="required"
+                :accept="accept"
+            />
         </label>
         <div v-if="file" class="file-msg">
             <p>Выбранный файл: {{ file.name }}</p>
@@ -26,6 +33,13 @@ export default {
         checkTypeValidity: {
             default: true,
             type: Boolean,
+        },
+        required: {
+            default: true,
+            type: Boolean,
+        },
+        accept: {
+            default: "image/*",
         }
     },
     methods: {
