@@ -41,4 +41,13 @@ class Conversation extends Model
         return $conversations;
     }
 
+    public static function findConversation($user1, $user2) {
+        return Conversation::where(function ($query) use ($user1, $user2) {
+            $query->where('user1_id', '=', $user1)
+                  ->orWhere('user1_id', '=', $user2);
+        })->orWhere(function ($query) use ($user1, $user2) {
+            $query->where('user1_id', '=', $user2)
+                ->orWhere('user1_id', '=', $user1);
+        })->first();
+    }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="messSent-wrapper basePadding" :style="{'height': `${inputBlockHeight}px`}">
-        <icon class="attach-btn">
+        <icon class="attach-btn" @click="addAttachment">
             <attach-icon/>
         </icon>
         <textarea
@@ -16,16 +16,18 @@
             <send-icon/>
         </icon>
     </div>
+    <attach-message-modal :show="showAttachModal" :to_user="with_user"></attach-message-modal>
 </template>
 <script>
 import SendIcon from "@/components/icons/sendIcon";
 import AttachIcon from "@/components/icons/attachIcon";
 import Icon from "@/components/icons/icon";
 import Uuid from "@/utils/uuid";
+import AttachMessageModal from "@/components/dialogues/attach-message-modal";
 
 export default {
     name      : "message-write",
-    components: {SendIcon, AttachIcon, Icon},
+    components: {AttachMessageModal, SendIcon, AttachIcon, Icon},
     props     : ["with_user"],
     data() {
         return {
@@ -34,6 +36,7 @@ export default {
             maxInputHeight  : 120,
             inputBlockHeight: 40,
             typingTimeout   : null,
+            showAttachModal : false
         }
     },
     methods: {
@@ -99,6 +102,10 @@ export default {
             } else {
                 this.sendMessage();
             }
+        },
+
+        addAttachment() {
+            this.showAttachModal = true;
         }
     },
 

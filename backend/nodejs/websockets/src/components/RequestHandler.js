@@ -18,6 +18,7 @@ export default class RequestHandler {
         /* Server */
         "server.user.registered": "ServerUser.userRegistered",
         "server.user.update": "ServerUser.userUpdated",
+        "server.user.sendfile": "ServerUser.sendFile",
     }
 
     constructor(socket, message, uuid) {

@@ -24,6 +24,7 @@ class Message extends Model {
     protected $casts = [
         'created_at' => 'datetime:H:i:s Y-m-d',
         'updated_at' => 'datetime:H:i:s Y-m-d',
+        'attach_data' => 'array',
     ];
 
     /*

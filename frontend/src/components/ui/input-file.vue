@@ -22,7 +22,11 @@ export default {
         };
     },
     props  : {
-        name
+        name,
+        checkTypeValidity: {
+            default: true,
+            type: Boolean,
+        }
     },
     methods: {
         handleFileChange() {
@@ -38,6 +42,10 @@ export default {
             }
         },
         validateFile(file) {
+            if (!this.checkTypeValidity) {
+                return true;
+            }
+
             const allowedTypes = ["image/png", "image/gif", "image/jpeg"];
             return allowedTypes.includes(file.type);
         },

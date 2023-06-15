@@ -31,4 +31,13 @@ export default class Conversation {
 
         return await this.create(user1_id, user2_id);
     }
+
+    static async getUserIdByConversationId(conversation_id, user_id) {
+        const conversation = await Conversation.find(conversation_id);
+        if (!conversation) {
+            return false;
+        }
+
+        return conversation.user1_id === user_id ? conversation.user2_id : conversation.user1_id;
+    }
 }

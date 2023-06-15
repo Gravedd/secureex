@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Event;
 use App\Events\UserRegistered;
 use App\Helpers\Websocket;
 use App\Events\UserUpdateProfile;
+use App\Events\UserSendFile;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(UserRegistered::class, fn($event) => $this->sendEventToWebsocket("server.user.registered", $event->user));
 
         Event::listen(UserUpdateProfile::class, fn($event) => $this->sendEventToWebsocket("server.user.update", $event->user));
+
+        Event::listen(UserSendFile::class, fn($event) => $this->sendEventToWebsocket("server.user.sendfile", $event->message));
     }
 
     /**

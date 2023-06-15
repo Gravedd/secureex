@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
+use App\Events\UserSendFile;
 
 class ConversationsController extends Controller {
 
@@ -57,5 +58,39 @@ class ConversationsController extends Controller {
         $messages = Message::where('conversation_id', $conversation['id'])->get();
 
         return response()->json(["messages" => $messages]);
+    }
+
+    public function sendFile(Request $request) {
+        $file = $request->file("file");
+        if (!$file) {
+            return response()->json(["message" => "файл не загружен"], 422);
+        }
+
+        $current_user = $request->user()->id;
+        $to_user = $request->input("to_user");
+        $uuid = $request->input("uuid");
+        $conversation_id = Conversation::findConversation($current_user, $to_user);
+        $conversation_id = $conversation_id['id'];
+
+        $file->getMimeType();
+        $path = $file->store('public/files');//storage/files/<filename>
+        $filename = basename($path);
+
+        $message = new Message();
+        $message->user_id = $current_user;
+        $message->read = 0;
+        $message->conversation_id = $conversation_id;
+        $message->body = "";
+        $message->type = "file";
+        $message->attach_data = [
+            "path" => $filename,
+            "filename" => $file->getClientOriginalName(),
+            "filetype" => $file->getMimeType(),
+        ];
+        $message->save();
+
+        event(new UserSendFile($message));
+
+        return response()->json(['filename' => $filename, "uuid" => $uuid, "message" => $message], 201);
     }
 }
