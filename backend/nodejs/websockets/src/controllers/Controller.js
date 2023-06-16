@@ -35,13 +35,15 @@ export default class Controller {
 
         socket.send(JSON.stringify({
             "action": "message_sent",
-            "data"  : {
-                "message_id": message.id,
-                "id"        : message.id,
-                "body"      : message.text,
-                "to_user"   : toId,
-                "created_at": message.created_at,
-                "uuid"      : message_uuid,
+            "data": {
+                "message_id" : message.id,
+                "id"         : message.id,
+                "body"       : message.text,
+                "to_user"    : toId,
+                "created_at" : message.created_at,
+                "uuid"       : message_uuid,
+                "type"       : "msg",
+                "attach_data": null,
             }
         }));
 
@@ -55,6 +57,8 @@ export default class Controller {
                 "updated_at"     : message.created_at,
                 "read"           : 0,
                 "conversation_id": message.conversation_id,
+                "type"           : "msg",
+                "attach_data"    : null,
             }
         });
     }
