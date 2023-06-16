@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    event(new \App\Events\UserRegistered(\App\Models\User::first()));
-});
+Route::get("/store/files", [\App\Http\Controllers\StorageController::class, "downloadFile"]);
