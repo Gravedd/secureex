@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         download() {
-            window.open(this.link);
+            window.open(this.downloadLink);
         },
         showImage() {
             this.$store.commit("showImageModal", {
@@ -57,6 +57,9 @@ export default {
         },
         link() {
             return config.files + this.attach_data.path;
+        },
+        downloadLink() {
+            return this.link + "&name=" + this.attach_data.filename;
         }
     }
 }
