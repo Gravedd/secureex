@@ -2,7 +2,7 @@
     <modal :show="show" header="Отправить вложение" @click="$emit('close_attach')">
         <form method="post" enctype="multipart/form-data" id="sendfile-form" @submit="sendFile">
 
-            <input-file name="file" :check-type-validity="false" :required="true" accept="*"></input-file>
+            <input-file ref="input_file" name="file" :check-type-validity="false" :required="true" accept="*"></input-file>
 
             <div class="center-input margin-top-16">
                 <input type="submit" class="submit-btn" value="Подтвердить">
@@ -65,6 +65,10 @@ export default {
                     "text" : uploadResult.message,
                 })
             }
+
+            document.getElementById("sendfile-form").reset();
+            this.$refs.input_file.file = null;
+            this.$refs.input_file.isValid = true;
         }
     }
 
