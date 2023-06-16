@@ -93,7 +93,9 @@ label.custom-file-upload {
     color: var(--text);
     margin-right: 8px;
 }
-
+.file-msg {
+    word-break: break-word;
+}
 
 input[type="file"] {
     display: none;

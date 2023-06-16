@@ -85,6 +85,8 @@ export default {
     overflow-y: scroll;
     flex-shrink: 1;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .messages-wrapper::-webkit-scrollbar {
     width: 2px;

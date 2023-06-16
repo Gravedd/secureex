@@ -26,7 +26,7 @@ export default {
 <style scoped>
 .message-wrapper {
     font-size: 12px;
-    padding: 4px;
+    padding: 4px 8px 4px 8px;
     border-radius: 8px;
     margin-bottom: 4px;
     transition: 0.25s;
@@ -38,6 +38,7 @@ export default {
 
 .message-text {
     width: 100%;
+    word-break: break-word;
 }
 
 .message-time-wrapper {
@@ -53,6 +54,7 @@ export default {
     margin-right: 4px;
     opacity: 0.8;
     user-select: none;
+    margin-left: 50px;
 }
 
 .message-read {
@@ -68,7 +70,6 @@ export default {
     margin-left: auto;
     background: linear-gradient(97.99deg, var(--main) -11.81%, var(--main2) 130.29%);
     animation: 0.3s show-sent ease-in-out;
-    min-width: 40%;
     max-width: 60%;
 }
 
@@ -76,8 +77,7 @@ export default {
     background-color: var(--bg3);
     margin-right: auto;
     animation: 0.3s show-received ease-in-out;
-    min-width: 20%;
-    max-width: 50%;
+    max-width: 60%;
 }
 
 @media (max-width: 400px) {
