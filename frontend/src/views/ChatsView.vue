@@ -11,14 +11,7 @@
         <div class="componentWrapper">
             <div class="dialogList-wrapper" v-for="dialogue in dialogues">
 
-                <dialog-item
-                    :user_id="dialogue.user.id"
-                    :user_avatar="dialogue.user.avatar"
-                    :username="dialogue.user.name"
-                    :last-message="dialogue.messages[0].body"
-                    :last-time="dialogue.messages[0]?.created_at ?? ''"
-                    :unread_count="dialogue.unread_count"
-                />
+                <dialog-item :dialogue="dialogue"/>
 
             </div>
 

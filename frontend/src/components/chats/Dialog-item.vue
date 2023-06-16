@@ -1,26 +1,26 @@
 <template>
-    <router-link :to="{ name: 'chat', params: {id: user_id} }" class="dialog-wrapper basePadding">
+    <router-link :to="{ name: 'chat', params: {id: dialogue.user.id} }" class="dialog-wrapper basePadding">
         <div class="dialog-avatar-wrapper">
-            <user-avatar :avatar-src="user_avatar" :username="username"/>
+            <user-avatar :avatar-src="dialogue.user.avatar" :username="dialogue.user.username"/>
         </div>
 
         <div class="dialog-data">
             <div class="dialog-name-time-wrapper">
-                <div class="dialog-name">{{ username }}</div>
-                <div class="dialog-time">{{ lastTime }}</div>
+                <div class="dialog-name">{{ dialogue.user.name }}</div>
+                <div class="dialog-time">{{ dialogue.messages[0]?.created_at ?? '' }}</div>
             </div>
             <div class="dialog-name-time-wrapper">
-                <div class="dialog-message typed-text" v-if='typing["user_" + user_id]'>
-                    {{ "Печатает..." }}
+                <div class="dialog-message typed-text" v-if='typing'>
+                    Печатает...
                 </div>
 
-                <div class="dialog-message" v-if='!typing["user_" + user_id]'>
-                    {{ lastMessage.length > 50 ? lastMessage.substr(0, 50) + "..." : lastMessage }}
+                <div class="dialog-message" v-if='!typing'>
+                    {{ lastMessage }}
                 </div>
 
                 <div class="dialog-unread-wrapper">
-                    <div class="dialog-unread-count" v-if="unread_count && unread_count > 0">
-                        {{ unread_count }}
+                    <div class="dialog-unread-count" v-if="dialogue.unread_count && dialogue.unread_count > 0">
+                        {{ dialogue.unread_count }}
                     </div>
                 </div>
             </div>
@@ -35,16 +35,24 @@ export default {
     components: {UserAvatar},
     computed: {
         typing() {
-            return this.$store.getters.getTyping;
+            const typingData = this.$store.getters.getTyping;
+            const userId = this.dialogue.user.id;
+            return typingData[`user_${userId}`] ?? false;
+        },
+        lastMessage() {
+            let message = this.dialogue.messages[0];
+            let text = "";
+            if (message.type !== "msg" && message.attach_data) {
+                text = "Вложение"
+            } else {
+                text = message.body.length > 50 ? message.body.substr(0, 50) + "..." : message.body
+            }
+
+            return text;
         }
     },
     props: {
-        user_id: null,
-        user_avatar: null,
-        username: null,
-        lastMessage: null,
-        lastTime: null,
-        unread_count: null,
+        dialogue: null
     }
 }
 </script>
