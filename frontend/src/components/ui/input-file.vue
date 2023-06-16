@@ -16,7 +16,7 @@
             <p>Выбранный файл: {{ file.name }}</p>
         </div>
         <div v-if="!isValid" class="file-msg">
-            <p>Выбранный файл неправильного формата. </p>
+            <p>Выбранный файл неправильного формата, или его размер превышает 10 мб!</p>
         </div>
     </div>
 </template>
@@ -51,11 +51,16 @@ export default {
                     this.isValid = true;
                 } else {
                     this.file = null;
+                    this.$refs.fileInput.value = "";
                     this.isValid = false;
                 }
             }
         },
         validateFile(file) {
+            if (file.size > 10000000) {//10 мб
+                return false;
+            }
+
             if (!this.checkTypeValidity) {
                 return true;
             }
