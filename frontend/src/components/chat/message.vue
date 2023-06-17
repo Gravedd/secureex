@@ -4,7 +4,9 @@
     >
 
         <message-attach v-if="message.type !== 'msg'" :message_type="message.type" :attach_data="message.attach_data"/>
-        <div v-if="message.upload">Загрузка</div>
+        <div v-if="message.upload" class="message_load_file">
+            Загрузка файла
+        </div>
         <div class="message-text">{{ message.body }}</div>
         <div class="message-time-wrapper" :title="message.id">
             <div class="message-time">{{ message.created_at }}</div>
@@ -17,6 +19,7 @@
 </template>
 <script>
 import MessageAttach from "@/components/chat/message-attach";
+
 export default {
     name : "message",
     props: ["message"],
@@ -91,5 +94,15 @@ export default {
     .message-time {
         opacity: 0.75;
     }
+}
+
+.message_load_file {
+    animation: loading 1s infinite;
+    width: 100%;
+}
+
+@keyframes loading {
+    from { opacity: 1 }
+    to { opacity: 0.3 }
 }
 </style>
