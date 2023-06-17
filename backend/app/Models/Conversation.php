@@ -35,7 +35,7 @@ class Conversation extends Model
 
     public static function getLastMessage($conversations) {
         foreach ($conversations as &$conversation) {/** @var $conversation \App\Models\Conversation */
-            $conversation['messages'] = [$conversation->messages()->orderBy("id")->first()];
+            $conversation['messages'] = [$conversation->messages()->latest()->first()];
         }
 
         return $conversations;
