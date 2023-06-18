@@ -15,9 +15,9 @@ class StorageController extends Controller {
         }
 
         $filename = $request->query->get("name") ?? $name_in_storage;
-        $path = "/public/files/".$name_in_storage;
+        $path = "/public/files/" . $name_in_storage;
 
-        if (!Storage::exists("/public/files/".$name_in_storage)) {
+        if (!Storage::exists("/public/files/" . $name_in_storage)) {
             throw new NotFoundHttpException();
         }
 

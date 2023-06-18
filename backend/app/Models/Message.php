@@ -36,4 +36,9 @@ class Message extends Model {
     {
         return $date->format('Y-m-d');
     }*/
+
+    public static function getMessages($conversation_id) {
+        return Message::where('conversation_id', $conversation_id)->get();
+    }
+
 }
